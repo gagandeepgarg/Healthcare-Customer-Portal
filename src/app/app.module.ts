@@ -21,6 +21,8 @@ import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
+import { CustomSerializer } from './reducers/custom-router-state-serializer';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,18 +45,20 @@ import { EffectsModule } from '@ngrx/effects';
     ButtonModule,
     ConfirmDialogModule,
     // UserIdleModule.forRoot({idle: 600, timeout: 180, ping: 120})
-    UserIdleModule.forRoot({idle: 180, timeout: 180, ping: 120}),
+    UserIdleModule.forRoot({ idle: 180, timeout: 180, ping: 120 }),
     StoreModule.forRoot(reducers, {
       metaReducers
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot({ stateKey: 'router' })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: PortalHttpInterceptor, multi: true },
+    { provide: RouterStateSerializer, useClass: CustomSerializer },
     ConfirmationService
   ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
