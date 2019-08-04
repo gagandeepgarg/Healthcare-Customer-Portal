@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '@shared-module/shared.module';
 import { StoreModule } from '@ngrx/store';
 import * as fromAuth from './auth.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './auth.effects';
 
 @NgModule({
     imports: [
@@ -18,7 +20,8 @@ import * as fromAuth from './auth.reducer';
         CommonModule,
         ...PRIMENG_IMPORTS,
         SharedModule,
-        StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.authReducer)
+        StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.authReducer),
+        EffectsModule.forFeature([AuthEffects])
     ],
     declarations: [
         ...COMPONENT_DECLARATIONS

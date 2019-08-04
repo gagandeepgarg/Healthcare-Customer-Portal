@@ -25,7 +25,7 @@ export class MemberRegistrationComponent implements OnInit, AfterViewInit {
   constants = constants;
   backBtnClicked: boolean;
   iconName = constants.ICON_ACTIVATE;
-  headerHtml = ' Activate your <b>Aliera Healthcare</b> account';
+  headerHtml = ' Activate your <b>Customer Healthcare</b> account';
   @ViewChild('pSteps') psteps: ElementRef;
   constructor(
     private router: Router,

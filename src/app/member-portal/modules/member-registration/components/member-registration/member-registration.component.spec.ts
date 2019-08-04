@@ -41,9 +41,9 @@ describe('MemberRegistrationComponent', () => {
   it('iconName defaults to: constants.ICON_ACTIVATE', () => {
     expect(component.iconName).toEqual(constants.ICON_ACTIVATE);
   });
-  it('headerHtml defaults to:  Activate your <b>Aliera Healthcare</b> account', () => {
+  it('headerHtml defaults to:  Activate your <b>Customer Healthcare</b> account', () => {
     expect(component.headerHtml).toEqual(
-      ' Activate your <b>Aliera Healthcare</b> account'
+      ' Activate your <b>Customer Healthcare</b> account'
     );
   });
   describe('constructor', () => {

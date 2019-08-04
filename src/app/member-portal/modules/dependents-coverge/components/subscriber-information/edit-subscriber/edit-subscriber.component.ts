@@ -384,7 +384,7 @@ export class EditSubscriberComponent implements OnInit, OnChanges {
           this.msgSevice.clear();
         }, 5000);
       } else if (res === 7013) {
-        this.errorText = 'Sorry, Aliera Healthcare does not operate in the ' +
+        this.errorText = 'Sorry, Customer Healthcare does not operate in the ' +
           this.editSubscriberForm.get('stateProvince').value.label +
           '. Please get in touch with member services at (844) 834-3456 for any assistance.';
       }
@@ -392,11 +392,11 @@ export class EditSubscriberComponent implements OnInit, OnChanges {
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
         } else if (err.status === 500 && err.error.ErrorCode === 7010) {
-          /* this.errorText = 'Sorry, Aliera Healthcare does not operate in the ' +
+          /* this.errorText = 'Sorry, Customer Healthcare does not operate in the ' +
             this.editSubscriberForm.get('stateProvince').value.label +
              '. Please get in touch with member services at (844) 834-3456 for any assistance.'; */
         } else if (err.status === 500 && err.error.ErrorCode === 7009) {
-          /* this.errorText = 'Sorry, Aliera Healthcare does not operate in the ' +
+          /* this.errorText = 'Sorry, Customer Healthcare does not operate in the ' +
             this.editSubscriberForm.get('stateProvince').value.label +
              '. Please get in touch with member services at (844) 834-3456 for any assistance.'; */
         }
