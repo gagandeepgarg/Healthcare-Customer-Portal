@@ -1,0 +1,30 @@
+// component css goes here
+@import "../../../../assets/custom-sass/variables.scss";
+.profile {
+  .dependent-header {
+    padding: 1em 0 0 1em;
+    font-size: 20px;
+    font-weight: 100;
+  }
+}
+
+::ng-deep{
+  .msgs .ui-messages{
+    margin-left: 1%;
+    margin-right: 4%;
+  }
+}
+
+.desktopWidth{
+  width:calc(100%-200px);
+}
+
+.header-snapshot{
+  background: linear-gradient(to right, $gradient-start, 35%, $gradient-end);
+}
+.accordionIcon{
+  float:right;
+}
+.no-padding{
+  padding:0;
+}

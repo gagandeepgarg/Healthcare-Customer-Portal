@@ -1,0 +1,15 @@
+@import "../../../../../../assets/custom-sass/variables.scss";
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: auto;
+  padding: 0;
+}
+.top-margin{
+    margin-top: 10px;
+}
+.top-margin-2pc{
+  margin-top:2%;
+}

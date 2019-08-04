@@ -1,0 +1,32 @@
+<app-page-header [iconName]="iconName" [headerInnerHtml]="headerHtml"></app-page-header>
+<div class="ui-fluid header-freeze-padding">
+  <div class="ui-g ">
+    <!-- sidebar for categories -->
+    <div class="ui-g-3 categorysidemenu" *ngIf="!searchClicked">
+      <div class="categorymenuitem" *ngFor="let cat of documentFormsCategories">
+        <div class="categorymenuitemLabel wrap" (click)="categoryChanged(cat)" [ngClass]="{'active':selectedCategory==cat}">
+          {{cat}}
+        </div>
+      </div>
+    </div>
+    <!-- header and file results -->
+    <div class="documentformssection"
+      [ngClass]="{'ui-g-9':!searchClicked, 'ui-g-10':searchClicked, 'center-align':searchClicked}">
+      <!-- search header -->
+      <div class="searchHeader">
+        <app-document-search-header (searchClickEvent)="SearchClicked($event)" (backClickEvent)="BackClicked()">
+        </app-document-search-header>
+      </div>
+      <!-- if user is on list files page -->
+      <div class="list-files" *ngIf="!searchClicked">
+        <app-list-documents [selectedCategory]="selectedCategory"></app-list-documents>
+      </div>
+      <!-- if user is on searched result page -->
+      <div class="list-searchedfiles" *ngIf="searchClicked">
+        <app-searched-documents [searchedText]="searchText" [searchedCickedCount]="searchedCickedCount"
+          [categories]="documentFormsCategories"></app-searched-documents>
+      </div>
+
+    </div>
+  </div>
+</div>

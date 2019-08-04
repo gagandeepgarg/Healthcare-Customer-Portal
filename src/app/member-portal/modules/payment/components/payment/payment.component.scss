@@ -1,0 +1,228 @@
+@import "../../../../../../assets/custom-sass/variables.scss";
+
+.labels {
+  color: $active-color;
+  font-size: 1.2em;
+}
+.value {
+  padding-left: 16px;
+  line-height: 1.7;
+  color: $text-color;
+}
+.countcharacterlabel {
+  color: $text-color;
+  float: right;
+  padding: 2px;
+}
+.social {
+  margin-top: 12%;
+  margin-left: 6%;
+}
+p-dialog .round-input-div {
+  border: 1px solid #ccc;
+}
+.right-contact {
+  color: $text-color;
+  padding-left: 3%;
+}
+//p-dialog CSS
+::ng-deep {
+  .ddl{
+    padding-top: 4px;
+    padding-bottom: 4px;
+//  .ui-dropdown .ui-dropdown-label.ui-inputtext{
+//     font-size:1.3em;
+//   }
+}
+  .cancelbtn button {
+    background-color: $white !important;
+    color: $cancel-btn-text-col0r !important;
+    border: 1px solid $placeholder-color !important;
+    font-size: 0.9em;
+  }
+  .ui-button-rounded submitbtn {
+    button {
+      font-size: 0.95em;
+    }
+  }
+  .register-header {
+    .ui-dialog .ui-dialog-titlebar .ui-dialog-title {
+      padding-top: 50px;
+      height: 80px;
+      width: 100%;
+      color: $white;
+      text-align: center;
+      background: linear-gradient(to right, $gradient-start, 35%, $gradient-end);
+    }
+  }
+}
+
+.addbtn {
+  margin-left: 4%;
+  ::ng-deep {
+    p-button button {
+      font-size: 0.8em;
+      margin-top: -10px;
+    }
+}
+}
+.no-pad{
+  padding: 0;
+}
+.pad-left-10{
+  padding-left: 10%;
+}
+// .ddlsize{
+//   font-size:0.7em;
+// }
+::ng-deep {
+  .pDialog {
+    .ui-dialog .ui-dialog-titlebar {
+      padding: 0;
+    }
+    .ui-dialog .ui-dialog-footer {
+      border: none;
+      padding: 0;
+    }
+    .cancelBtn button {
+      background-color: $pdialog-cancel-btn-color !important;
+      color: $black !important;
+    }
+  }
+}
+.pheaderCss {
+  margin: 0;
+  padding: 0;
+  color: $white;
+  background: linear-gradient(to right, $gradient-start, 35%, $gradient-end);
+  height: 45px;
+}
+.pHeaderCloseIcon {
+  background-color: $gradient-start;
+  color: $white;
+  cursor: pointer;
+}
+.buttons {
+  border-top:1px solid #CCCCD0;
+::ng-deep {
+    p-button button {
+      font-size: 0.8em;
+    }
+  }
+}
+.bottom-margin-10{
+  margin-bottom: 10px;
+}
+/*custome-css-btn-submit*/
+.block-viewbtn {
+  clear: both;
+  display: block;
+  padding-left: 17px;
+}
+
+.block-viewbtn .ui-button-rounded {
+  display: block;
+}
+.block-viewbtn .ui-button-rounded {
+  display: block;
+  width: 110px;
+}
+.block-viewbtn .ui-button-rounded span {
+  line-height: 20px;
+}
+
+.get-inblock{
+  margin-left: 3%;
+}
+.get-inblock .round-input-div {
+  border-radius: 16px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+}
+.bordr-right {
+  display: block;
+  border-right: 1px solid #ddd;
+  //width: 100%;
+}
+.contact-header {
+  color: rgb(81, 85, 84);
+  font-size: 1.3em;
+}
+::ng-deep {
+  .register-header {
+    .ui-dialog .ui-dialog-titlebar .ui-dialog-title {
+      padding-top: 50px;
+      height: 80px;
+      width: 100%;
+      color: $white;
+      text-align: center;
+      background: linear-gradient(to right, $gradient-start, 35%, $gradient-end);
+    }
+  }
+}
+
+::ng-deep {
+  .pDialog {
+    .ui-dialog .ui-dialog-titlebar {
+      padding: 0;
+    }
+    .ui-dialog .ui-dialog-footer {
+      border: none;
+      padding: 0;
+    }
+    .cancelBtn button {
+      background-color: $pdialog-cancel-btn-color !important;
+      color: $black !important;
+    }
+  }
+}
+.pheaderCss {
+  margin: 0;
+  padding: 0;
+  color: $white;
+  background: linear-gradient(to right, $gradient-end, 35%, $gradient-start);
+}
+.pHeaderCloseIcon {
+  background-color: $gradient-start;
+  color: $white;
+  cursor: pointer;
+}
+
+
+// override radio button style
+.Radio {
+  ::ng-deep .ui-state-active .pi {
+    color: #8DC641;
+    background-color: #8DC641;
+  }
+  ::ng-deep .ui-radiobutton-box.ui-widget.ui-state-default.ui-state-active {
+    background-color: $white;
+    border-color: #8DC641;
+  }
+}
+
+.dialog-header-margin{
+  margin:8% 0;
+}
+
+.payment-detail-header-margin{
+  margin-bottom:10%;margin-top:2%;
+}
+.premium-header-margin{
+  margin-bottom:6%;margin-top:2%;
+}
+.top-padding-3px{
+  padding-top: 3px;
+}
+
+
+/* For mobile phones: */
+@media only screen and (max-width: 768px) {
+  .addbtn{
+    margin-left: 2% ;
+  }
+}
+
+.no-padding{
+  padding: 0;
+}

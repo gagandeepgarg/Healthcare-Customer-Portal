@@ -1,0 +1,52 @@
+// component css goes here
+@import "../../../../../../assets/custom-sass/variables.scss";
+
+::ng-deep {
+  .EOBConfirmDialog{
+    .ui-dialog .ui-dialog-titlebar {
+      background: linear-gradient(to right, $gradient-start, 55%, $gradient-end);
+  }
+  }
+  .data-table {
+    .ui-table table {
+      max-width: 100%;
+    }
+    font-size: 14px;
+    .ui-table .ui-table-thead > tr > th,
+    .ui-table .ui-table-tfoot > tr > td {
+      font-size: 12px;
+      color: $white;
+      background-color: $gradient-start;
+      //background: linear-gradient(to right, $gradient-start, 35%, $gradient-end);
+      border: none !important;
+      text-align: left;
+      font-family: "Roboto", sans-serif;
+    }
+
+    .ui-table .ui-table-tbody > tr > td {
+      background: inherit;
+      border-bottom: 1px solid #cacaca;
+      border: none;
+      font-family: "Roboto", sans-serif;
+    }
+  }
+}
+
+
+.tdPadding {
+  word-break: break-word;
+}
+.processed {
+  color: green;
+  margin: 0;
+  font-size: 11px;
+}
+
+.Processing {
+  color: $active-color;
+  font-size: 11px;
+}
+.Processed {
+  color: green;
+  font-size: 11px;
+}

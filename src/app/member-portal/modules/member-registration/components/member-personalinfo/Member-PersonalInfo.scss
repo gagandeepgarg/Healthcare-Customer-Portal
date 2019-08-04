@@ -1,0 +1,51 @@
+@import "../../../../../../assets/custom-sass/variables.scss";
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0;
+}
+
+// override radio button style
+.memberIdRadio {
+  margin-left:2%;
+  ::ng-deep .ui-state-active .pi {
+    color: #8DC641;
+    background-color: #8DC641;
+  }
+  ::ng-deep .ui-radiobutton-box.ui-widget.ui-state-default.ui-state-active {
+    background-color: $white;
+    border-color: #8DC641;
+  }
+}
+
+// override calendar styles
+.roundCalendar {
+  ::ng-deep .ui-calendar.ui-calendar-w-btn input {
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+  }
+  ::ng-deep .ui-fluid .ui-calendar.ui-calendar-w-btn .ui-inputtext {
+    width: 100%;
+  }
+  ::ng-deep .ui-datepicker .ui-datepicker-title {
+    margin: 0 1.9em;
+    line-height: 1.8em;
+    text-align: center;
+    width: 74%;
+    display: inline-block;
+  }
+  ::ng-deep .ui-datepicker-today .ui-state-disabled {
+    background-color: $white;
+    color: $grey-600;
+  }
+}
+.marginFlex {
+  margin-bottom: 1.5%;
+}
+.font1em{
+  font-size:1em;
+  padding-top: 1%;
+}

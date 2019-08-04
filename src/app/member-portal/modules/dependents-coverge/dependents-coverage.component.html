@@ -1,0 +1,29 @@
+<div class="ui-g-12 no-padding" [ngStyle]="!isMobile() && {'display': 'inline-flex'}" >
+    <app-user-profile *ngIf="!isMobile()"></app-user-profile>
+    <div class="ui-g-12 accordionDiv" *ngIf="isMobile()">
+        <div class="ui-g-12">
+            <div class="ui-g-12 header-snapshot">
+                <span>View Plans SnapShot</span>
+                <span class="accordionIcon">
+                    <i *ngIf="!snapShotOpen" class="fa fa-chevron-down" (click)="snapShotOpen=true"></i>
+                    <i *ngIf="snapShotOpen" class="fa fa-chevron-up" (click)="snapShotOpen=false"></i>
+                </span>
+            </div>
+            <div class="ui-g-12 no-padding" [hidden]="!snapShotOpen">
+                <app-user-profile ></app-user-profile>
+            </div>
+        </div>
+    </div>
+    <div [ngClass]="{'desktopWidth ui-g-10':!isMobile(), 'ui-g-12':isMobile()}" class="profile" >
+        <div class="dependent-header">Subscriber and Dependent Services</div>
+        <br />
+        <p-messages [(value)]="msgs" class ="msgs"></p-messages>
+        <app-subscriber-information [memberInfo]="details" (callServiceEvent)="UpdateDependents($event)"></app-subscriber-information>
+        <br />
+        <br />
+        <app-dependent-information [dependents]="dependents" (deleteEvent)="deleteDependent($event)" (callServiceEvent)="UpdateDependents($event)"></app-dependent-information>
+        <br />
+        <br />
+        <app-coverage-information [dependents]="dependents"></app-coverage-information>
+    </div>
+</div>

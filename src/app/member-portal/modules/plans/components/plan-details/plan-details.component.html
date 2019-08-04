@@ -1,0 +1,15 @@
+<app-page-header [iconName]="iconName" [headerInnerHtml]="headerHtml"></app-page-header>
+<div class="ui-fluid header-freeze-padding">
+    
+
+    <div class="ui-g-12 ui-md-12 ui-lg-12 plan width-100" >
+        <div class="plan-header">
+            <div class="plan-name">Plan Name: {{planName}}</div>
+        </div>
+    </div>
+    <div class="embeded-pdf">
+        <div class="pdf-container">
+            <embed [attr.src]="dataLocalUrl" type="application/pdf" class="width-100 embed-pdf-height" >
+        </div>
+    </div>
+</div>

@@ -1,0 +1,139 @@
+<form [formGroup]="addDependentForm" (ngSubmit)="onSubmit()">
+  <div class="ui-g-12 flex-container">
+    <div class="ui-g-12">
+      <span class="error" *ngIf="errorText">{{errorText}}</span>
+    </div>
+  </div>
+  <div class="ui-g-12 depContainer">
+  <div class="ui-g-12 ui-md-12">
+    <div class="ui-g-12 flex-container">
+      <div class="ui-g-12 ui-md-6">
+        <div class="ui-g-12 ui-md-3 label">
+          First Name :
+        </div>
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-12 ui-inputgroup  round-input-div"
+            [ngClass]="{'has-error': (isSubmitted && addDependentForm.get('firstName').errors)}">
+            <span class="ui-inputgroup-addon" style="border:none;background:transparent;"><i
+                class="fa fa-user round-input-icon"></i></span>
+            <input pInputText type="text" class="round-input-element" formControlName="firstName"
+              placeholder="First Name *" maxlength="80" />
+          </div>
+        </div>
+      </div>
+      <!-- <div class="ui-g-12 ui-md-2"></div> -->
+
+      <div class="ui-g-12 ui-md-6">
+        <div class="ui-g-12 ui-md-3 label">
+          Last Name :
+        </div>
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-12 ui-inputgroup  round-input-div"
+            [ngClass]="{'has-error': (isSubmitted && addDependentForm.get('lastName').errors)}">
+            <span class="ui-inputgroup-addon" style="border:none;background:transparent;"><i
+                class="fa fa-user round-input-icon"></i></span>
+            <input pInputText type="text" class="round-input-element" formControlName="lastName"
+              placeholder="Last Name *" maxlength="80" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-g-12 flex-container">
+      <div class="ui-g-12 ui-md-6">
+        <div class="ui-g-12 ui-md-3 label">
+          Gender :
+        </div>
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-12 ui-inputgroup  round-input-div"
+            [ngClass]="{'has-error': ( isSubmitted && addDependentForm.get('gender').errors)}">
+            <!-- <span class="ui-inputgroup-addon" style="border:none;background:transparent;"></span> -->
+            <p-dropdown class="round-input-element addDropdown" [options]="genderOptions" formControlName="gender"
+              placeholder="Select a Gender"></p-dropdown>
+          </div>
+        </div>
+      </div>
+      <div class="ui-g-12 ui-md-6">
+        <div class="ui-g-12 ui-md-3 label">
+          Date Of Birth :
+        </div>
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-12 ui-inputgroup  round-input-div roundCalendar"
+            [ngClass]="{'has-error': (addDependentForm.get('dob').errors && isSubmitted)}">
+            <span class="ui-inputgroup-addon" style="border:none;background:transparent;"></span>
+            <p-calendar class="round-input-element" formControlName="dob" placeholder="DOB *" [maxDate]="maxDate"
+              [showIcon]="true" utc="false" [showOtherMonths]="true" [selectOtherMonths]="true" [monthNavigator]="true"
+              [yearNavigator]="true" [yearRange]="yearRange" [panelStyle]="{'height':'05%'}">
+            </p-calendar>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="ui-g-12 flex-container">
+      <div class="ui-g-12 ui-md-6">
+        <div class="ui-g-12 ui-md-3 label">
+          Relationship :
+        </div>
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-12  round-input-div"
+            [ngClass]="{'has-error': ( isSubmitted && addDependentForm.get('relationShip').errors) }">
+            <!-- <span class="ui-inputgroup-addon" style="border:none;background:transparent;"></span> -->
+            <p-dropdown class="round-input-element addDropdown" [options]="relationShipOptions"
+              formControlName="relationShip" placeholder="Select a Relationship"></p-dropdown>
+          </div>
+        </div>
+      </div>
+      <div class="ui-g-12 ui-md-6"></div>
+
+      <!-- <div class="ui-g-12 ui-md-6">
+        <div class="ui-g-12 ui-md-3">
+          Relationship :
+        </div>
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-12 ui-inputgroup  round-input-div"
+            [ngClass]="{'has-error': ( isSubmitted && addDependentForm.get('tobaccoUse').errors)}">
+            <span class="ui-inputgroup-addon" style="border:none;background:transparent;"></span>
+            <p-dropdown class="round-input-element" [options]="tobaccoOptions" formControlName="tobaccoUse"
+              placeholder="Do you use Tobacco?"></p-dropdown>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+  <!-- <span style="padding-left:7px;">Profile Picture</span>
+  <div class="ui-g-12 ui-md-2">
+    <img *ngIf="!url" class="profile-img" src="/assets/images/ProfileAvatar.jpg">
+    <img *ngIf="url" class="profile-img" [src]="url">
+    <div class="overview-imgpicker imgpicker-icon" (click)="fileInput.click()" title="click to upload image">
+      <div class="overview-pic">
+        <input type="file" maxFileSize="2000000" #fileInput style="display: none" accept="image/*"
+          (change)="processFile($event)">
+        <span>
+          Change Picture
+          <i class="fa fa-edit img-picker"></i>
+          <span style="font-size:12px;">Max size 2 MB</span>
+        </span>
+      </div>
+    </div>
+  </div> -->
+</div>
+
+  <!--  <p-footer> -->
+  <div class="ui-g-12 flex-container">
+    <div class="ui-g-12">
+      <!-- <div class="ui-g-12 ui-md-2"></div> -->
+      <div class="ui-g-12 ui-md-6 smallbutton">
+        <p-button id="createAccount" label="Cancel" class="ui-button-rounded cancelBtn" type="button"
+          (click)="onCancel()"></p-button>
+      </div>
+      <div class="ui-g-12 ui-md-6 smallbutton">
+        <p-button class="ui-button-rounded submitbtn" label="Next" type="submit">
+        </p-button>
+      </div>
+    </div>
+    <!-- <div class="ui-g-2"></div> -->
+  </div>
+  <!-- </p-footer> -->
+</form>

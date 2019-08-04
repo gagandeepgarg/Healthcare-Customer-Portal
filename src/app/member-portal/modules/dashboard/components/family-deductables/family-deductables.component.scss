@@ -1,0 +1,49 @@
+@import "../../../../../../assets/custom-sass/variables.scss";
+
+::ng-deep{
+    .familyDeductableCarousel{
+        .ui-widget-content{
+            border:0;
+          }
+          .ui-widget-header{
+            background-color: #ffffff;
+            color:black;
+            font-weight:2px;
+          }
+         /* .ui-carousel{
+             width:100%;
+            //  position: relative;
+         } */
+        .ui-carousel-header{
+            margin:0;
+            border: 0;
+            padding: 1.225em 1em !important;
+            border-bottom: 0.5px solid #ccc;
+        }
+        .ui-carousel .ui-carousel-viewport .ui-carousel-items .ui-carousel-item{
+            border-right: 1px solid #ccc;
+          }
+        .ui-carousel .ui-carousel-viewport .ui-carousel-items .ui-carousel-item:last-child{
+          border-right: none;
+        }
+          .ui-carousel .ui-carousel-header .ui-carousel-page-links {
+            margin: 5px 0 0 0;
+            font-size: 8px;
+          }
+                   
+          .ui-carousel-button{
+            display:none;
+          }
+          
+          .ui-carousel .ui-carousel-page-links .ui-carousel-page-link {
+            color: #848484;
+          }
+    }
+
+    .viewFamilyPageLinks{
+      .ui-carousel .ui-carousel-page-links {
+        display:none;
+      }
+    }
+}
+

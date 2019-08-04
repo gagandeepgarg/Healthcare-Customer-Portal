@@ -1,0 +1,39 @@
+@import "../../../../../../assets/custom-sass/variables.scss";
+.plan {
+  padding: 0 15% 0 15%;
+  .plan-header {
+    font-size: 20px;
+  }
+}
+.embeded-pdf{
+  padding:4% 15% 0 15%;
+}
+.pdf-container{
+  background-color: white;
+  padding: 2%;
+}
+.plan-name{
+  border-bottom: 1px solid darkgray;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #0c76b4; 
+}
+.embed-pdf-height{
+  height:75vh;
+}
+/* For mobile phones: */
+@media only screen and (max-width: 768px) {
+  .embeded-pdf{
+    padding-top: 7% ;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .embeded-pdf{
+    padding-top: 10% ;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .embeded-pdf{
+    padding-top: 16% ;
+  }
+}

@@ -1,0 +1,73 @@
+@import "../../../../../../assets/custom-sass/variables.scss";
+.searchHeader {
+  margin-top: 1.6%;
+}
+.right-margin {
+  margin-right: 10%;
+}
+.no-padding{
+  padding-right: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+::ng-deep {
+  .backbutton button:hover{
+    .ui-button-icon-left {
+      color:#0E4668;
+    }
+  }
+  .searchHeader {
+    p-button button {
+      font-size: 0.9em;
+      .ui-button-text {
+        padding-top: 1px;
+      }
+      .ui-button-icon-left {
+        padding-top: 1px;
+      }
+    }
+
+    .round-input-div {
+      padding: 0.3em;
+      padding-left: 1em;
+    }
+    .round-input-element {
+      font-size: 0.9em;
+    }
+    .submitbtn {
+      .ui-button-text {
+        padding-left: 0;
+      }
+    }
+    .cancelBtn {
+      .ui-button-text {
+        padding-left: 0;
+      }
+      .pi-arrow-left {
+        color: $cancel-btn-text-col0r;
+      }
+    }
+  }
+}
+
+.zero-top-pad {
+  padding-top: 0;
+}
+
+/* For mobile phones: */
+
+@media only screen and (max-width: 640px) {
+  .zero-top-pad {
+    padding-top: 10px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .right-margin {
+    margin-right: 4%;
+  }
+}
+@media only screen and (min-width: 641px) {
+.text-right-align
+{
+text-align: right;
+}}

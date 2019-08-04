@@ -1,0 +1,10 @@
+{
+  "LOGIN":{
+    "Header":"Login"
+  },
+  "DASHBOARD": {
+    "ChangePasswordPopup":{
+      "Header":"Password Expiry Notification"
+      }
+    }
+}

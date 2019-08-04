@@ -1,0 +1,62 @@
+@import "../../../../../../../../assets/custom-sass/variables.scss";
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.round-input-div {
+  border: 1px solid #cccccc;
+  padding: 0.4em;
+}
+.cancelBtn {
+  float: left;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  font-size: 0.8em;
+
+}
+.submitbtn {
+  float: right;
+  font-size: 0.8em;
+}
+
+/*  .ui-inputtext{
+    text-align: center !important;
+}
+
+.ui-fluid .ui-calendar .ui-calendar-w-btn .ui-inputtext {
+  text-align: center !important;
+} */
+
+.error{
+  float: left;
+}
+
+.label{
+  padding-top: 4%;
+}   
+
+.ui-fluid .ui-inputgroup .ui-button-icon-only .ui-button-icon-left {
+  font-size:1.2em !important;
+}
+
+.addDropdown{
+  ::ng-deep{
+    .ui-dropdown label.ui-dropdown-label{
+      text-align: left;
+    }
+  }
+}
+@media screen and (max-width:1024px) {
+  .depContainer{
+    max-height:15em;
+    overflow: auto;
+  }
+  .smallbutton{
+    width:50%;
+  }
+}
+

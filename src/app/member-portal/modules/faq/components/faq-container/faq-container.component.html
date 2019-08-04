@@ -1,0 +1,19 @@
+<app-page-header [iconName]="iconName" [headerInnerHtml]="headerHtml"></app-page-header>
+<div class="ui-fluid header-freeze-padding">
+    <div class="ui-g ">
+    <!-- sidebar for categories -->
+    <div class="ui-g-3 categorysidemenu">
+      <div class="categoryheaderLabel">Processes</div>
+      <div class="categorymenuitem" *ngFor="let cat of faqCategories">
+        <div class="categorymenuitemLabel" (click)="categoryChanged(cat)" [ngClass]="{'active':selectedCategory==cat}">
+          {{cat.Category}}
+        </div>
+      </div>
+    </div>
+
+    <div class="faqsection ui-g-9">
+      <!--  list question answer page -->
+      <app-list-faq [selectedCategory]="selectedCategory"></app-list-faq>
+    </div>
+  </div>
+</div>

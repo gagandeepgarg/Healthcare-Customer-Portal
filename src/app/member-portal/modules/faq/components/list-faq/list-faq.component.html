@@ -1,0 +1,16 @@
+<div class="ui-g-12 categoryname">
+  {{selectedCategoryName}}
+</div>
+<div class="ui-g-12 no-padding" *ngFor="let faq of listOfFAQs let i=index">
+  <div class="ui-g-12 questionWhole">
+    <div class="ui-g-12 question" (click)="faq.showAnswer=!faq.showAnswer">
+      <span class="ui-g-11">Q{{i+1}}. {{faq?.Faqquestion}}</span>
+      <span class="ui-g-1">
+        <i class="fa right-float" [ngClass]="{'fa-angle-double-up':faq.showAnswer,'fa-angle-double-down':!(faq.showAnswer)}"></i>
+      </span>
+    </div>
+  </div>
+  <div class="answer" *ngIf="faq.showAnswer">
+    <span><b>Answer:</b> {{faq?.Faqanswer}}</span>
+  </div>
+</div>

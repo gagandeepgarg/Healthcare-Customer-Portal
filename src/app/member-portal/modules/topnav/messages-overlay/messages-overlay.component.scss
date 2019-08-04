@@ -1,0 +1,186 @@
+@import "../../../../../assets/custom-sass/variables.scss";
+.overlay-box{
+  position: absolute;
+    top: 47px;
+    right: 5px;
+    width: 250px;
+    background-color: #ffffff;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 17px 0 rgba(0, 0, 0, 0.2);
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+}
+.db-top-right {
+  height: 100%;
+  padding: 0px;
+  font-family: "Roboto", sans-serif;
+
+  .header {
+    //height: 48px;
+    padding: 8px 10px;
+    .header-left {
+      width: 80px;
+      float: left;
+      position: relative;
+      font-family: "Roboto", sans-serif;
+
+      .badge {
+        position: absolute;
+        right: -5px;
+        top: -5px;
+        background-color: $red-950;
+        color: $white;
+        border-radius: 50%;
+        padding: 2px 4px;
+        display: block;
+        font-size: 12px;
+        line-height: 12px;
+      }
+    }
+    
+    .header-right {
+      width: calc(100% - 80px);
+      float: left;
+      display: flex;
+      justify-content: flex-end;
+      font-family: "Roboto", sans-serif;
+
+      .messages-total {
+        color: $grey-600;
+        font-size: 11px;
+
+        .count {
+          color: $grey-600;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  .filters {
+    background-color: $grey-100;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 30px;
+
+    div {
+      color: $blue-400;
+      font-size: 12px;
+      margin-right: 8px;
+      cursor: pointer;
+    }
+
+    div:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .messages {
+    padding: 0px;
+    height: calc(100% - 118px);
+
+    .message {
+      border-top: 0.5px solid $grey-350;
+
+      .icon {
+        width: 60px;
+      }
+
+      .text {
+        width: calc(100% - 62px);
+        //display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+    }
+  }
+.imgIcon{
+  cursor: pointer;
+}
+  .messages-footer {
+    border-top: 0.5px solid #CCCCD0;  
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px;
+    .view-all-btn {
+      float: right;
+      padding: 3px 10px;
+      border-radius: 25px;
+      color: $white;
+      background-color: $orange-shade-100;
+      margin: -3px 5px 0 5px;
+      cursor: pointer;
+      font-size: 0.7em;
+    }
+    .view-all-btn:hover{
+      color:#0E4668;
+    }
+  }
+}
+.subject{
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  margin: 0;
+}
+/* mixin for multiline */
+@mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white){
+  overflow: hidden;
+  position: relative;
+  line-height: $lineHeight;
+  max-height: $lineHeight * $lineCount; 
+  // text-align: justify;
+  //margin-right: -1em;
+  padding-right: 1em;
+  margin-top:0;
+  margin-bottom:0; 
+  &:before {
+    content: '...';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    background: $bgColor;
+  }
+}
+
+.block-with-text {
+  @include multiLineEllipsis($lineHeight: 1.1em, $lineCount: 2, $bgColor: white);
+}
+.message:hover{
+  background-color: lightblue;
+  .block-with-text{
+    @include multiLineEllipsis($lineHeight: 1.1em, $lineCount: 2, $bgColor: lightblue);
+  }
+}
+.message div.selected{
+  .block-with-text{
+    @include multiLineEllipsis($lineHeight: 1.1em, $lineCount: 2, $bgColor: $gradient-start);
+  }
+}
+.selected{
+  background-color: $gradient-start;
+}
+
+.msg-inner-row{
+  padding: 0;
+}
+
+.unread{
+  font-weight: bold;
+}
+
+.top-margin-10px{
+  margin-top:10px;
+}
+.left-padding-5px{
+  padding-left:5px;
+}

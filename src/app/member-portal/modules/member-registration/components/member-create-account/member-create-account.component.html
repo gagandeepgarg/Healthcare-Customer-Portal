@@ -1,0 +1,260 @@
+<div class="ui-fluid">
+  <div class="ui-g ">
+    <form [formGroup]="memberCreateAcountInfo" (ngSubmit)="onSubmit()">
+      <div class="ui-g-12 flex-container">
+        <div class="ui-g-12 ui-md-6">
+          <span class="error">{{errorText}}</span>
+        </div>
+      </div>
+      <div class="ui-g-12 flex-container">
+        <div class="ui-g-12 ui-md-2">
+          <div class="ui-g-12 ui-inputgroup  round-input-div"
+            [ngClass]="{'has-error': (isSubmitted && memberCreateAcountInfo.get('userName').errors)}">
+            <span class="ui-inputgroup-addon no-border-no-back"><i class="fa fa-user round-input-icon"></i></span>
+            <input pInputText type="text" class="round-input-element" formControlName="userName"
+              placeholder="User Name *" maxlength="80" />
+          </div>
+          <span class="ui-g-12 checkAvailability" (click)="checkUserNameAvailability()">Check Availability</span>
+          <span *ngIf="(memberCreateAcountInfo.get('userName').errors?.isUserNameHasSpecialCharacter)"
+            class="ui-g-12 error">{{constants.USERNAME_HAS_SPECIAL_CHARACTER}}</span>
+          <span
+            *ngIf="isUserNameEntred && isUserNameAvailable && isCheckAvailabilityClicked && !(memberCreateAcountInfo.get('userName').errors?.isUserNameHasSpecialCharacter)"
+            class="ui-g-12 error">{{constants.USERNAME_NOT_AVAILABLE}}</span>
+          <span
+            *ngIf="isUserNameEntred && !isUserNameAvailable && isCheckAvailabilityClicked && !(memberCreateAcountInfo.get('userName').errors?.isUserNameHasSpecialCharacter)"
+            class="ui-g-12 sucessInfo">{{constants.USERNAME_AVAILABLE}}</span>
+        </div>
+        <div class="ui-g-12 ui-md-2 prog">
+          <div class="ui-g-11 ui-sm-11 ui-md-11 ui-inputgroup round-input-div"
+            [ngClass]="{'has-error': (isSubmitted && memberCreateAcountInfo.get('password').errors) ||  !this.isPasswordValid }">
+            <span class="ui-inputgroup-addon no-border-no-back"><i class="fa fa-lock round-input-icon"></i></span>
+            <div class="flex-growth-1">
+              <input pInputText #password type="password" class="round-input-element" formControlName="password"
+                placeholder="Password *" maxlength="15" (input)="displayProgressbar($event.target.value)"
+                (paste)="paste($event)" (keydown)="utilService.validatePasswordCharacters($event)" />
+            </div>
+            <span class="ui-inputgroup-addon no-border-no-back"><i class="fa fa-eye round-input-icon"
+                (touchstart)="password.type='text'" (touchend)="password.type='password'"
+                (mouseleave)="password.type='password'" (mouseup)="password.type='password'"
+                (mousedown)="password.type='text'"></i></span>
+          </div>
+          <i class="ui-g-1 ui-sm-1 ui-md-1 fa  fa-info-circle round-input-icon"
+            pTooltip="{{constants?.PASSWORD_POLICY_INFO}}" tooltipPosition="bottom" [escape]="false"
+            placeholder="Bottom"></i>
+          <span class="ui-g-12" *ngIf="passwordStrengthInfo?.strenthbar">
+            <p-progressBar [ngClass]="{
+              'progressbarlayout':true,
+                'color-1':passwordStrengthInfo?.progressval <= 30,
+                'color-2':passwordStrengthInfo?.progressval >= 31 && passwordStrengthInfo?.progressval <= 49 ,
+                'color-3':passwordStrengthInfo?.progressval >= 50 && passwordStrengthInfo?.progressval <= 65,
+                'color-4':passwordStrengthInfo?.progressval >= 66
+              }" [value]="passwordStrengthInfo?.progressval" mode="determinate"></p-progressBar>
+          </span>
+          <span *ngIf="(memberCreateAcountInfo.errors?.isUserNamePasswordMatched && isSubmitted)"
+            class="ui-g-12 error">{{constants.USERNAME_PASSWORD_MATCHED}}</span>
+
+          <span *ngIf="(memberCreateAcountInfo.get('password').errors?.minLength || !this.isPasswordValid )"
+            class="ui-g-12 error">{{constants.PASSWORD_POLICY_ERROR}}</span>
+        </div>
+        <div class="ui-g-12 ui-md-2">
+          <div class="ui-g-12 ui-sm-12 ui-md-12 ui-inputgroup round-input-div"
+            [ngClass]="{'has-error': (isSubmitted && memberCreateAcountInfo.get('confirmPassword').errors)}">
+            <span class="ui-inputgroup-addon no-border-no-back"><i class="fa fa-lock round-input-icon"></i></span>
+            <div class="flex-growth-1">
+              <input pInputText #confirmPassword type="password" class="round-input-element"
+                formControlName="confirmPassword" placeholder="Confirm Password *" maxlength="15"
+                (paste)="paste($event)" (keydown)="utilService.validatePasswordCharacters($event)" />
+            </div>
+            <span class="ui-inputgroup-addon no-border-no-back"><i class="fa fa-eye round-input-icon"
+                (touchstart)="confirmPassword.type='text'" (touchend)="confirmPassword.type='password'"
+                (mouseleave)="confirmPassword.type='password'" (mouseup)="confirmPassword.type='password'"
+                (mousedown)="confirmPassword.type='text'"></i></span>
+          </div>
+          <span *ngIf="(memberCreateAcountInfo.errors?.isConfirmPasswordNotMatched && isSubmitted)"
+            class="ui-g-12 error">{{constants.CONFIRM_PASSWORD_NOT_MATCHED}}</span>
+        </div>
+      </div>
+
+      <div class="ui-g-12 flex-container">
+        <div class="ui-g-12 ui-md-3">
+          <div class="ui-g-12 ui-inputgroup  round-input-div"
+            [ngClass]="{'has-error': (isSubmitted && memberCreateAcountInfo.get('emailId').errors),
+            'backgroundDiasbed': emailId.disabled}">
+            <span class="ui-inputgroup-addon no-border-no-back"><i class="fa fa-envelope round-input-icon"></i></span>
+            <input type="text" pInputText placeholder="Email Address *" id="malId" formControlName="emailId" #emailId
+              class="round-input-element" />
+          </div>
+        </div>
+        &nbsp;
+        <div class="ui-g-12 ui-md-3">
+          <div class="ui-g-12 ui-inputgroup  round-input-div"
+            [ngClass]="{'has-error': ( isSubmitted && memberCreateAcountInfo.get('phoneNo').errors),
+            'backgroundDiasbed': phoneNo.disabled}">
+            <span class="ui-inputgroup-addon no-border-no-back"><i class="fa fa-phone round-input-icon"></i></span>
+            <input type="text" class="round-input-element" pInputText placeholder="Phone Number *"
+              formControlName="phoneNo" maxlength="10" (keydown)="validatePhoneNumberEntry($event)" #phoneNo/>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="ui-g-12 flex-container">
+        <div class="ui-g-12 ui-md-6">
+          <hr />
+        </div>
+      </div>
+
+      <div class="ui-g-12 flex-container">
+        <div class="ui-g-12 ui-md-2">
+          <p-button [disabled]="sentforOTP || otpVerfied" type="button" label={{otpButtonLabel}}
+            icon="fa fa-info-circle atl" iconPos="right" class="ui-button-rounded oTPButton"
+            (click)="sendOTP(memberCreateAcountInfo)"
+            title="One time password sent either to email or cellphone for verification." tooltipPosition="bottom">
+          </p-button>
+          <div class="ui-g-12 resendOTP" *ngIf="sentforOTP">
+            <label class="resendOTP-label" *ngIf="!otpVerfied">Resend OTP will be available in {{otpLabelTimer}}
+              seconds</label>
+          </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-2">
+          <div class="ui-g-12 ">
+            <p-radioButton name="radioGroup" value="phone" label="Cell Number" formControlName="otpControl"
+              inputId="preopt1" styleClass="phEmailRadio" [disabled]="sentforOTP || otpVerfied">
+            </p-radioButton>
+          </div>
+          <div class="ui-g-12">
+            <p-radioButton name="radioGroup" value="email" label="Email" formControlName="otpControl" inputId="preopt2"
+              styleClass="phEmailRadio" [disabled]="sentforOTP || otpVerfied">
+            </p-radioButton>
+          </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-2">
+          <div class="ui-g-12 ui-inputgroup round-input-div"
+            [ngClass]="{'has-error': (isSubmitted && (memberCreateAcountInfo.get('otpText').errors || !otpVerfied)),'inputdisabled':otpVerfied}">
+            <input pInputText #otpText type="text" class="round-input-element OTPClass"
+              placeholder="Enter a 6 digit OTP *" formControlName="otpText" (keydown)="validateNumber($event)"
+              (input)="CheckOTP()" maxlength="6" [attr.disabled]="otpVerfied?true:null" />
+
+          </div>
+          <div class="ui-g-12 flex-container top-padding-10px">
+            <span class="error" *ngIf="!otpVerfied">{{OtperrorText}}</span>
+          </div>
+          <div class="ui-g-12 flex-container">
+            <span class="sucessInfo" *ngIf="otpVerfied">{{otpTextSuccess}}</span>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="ui-g-12 flex-container negative-margin-2pc">
+        <div class="ui-g-12 ui-md-6">
+          <hr />
+        </div>
+      </div>
+
+      <div class="ui-g-12 flex-container">
+        <div class="ui-g-12 ui-md-6">
+          <h4 class="ttcad">Set Security Questions</h4>
+        </div>
+      </div>
+
+      <div class="ui-g-12 flex-container">
+        <div class="ui-g-12 ui-md-4">
+          <div class="ui-g-12 ui-inputgroup  round-input-div"
+            [ngClass]="{'has-error': ( isSubmitted && memberCreateAcountInfo.get('question1').errors)}">
+            <span class="ui-inputgroup-addon no-border-no-back"><i class="fa fa-lock round-input-icon"></i></span>
+            <p-dropdown class="round-input-element" [options]="questions1" formControlName="question1"
+              (onChange)="filterQuestions1()" placeholder="Select a Question"></p-dropdown>
+          </div>
+        </div>
+        <div class="ui-g-12 ui-md-2 ">
+          <div class="ui-g-12  round-input-div answer"
+            [ngClass]="{'has-error': ( isSubmitted && memberCreateAcountInfo.get('answer1').errors) }">
+            <input pInputText type="text" class="round-input-element" placeholder="Answer *" maxlength="100"
+              formControlName="answer1" />
+          </div>
+        </div>
+      </div>
+      <div class="ui-g-12 flex-container">
+        <div class="ui-g-12 ui-md-4">
+          <div class="ui-g-12 ui-inputgroup  round-input-div"
+            [ngClass]="{'has-error': (isSubmitted && memberCreateAcountInfo.get('question2').errors)}">
+            <span class="ui-inputgroup-addon no-border-no-back"><i class="fa fa-lock round-input-icon"></i></span>
+            <p-dropdown class="round-input-element" [options]="questions2" formControlName="question2"
+              (onChange)="filterQuestions2()" placeholder="Select a Question"></p-dropdown>
+          </div>
+        </div>
+        <div class="ui-g-12 ui-md-2">
+          <div class="ui-g-12  round-input-div answer"
+            [ngClass]="{'has-error': ( isSubmitted && memberCreateAcountInfo.get('answer2').errors)}">
+            <input pInputText type="text" class="round-input-element" placeholder="Answer *" maxlength="100"
+              formControlName="answer2" />
+          </div>
+        </div>
+      </div>
+      <div class="ui-g-12 flex-container">
+        <div class="ui-g-12 ui-md-4">
+          <div class="ui-g-12 ui-inputgroup  round-input-div"
+            [ngClass]="{'has-error': ( isSubmitted && memberCreateAcountInfo.get('question3').errors) }">
+            <span class="ui-inputgroup-addon no-border-no-back"><i class="fa fa-lock round-input-icon"></i></span>
+            <p-dropdown class="round-input-element" [options]="questions3" formControlName="question3"
+              (onChange)="filterQuestions3()" placeholder="Select a Question"></p-dropdown>
+          </div>
+        </div>
+        <div class="ui-g-12 ui-md-2">
+          <div class="ui-g-12  round-input-div answer"
+            [ngClass]="{'has-error': ( isSubmitted && memberCreateAcountInfo.get('answer3').errors)}">
+            <input pInputText type="text" class="round-input-element" placeholder="Answer *" maxlength="100"
+              formControlName="answer3" />
+          </div>
+        </div>
+      </div>
+
+      <div class="ui-g-12 flex-container negative-margin-2pc">
+        <div class="ui-g-12 ui-md-6">
+          <hr />
+        </div>
+      </div>
+      <div class="ui-g-12 flex-container">
+        <div class="ui-g-12 ui-md-6">
+          <h4 class="ttcad">Disclosures</h4>
+        </div>
+      </div>
+
+      <div class="ui-g-12 flex-container max-height-18pc">
+        <div class="ui-g-12 ui-md-6">
+          <p-scrollPanel class="tocPanel" [style]="{width: '100%', height: '100%','background-color':'#EBF0F3'}"
+            [escape]="false">
+            <div class="termsConditions" [innerHTML]="constants?.TERMS_CONDITIONS"></div>
+          </p-scrollPanel>
+        </div>
+
+      </div>
+      <div class="ui-g-12 flex-container">
+        <div class="ui-g-12 ui-md-6">
+          <p-checkbox label="I Agree" binary="true" styleClass="ccheck" #agreeCheckBox required
+            (onChange)="checkIAgree($event)" [formControl]="memberCreateAcountInfo.controls['iAgreeCheckBox']"
+            [ngClass]="{'has-error': ( isSubmitted && (!iAgreeChecked)) }">
+          </p-checkbox>
+          <br />
+          <span class="error" *ngIf="iAgreeCheckedMessage && isSubmitted ">
+            {{constants?.REGISTRATION_AGREE}}
+          </span>
+          <hr />
+        </div>
+      </div>
+      <div class="ui-g-12 flex-container">
+        <div class="ui-g-12 ui-md-3">
+          <p-button id="createAccount" label="Back" class="ui-button-rounded cancelBtn left-float" type="button"
+            (click)="onBack()"></p-button>
+        </div>
+        <div class="ui-g-12 ui-md-3">
+          <p-button class="ui-button-rounded submitbtn right-float" label="Submit" type="submit"></p-button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

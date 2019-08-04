@@ -1,0 +1,48 @@
+@import "../../../../../../assets/custom-sass/variables.scss";
+// sidemenu CSS
+.categorysidemenu {
+  background-color: #edf1f2;
+  padding: 0;
+  padding-top: 1%;
+  min-height: 100vh;
+  width: 20%
+}
+.categorymenuitem {
+  width: 100%;
+}
+.categorymenuitemLabel {
+  color: #808084;
+  padding: 2%;
+  padding-left: 10%;
+  cursor: pointer;
+  border-bottom: 1px solid #e0e0e3;
+  padding: 0.7em 0.7em 0.7em 3em;
+}
+.categoryheaderLabel {
+  font-size: 20px;
+  padding: 5%;
+  color: $active-font-color;
+}
+.active,
+.categorymenuitemLabel:hover {
+  background-color: white;
+  color: #034c7b;
+  font-weight: 500;
+}
+
+
+.faqsection {
+  padding-left: 3%;
+  min-height: 100%;
+}
+
+/* For mobile phones: */
+@media only screen and (max-width: 640px) {
+  .active,.categorymenuitemLabel, .categorymenuitemLabel:hover {
+    padding: 0;
+  }
+  .categoryheaderLabel{
+    font-size: 15px;
+    font-weight: bold;
+  }
+}

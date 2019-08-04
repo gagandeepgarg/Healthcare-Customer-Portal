@@ -1,0 +1,79 @@
+@import "../../../../../../../../assets/custom-sass/variables.scss";
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.round-input-div {
+  border: 1px solid #cccccc;
+  padding: 0.4em;
+}
+
+.cancelBtn {
+  float: left;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  font-size: 0.8em;
+
+}
+.submitbtn {
+  float: right;
+  font-size: 0.8em;
+}
+
+.questContainer{
+  text-align: left;
+  overflow: auto;
+  max-height:25em;
+}
+
+ .backgroundDiasbed{
+    background-color: #F0F0F2 !important;
+  }
+  .round-input-div input[type=text]:disabled {
+    background-color: #F0F0F2 !important;
+    border:none !important;
+    cursor:not-allowed !important;
+    color:black !important;
+    opacity: 1;
+  }
+
+  .textArea{
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+  }
+  .textArea:focus {
+    box-shadow: none;
+    border: 1px solid #cccccc;
+    outline: none !important;
+  }
+
+  .error{
+    float: left;
+  }
+
+  .quest{
+    text-align: left;
+    color:#808084;
+    font-weight: 500;
+    width:100%;
+  }
+
+  .max-chars{
+    float: right;
+    color: black;
+    font-size: smaller;
+  }
+
+  @media screen and (max-width:1024px){
+    .questContainer{
+      max-height:15em;
+      overflow: auto;
+    }
+    .smallbuton{
+      width:50%;
+    }
+  }

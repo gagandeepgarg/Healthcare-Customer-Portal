@@ -1,0 +1,129 @@
+<!--component html goes here -->
+<div class="ui-g-12 dashboard no-padding">
+    <!-- <div class="ui-lg-2 ui-md-2 ui-sm-12 no-padding"> -->
+        <app-user-profile *ngIf="!isMobile()"></app-user-profile>
+    <!-- </div> -->
+    <div [ngClass]="{'desktopWidth ui-g-10':!isMobile(), 'ui-g-12':isMobile()}" >
+        
+        <div class="ui-g ui-md-12 ui-lg-12 call-icon">
+            <span class="icon">   <i class="material-icons">
+                    call
+                </i> 
+            </span>
+            <div class="text">
+                Call us at: <span> (844) 834-3456 from Monday – Friday 8AM – 8PM EST</span>
+            </div>
+        </div>
+
+        <div class="ui-g accordionDiv" *ngIf="isMobile()">
+            <div class="ui-g-12">
+                <div class="ui-g-12 header-snapshot">
+                    <span>View Plans SnapShot</span>
+                    <span class="accordionIcon">
+                        <i *ngIf="!snapShotOpen" class="fa fa-chevron-down" (click)="snapShotOpen=true"></i>
+                        <i *ngIf="snapShotOpen" class="fa fa-chevron-up" (click)="snapShotOpen=false"></i>
+                    </span>
+                </div>
+                <div class="ui-g-12 no-padding" [hidden]="!snapShotOpen">
+                    <app-user-profile ></app-user-profile>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g db-content-top">
+            <div class="ui-g-12 ui-lg-12">
+                <div class="card card-w-title db-top-left">
+                    <div class="ui-g-12 header">
+                        <div class="header-left ui-g-12 ui-md-6 ui-lg-6 ui-sm-12">
+                            <span class="left-margin-10px">Recent Share Requests</span>
+                        </div>
+                        <div class="header-right ui-g-12 ui-md-6 ui-lg-6 ui-sm-12">
+                            <p-button label="Medical"
+                                [ngClass]="{'active':onMedicalselected,'inactive':!onMedicalselected}"
+                                (onClick)="onFilterSelect('Medical')"></p-button> &nbsp;&nbsp;
+                            <p-button label="Dental" (onClick)="onFilterSelect('Dental')" 
+                                [ngClass]="{'active':onDentalselected,'inactive':!onDentalselected}"  [disabled]="!plansCovered?.IsDental" >
+                            </p-button>&nbsp;&nbsp;
+                            <p-button label="Vision" (onClick)="onFilterSelect('Vision')" 
+                                [ngClass]="{'active':onVisionselected,
+                                'inactive':!onVisionselected}" [disabled]="!plansCovered?.IsVision">
+                            </p-button>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 claim-filters">
+                        <div class="ui-g">
+                            <div class="ui-g-12 ui-md-5">
+                                <div class="ui-g-12 ui-md-4 claim-text">
+                                    <span class="label ">
+                                        View Requests For:
+                                    </span>
+                                </div>
+                                <div class="ui-g-12 ui-md-8 ui-inputgroup  round-input-div dependentDD"
+                                    >
+                                    <p-dropdown [options]="dependentMembers" [(ngModel)]="selectedDependent"
+                                        (onChange)="onDependentSelected()" [paginator]="false" optionLabel="label">
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                            <div class="ui-g-12 ui-md-7 text-center-align" *ngIf="EOBClickedFlag" >
+                                <span class="notification">You will be directed to new browser window for EOB document</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui-g-12 claims-table">
+                        <app-claims-data-table [items]="cliams" [rows]="rows" [columns]="columns">
+                        </app-claims-data-table>
+                    </div>
+
+                    <div class="ui-g-12 claims-table-footer">
+                        <div *ngIf="cliams && cliams.length>0" class="view-all-btn" (click)="onViewAll()">View All</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-12 ui-md-12 ui-lg-12 no-padding" >
+                <app-family-deductables></app-family-deductables>
+            </div>
+        </div>
+       <div class="ui-g ui-fluid">
+            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                <app-individual-deductables-limits></app-individual-deductables-limits>
+            </div>
+        </div> 
+    </div>
+</div>
+
+
+
+
+<p-dialog class="pDialog" [draggable]="false" [modal]="true" [closable]="false" [closeOnEscape]="false" [responsive]="true"
+    [(visible)]="display"  [style]="{'width': '30%','margin':'0'}">
+    <p-header>
+        <div class="ui-g-12 flex-container pheaderCss">
+            <div class="ui-g-10 ui-md-10">
+                &nbsp;<span> Password Expiry Notification</span>
+            </div>
+            <div class="ui-g-2 ui-md-2">
+                <span class="right-float"><i class="fa fa-times-circle pHeaderCloseIcon" (click)="cancel()"></i></span>
+            </div>
+        </div>
+    </p-header>
+
+    <div class="customError">
+        <span> Your password will expire in {{noOfDays}} days</span></div>
+
+    <p-footer [style]="{padding:'0'}">
+        <div class="ui-g-12 flex-container">
+            <div class="ui-g-12 ui-md-12">
+                <p-button label="Later" class="ui-button-rounded cancelBtn left-float" type="button" 
+                    (click)="later()"></p-button>
+                <p-button class="ui-button-rounded submitbtn right-float" (click)="changePassword()"
+                    label="Change Now" type="button">
+                </p-button>
+            </div>
+        </div>
+    </p-footer>
+
+</p-dialog>

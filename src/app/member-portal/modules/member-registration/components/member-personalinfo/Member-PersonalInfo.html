@@ -1,0 +1,138 @@
+<div class="ui-fluid">
+        <div class="ui-g ">
+                <div class="ui-g-12 flex-container">
+                        <div class="ui-g-12 ui-md-6">
+                                Sign up using my:
+                                <span class="memberIdRadio">
+                                        <p-radioButton name="radiogroup" value="0" [(ngModel)]="memberIdCheckbox"
+                                                inputId="preopt2"></p-radioButton>
+                                        <b>Member ID</b>
+                                </span>
+                        </div>
+                </div>
+                <div class="ui-g-12 flex-container">
+                        <div class="ui-g-12 ui-md-6">
+                                <span class="error">{{errorText}}</span>
+                        </div>
+                </div>
+                <form [formGroup]="memberPersonalInfo" (ngSubmit)="onSubmit()">
+                        <div class="ui-g-12 flex-container marginFlex">
+                                <div class="ui-g-12 ui-md-3">
+                                        <div class="ui-g-12 ui-inputgroup  round-input-div"
+                                                [ngClass]="{'has-error': (memberPersonalInfo.get('externalId').errors && isSubmitted)}">
+                                                <span class="ui-inputgroup-addon no-border-no-back"><i
+                                                                class="fa fa-user round-input-icon"></i></span>
+                                                <input type="text" class="round-input-element" pInputText
+                                                        placeholder="Member ID *" ms-input-placeholder="Member ID *"
+                                                        formControlName="externalId" />
+                                        </div>
+                                </div>
+                                <div class="ui-g-12 ui-md-6 font1em">
+                                        (Find your member ID on your ID card,Welcome letter or any EOB you received from
+                                        us)
+                                </div>
+                        </div>
+                        <div class="ui-g-12 flex-container marginFlex">
+                                <div class="ui-g-12 ui-md-3">
+                                        <div class="ui-g-12 ui-inputgroup  round-input-div"
+                                                [ngClass]="{'has-error': (isSubmitted && memberPersonalInfo.get('firstName').errors)}">
+                                                <span class="ui-inputgroup-addon no-border-no-back"><i
+                                                                class="fa fa-user round-input-icon"></i></span>
+                                                <input type="text" class="round-input-element" pInputText
+                                                        placeholder="First Name *" maxlength="50"
+                                                        formControlName="firstName" />
+                                        </div>
+                                </div>
+                                <div class="ui-g-12 ui-md-3">
+                                        <div class="ui-g-12 ui-inputgroup  round-input-div"
+                                                [ngClass]="{'has-error': (isSubmitted && memberPersonalInfo.get('lastName').errors)}">
+                                                <span class="ui-inputgroup-addon no-border-no-back"><i
+                                                                class="fa fa-user round-input-icon"></i></span>
+                                                <input type="text" class="round-input-element" pInputText
+                                                        placeholder="Last Name *" maxlength="50"
+                                                        formControlName="lastName" />
+                                        </div>
+                                </div>
+                                <div class="ui-g-12 ui-md-3">
+                                        <div class="ui-g-12 ui-inputgroup  round-input-div roundCalendar"
+                                                [ngClass]="{'has-error': (memberPersonalInfo.get('dob').errors && isSubmitted)}">
+                                                <span class="ui-inputgroup-addon no-border-no-back"></span>
+                                                <p-calendar class="round-input-element" formControlName="dob"
+                                                        placeholder="DOB *" [maxDate]="maxDate" [showIcon]="true"
+                                                        utc="false" [showOtherMonths]="true" [selectOtherMonths]="true"
+                                                        [monthNavigator]="true" [yearNavigator]="true"
+                                                        [yearRange]="yearRange">
+                                                </p-calendar>
+                                        </div>
+                                        <span class="ui-g-12" *ngIf=" (errorDob && !errorText && isSubmitted)"
+                                                class="error">Please enter valid date format (MM/DD/YYYY)</span>
+                                </div>
+                        </div>
+                        <div class="ui-g-12 flex-container marginFlex">
+                                <div class="ui-g-12 ui-md-3">
+                                        <div class="ui-g-12 ui-inputgroup  round-input-div"
+                                                [ngClass]="{'has-error': (memberPersonalInfo.get('zipCode').errors && isSubmitted)}">
+                                                <span class="ui-inputgroup-addon no-border-no-back"><i
+                                                                class="fa fa-map-marker round-input-icon"></i></span>
+                                                <input type="number" class="round-input-element" pInputText
+                                                        placeholder="Zip Code *" (input)=" LimitZipCode($event)"
+                                                        maxlength="9" (input)="validateNumber($event)"
+                                                        formControlName="zipCode" />
+                                        </div>
+                                        <span class="ui-g-12"
+                                                *ngIf=" (memberPersonalInfo.controls['zipCode'].hasError('Invalid_ZipCode') && isSubmitted && !errorText)"
+                                                class="error">Please enter valid Zip Code</span>
+                                </div>
+                                <div class="ui-g-12 ui-md-3">
+                                        <div class="ui-g-12 ui-inputgroup  round-input-div"
+                                                [ngClass]="{'has-error': ( isSubmitted && memberPersonalInfo.get('PhoneNumber').errors)}">
+                                                <span class="ui-inputgroup-addon no-border-no-back"><i
+                                                                class="fa fa-phone round-input-icon"></i></span>
+                                                <input type="text" class="round-input-element" pInputText
+                                                        placeholder="Phone Number *" formControlName="PhoneNumber"
+                                                        maxlength="10" (keydown)="validatePhoneNumberEntry($event)" />
+                                        </div>
+                                </div>
+
+                                <div class="ui-g-12 ui-md-3">
+                                        <div class="ui-g-12 ui-inputgroup  round-input-div"
+                                                [ngClass]="{'has-error': (memberPersonalInfo.get('email').errors && isSubmitted)}">
+                                                <span class="ui-inputgroup-addon no-border-no-back"><i
+                                                                class="fa fa-envelope round-input-icon"></i></span>
+                                                <input type="text" class="round-input-element" pInputText
+                                                        placeholder="Email Address *" formControlName="email" />
+                                        </div>
+                                        <span *ngIf=" (isSubmitted && !errorText && memberPersonalInfo.controls['email'].hasError('Invalid_Email'))"
+                                                class="error">Please enter valid Mail ID</span>
+                                </div>
+
+
+                        </div>
+                        <div class="ui-g-12 flex-container">
+                                <div class="ui-g-12 ui-md-10">
+                                        <hr />
+                                </div>
+                        </div>
+
+                        <div class="ui-g-12 flex-container">
+                                <div class="ui-g-12 ui-md-3">
+                                        <p-button label="Cancel" class="ui-button-rounded cancelBtn left-float"
+                                                type="button" (click)="NavigateT0Login()"></p-button>
+                                </div>
+                                <div class="ui-g-12 ui-md-3">
+                                        <p-button id="personalInfo" class="ui-button-rounded submitbtn right-float"
+                                                label="Save & Next" type="submit"></p-button>
+                                </div>
+                        </div>
+                </form>
+        </div>
+</div>
+
+<p-confirmDialog #cd [style]="{width: '45vw'}" class="addConfirmDialog" key="ConfirmationForPersonalInfo"
+        [closable]="false" [closeOnEscape]="false" acceptIcon="" rejectIcon="" acceptButtonStyleClass="ok"
+        rejectButtonStyleClass="cancel" [escape]="false">
+        <p-footer>
+                <p-button class="ui-button-rounded submitbtn okbtn" label="Yes" (click)="cd.accept()"></p-button>
+                <p-button class="ui-button-rounded cancelBtn okbtn" label="No" (click)="cd.reject()"></p-button>
+        </p-footer>
+</p-confirmDialog>

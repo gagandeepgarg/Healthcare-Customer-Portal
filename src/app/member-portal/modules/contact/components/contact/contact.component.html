@@ -1,0 +1,174 @@
+<app-page-header [iconName]="iconName" [headerInnerHtml]="headerHtml"></app-page-header>
+<div class="ui-fluid header-freeze-padding">
+  <div class="flex-container">
+    <div class="ui-grid">
+      <div class="ui-grid-col-12 top-margin-3pc">
+        <div class="ui-g-12 ui-md-2">
+          <!-- inital empty 2 columns -->
+        </div>
+        <!-- second 4 colum area -->
+        <div class="ui-g-12 ui-md-4">
+          <div class="bottom-margin-6pc">
+            <span class="contact-header">Contact Us</span>
+          </div>
+          <div class="bordr-right ">
+            <img src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.location}}" />
+            <span class="labels">&nbsp;Office Locations:</span><br />
+            <span class="value">Atlanta, Dallas, Miami</span> <br />
+            <br />
+            <div>
+              <img src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.phone}}" />
+              <span class="labels">&nbsp;Phone numbers:</span><br />
+              <!-- <span class="value"><b>(844) 412-3019 </b>Become a Member<br /></span> -->
+              <span class="value"><b> (844) 834-3456</b> Member Services<br /></span>
+              <span class="value"><b>(404) 618-0602 </b>Corporate Headquarters<br /></span>
+            </div>
+            <br />
+            <div>
+              <img src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.mail}}" />
+              <span class="labels">&nbsp;Email:</span><br />
+              <span class="value">info@alierahealthcare.com</span>
+            </div>
+
+            <br />
+            <div>
+              <img src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.services}}" />
+              <span class="labels">&nbsp;Member Services:</span><br />
+              <span class="value"><b>Monday – Friday</b> 8AM – 8PM EST<br /></span>
+            </div>
+          </div>
+          <div class="social">
+            <img class="icon pointer-cursor" src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.facebook}}" (click)="openFbLink()"
+               />
+            <img class="icon pointer-cursor left-margin-5pc" src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.linkden}}" (click)="openLinkdinLink()"
+               />
+            <div class="value experience-label">Tell us about your experience with Aliera: </div>
+            <div>
+              <p-button class="ui-button-rounded cancelbtn" (click)="showStoryPopUP()" label="Share Your Story"
+                type="button"></p-button>
+            </div>
+          </div>
+          <div class="ui-g-12">
+            <span class="sucessInfo" *ngIf="storySuccessText">{{storySuccessText}}</span>
+          </div>
+        </div>
+
+        <!-- 3rd 4 colum area -->
+        <div class="ui-g-12 ui-md-4 get-inblock">
+          <div class="ui-g-12  right-contact">
+            <b>Get in touch with us </b>
+          </div>
+          <div class="ui-g-12">
+            <form [formGroup]="contactForm" (ngSubmit)="contactSubmit()">
+              <div class="ui-g-12">
+                <div class="ui-g-12 ui-sm-12 ui-md-12 ui-inputgroup  round-input-div"
+                  [ngClass]="{'has-error': (isContactSubmitted && contactForm.get('name').errors)}">
+                  <span class="ui-inputgroup-addon" style="border:none;background:transparent;">
+                    <i class="fa fa-user round-input-icon"></i></span>
+                  <input type="text" class="round-input-element" pInputText placeholder="Name *"
+                    formControlName="name" />
+                </div>
+              </div>
+              <div class="ui-g-12">
+                <div class="ui-g-12 ui-sm-12 ui-md-12 ui-inputgroup  round-input-div"
+                  [ngClass]="{'has-error': (isContactSubmitted && contactForm.get('email').errors)}">
+                  <span class="ui-inputgroup-addon" style="border:none;background:transparent;">
+                    <i class="fa fa-envelope round-input-icon"></i></span>
+                  <input type="text" class="round-input-element" pInputText placeholder="Email Address *"
+                    formControlName="email" />
+                </div>
+              </div>
+              <div class="ui-g-12">
+                <div class="ui-g-12 ui-sm-12 ui-md-12 ui-inputgroup  round-input-div"
+                  [ngClass]="{'has-error': (isContactSubmitted && contactForm.get('phoneNumber').errors)}">
+                  <span class="ui-inputgroup-addon" style="border:none;background:transparent;">
+                    <i class="fa fa-phone round-input-icon"></i></span>
+                  <input type="text" class="round-input-element" pInputText placeholder="Phone Number *"
+                    formControlName="phoneNumber" maxlength="10" (input)="validateNumber($event)" />
+                </div>
+              </div>
+              <div class="ui-g-12">
+                <div class="ui-g-12 ui-sm-12 ui-md-12 ui-inputgroup  round-input-div"
+                  [ngClass]="{'has-error': (isContactSubmitted && contactForm.get('message').errors)}">
+                  <textarea #message maxlength="500" class="round-input-element" [rows]="8" pInputTextarea
+                    placeholder="Message *" formControlName="message"></textarea>
+                </div>
+                <span class="countcharacterlabel"> {{500 - message.value.length}} of 500 characters left</span>
+              </div>
+              <div class="ui-g-4 ui-md-6 block-viewbtn">
+                <p-button class="ui-button-rounded submitbtn" style="float:left;" label="Submit" type="submit">
+                </p-button>
+              </div>
+            </form>
+          </div>
+          <div class="ui-g-12">
+            <span class="error">{{errorText}}</span>
+            <span class="sucessInfo" *ngIf="contactSuccessText">{{contactSuccessText}}</span>
+          </div>
+
+        </div>
+        <div class="ui-g-12 ui-md-2">
+          <!-- end empty 2 columns -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- story form POPUP-->
+<p-dialog class="pDialog" [draggable]="false" [focusOnShow]="false" [responsive]="true" [modal]="true" [closable]="false" [positionTop]="100" [closeOnEscape]="false" [responsive]="true"
+  [(visible)]="display" [style]="{width: '45%', margin:'0'}">
+  <p-header>
+    <div class="ui-g-12 flex-container pheaderCss">
+      <div class="ui-g-10 ui-md-10 no-top-padding">
+        &nbsp;<span> Share your experience with Aliera</span>
+      </div>
+      <div class="ui-g-2 ui-md-2 no-top-padding">
+        <span class="right-float"><i class="fa fa-times-circle pHeaderCloseIcon"
+            (click)="closeStoryPopUP()"></i></span>
+      </div>
+    </div>
+  </p-header>
+  <div class="popup-form">
+  <div class="ui-g-12" *ngIf="storyErrorText">
+    <span class="error">{{storyErrorText}}</span>
+  </div>
+  
+  <form [formGroup]="storyForm" (ngSubmit)="storySubmit()">
+    <div class="story-header-padding">
+      <div class="ui-g-12 ui-md-12">
+        <div class="ui-g-12 ui-sm-12 ui-md-12 ui-inputgroup  round-input-div"
+          [ngClass]="{'has-error': (isStorySubmitted && storyForm.get('name').errors)}">
+          <span class="ui-inputgroup-addon" style="border:none;background:transparent;">
+            <i class="fa fa-user round-input-icon"></i></span>
+          <input type="text" class="round-input-element" pInputText placeholder="Name *" formControlName="name" />
+        </div>
+      </div>
+      <div class="ui-g-12 ui-md-12">
+        <div class="ui-g-12 ui-sm-12 ui-md-12 ui-inputgroup  round-input-div"
+          [ngClass]="{'has-error': (isStorySubmitted && storyForm.get('email').errors)}">
+          <span class="ui-inputgroup-addon" style="border:none;background:transparent;">
+            <i class="fa fa-envelope round-input-icon"></i></span>
+          <input type="text" class="round-input-element" pInputText placeholder="Email Address *"
+            formControlName="email" />
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <div class="ui-g-12 ui-sm-12 ui-md-12 ui-inputgroup  round-input-div" style="border-radius:15px;"
+          [ngClass]="{'has-error': (isStorySubmitted && storyForm.get('story').errors)}">
+          <textarea #story maxlength="500" class="round-input-element" [rows]="8" pInputTextarea
+            placeholder="Tell us about your story *" formControlName="story"></textarea>
+        </div>
+        <span class="countcharacterlabel"> {{500 - story.value.length}} of 500 characters left</span>
+      </div>
+    </div>
+    <p-footer [style]="{padding:'0'}">
+      <div class="ui-g-12 flex-container">
+        <div class="ui-g-12 ui-md-12">
+          <p-button class="ui-button-rounded submitbtn" style="float:right;" label="Share" type="submit">
+          </p-button>
+        </div>
+      </div>
+    </p-footer>
+  </form>
+</div>
+</p-dialog>

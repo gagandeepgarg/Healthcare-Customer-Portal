@@ -1,0 +1,22 @@
+<div class="ui-fluid">
+  <div class="register-header">
+    <div class="reg-text">
+      <img *ngIf="timerStarLeftIconName" class="icon" src="{{constants.ImagePaths.RelativePathImagesForShared}}icons/{{timerStarLeftIconName}}" />
+      &nbsp;<b>{{timerUpperText}} </b>&nbsp;
+      <img *ngIf="timerStartRightIconName" class="icon"
+        src="{{constants.ImagePaths.RelativePathImagesForShared}}icons/{{timerStartRightIconName}}" />
+    </div>
+    <div class="successtext">{{timerBelowText}}</div>
+  </div>
+  <div class="success-screen">
+    <div class=timerbodytext>{{timerBodyText}}</div>
+    <div class="redirect-counter">
+      <div class="countercss">{{counter}}</div>
+    </div>
+    <div class="ui-g-1 success-screen success-login">
+      <p-button class="ui-button-rounded submitbtn" style="width:10%;" type="button" label="Go to {{buttonLabel}}"
+        (click)="LoginRedirectClicked()">
+      </p-button>
+    </div>
+  </div>
+</div>

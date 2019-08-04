@@ -1,0 +1,153 @@
+/* Add your customizations of the theme here */
+@import './../../custom-sass/variables.scss';
+@import './theme_variables.scss';
+// .ui-calendar.ui-calendar-w-btn input {
+//     width: 100%;
+//     color: $blue-shade-100;
+// }
+
+// body .ui-calendar .ui-datepicker-trigger .pi {
+//     color: $blue-shade-100;
+// }
+body .ui-inputtext, body .ui-inputtext.ng-dirty.ng-invalid{
+    background-image: none;
+}
+body p-calendar.ng-dirty.ng-invalid > .ui-calendar > .ui-inputtext {
+    background-image: none;
+}
+body .ui-calendar .ui-datepicker-trigger{
+    right:100%;
+}
+body .ui-fluid .ui-inputgroup .ui-button-icon-only .ui-button-icon-left{
+color:$fa-icon-color;
+padding-top: 3px;
+}
+
+body .ui-button{
+    border-radius: 25px;
+    cursor: pointer;
+    border:none;
+    // border:none !important;
+}
+
+body .ui-steps:before{
+    display: none;
+}
+body .ui-inputgroup .ui-inputgroup-addon{
+    padding-bottom: 2px;
+}
+body p-dropdown .ui-dropdown{
+    background-image: none;
+    min-width: 100%;
+    max-width: 90%;
+    width:90%;
+}
+p-dropdown{
+    max-width:94% !important;
+}
+/* For mobile phones: */
+@media only screen and (max-width: 768px) {
+    p-dropdown{
+        max-width:90% !important;
+    }
+}
+label.ui-dropdown-label{
+    text-overflow: ellipsis;
+    }
+// global checkbox styling
+body  .ui-chkbox .ui-chkbox-box{
+    border-radius:5px;
+    cursor: pointer;
+}
+body .ui-chkbox .ui-chkbox-box.ui-state-active{
+    border-color:$green;
+    background-color:$green;
+}
+body .ui-chkbox .ui-chkbox-box.ui-state-focus{
+    border-color:$grey-600;
+}
+body .ui-chkbox .ui-chkbox-box.ui-state-focus.ui-state-active{
+    border-color:$green;
+}
+
+// setting placeholder color
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color:$placeholder-color;
+    opacity: 1; /* Firefox */
+  }
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: $placeholder-color;
+  }
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: $placeholder-color;
+  }
+
+
+
+  body .ui-button, body .ui-datepicker-buttonpane > button{
+      box-shadow: none;
+      font-size: 1.2em;
+  }
+  body .ui-widget:disabled, body .ui-state-disabled{
+    border: 1px solid #BBBDBF !important;
+    cursor: not-allowed !important;
+  }
+  :disabled{
+    color:gray !important;
+    background-color: white !important;
+    
+  }
+  body .ui-radiobutton .ui-radiobutton-box .pi-circle-on{
+      background-color: $success-color;
+  }
+  body .ui-radiobutton .ui-radiobutton-box.ui-state-active{
+      border-color: $success-color;
+  }
+  body p-dropdown.ng-dirty.ng-invalid > .ui-dropdown{
+      background-image: none;
+  }
+
+  body .ui-dialog .ui-dialog-footer .ui-button.ok{
+    float: right;
+    background-color: $active-color;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    color:  $white;
+  }
+  body .ui-dialog .ui-dialog-footer .ui-button.ok:hover{
+    color:  #0E4668;
+  }
+  body .ui-dialog .ui-dialog-footer .ui-button.cancel{
+    float: left;
+    font-size: 0.9em;
+    border:1px solid #BBBDBF;
+  }
+  .ui-dialog .ui-dialog-titlebar{
+      width: 100%;
+      background: linear-gradient(to right, $gradient-start, 55%, $gradient-end); 
+  }
+  body .ui-inputgroup .ui-inputgroup-addon{
+      border-width:0; 
+  }
+  .steps-custom{
+ .ui-widget:disabled, .ui-state-disabled{
+      border:0 !important;
+  }
+}
+
+body .ui-paginator .ui-paginator-pages a.ui-state-active{
+    background-color: #034C7B;
+}
+
+body .ui-dropdown-panel .ui-dropdown-item.ui-state-highlight{
+    background-color: #034C7B;
+}
+
+body .ui-dialog .ui-dialog-titlebar{
+    height: 35px ;
+    padding-top: 0 ;
+}
+
+body .ui-dialog .ui-dialog-titlebar .ui-dialog-title{
+    color:white;
+}

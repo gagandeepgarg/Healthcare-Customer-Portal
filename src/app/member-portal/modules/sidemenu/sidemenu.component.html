@@ -1,0 +1,26 @@
+<!--component html goes here -->
+<ul class="ultima-menu ultima-main-menu clearfix">
+    <li class="wrap" *ngFor="let menu of menuLabels; let i=index">
+        <a class="ripplelink" title="{{menu?.label}}"
+            (click)="menu.showSubmenu=!menu.showSubmenu;menuClicked(menu.label)">
+            <span class="menu-label"><img
+                    src="{{constants.ImagePaths.RelativePathImagesForModules}}left-nav/{{menu?.icon}}.png" />
+                <span>{{menu?.label}}</span>
+            </span>
+            <i class="material-icons submenu-icon" *ngIf="menu?.submenu">keyboard_arrow_down</i>
+        </a>
+        <ul class="ultima-sub-menu ultima-sub-menu clearfix" *ngIf="menu.showSubmenu">
+            <li class="wrap" *ngFor="let submenu of menu.submenu; let i=index">
+                <a class="ripplelink submenu-label" title="{{submenu?.label}}"
+                    (click)="subMenuClicked(submenu.label)">
+                    <span class="menu-label">
+                        <img src="{{constants.ImagePaths.RelativePathImagesForModules}}left-nav/{{menu?.icon}}.png" />
+                        <span>{{submenu?.label}}</span>
+                    </span>
+                    <i class="material-icons submenu-icon" *ngIf="submenu.submenu">keyboard_arrow_down</i>
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>
+

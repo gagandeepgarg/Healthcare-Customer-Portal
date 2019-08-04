@@ -1,0 +1,354 @@
+// component css goes here
+@import "../../../../assets/custom-sass/variables.scss";
+
+.call-icon {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+
+  .icon {
+    padding: 5px;
+    height: 15px;
+    width: 15px;
+    border-radius: 20px;
+    float: left;
+    margin-right: 10px;
+    background-color: $white;
+
+    i {
+      color: $deep-cerulean;
+      font-size: 1em;
+    }
+  }
+
+  .text {
+    color: $tuna;
+    font-family: "Roboto", sans-serif;
+
+    span {
+      color: $orange-shade-100;
+      font-family: "Roboto", sans-serif;
+    }
+
+    //float: left;
+  }
+}
+.left-margin-10px{
+  margin-left: 10px;
+}
+.db-content-top {
+  min-height: 5em;
+  font-family: "Roboto", sans-serif;
+
+  .db-top-left {
+    height: 100%;
+    padding: 0px;
+    border-radius: 5px 5px 0px 0px;
+    .header {
+      padding: 15px 10px 12px 10px;
+      font-family: "Roboto", sans-serif;
+
+      .header-left {
+        // width: 48%;
+        float: left;
+        font-weight: 500;
+        margin-top: 5px;
+        //margin-left: 10px;
+      }
+
+      .header-right {
+        // width: 50%;
+        
+        // display: flex;
+        justify-content: flex-end;
+        @media screen and (min-width:641px){
+        text-align: right;
+      }
+
+        .claim-btn {
+          float: left;
+          padding: 3px 10px;
+          border-radius: 10px;
+          color: $white;
+          background-color: $blue-shade-125;
+          margin: -3px 5px 0 5px;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .claims-table {
+      padding: 0px;
+    }
+
+    .claim-filters {
+      background-color: $grey-100;
+
+      .label {
+        color: $grey-700;
+        font-size: 12px;
+      }
+
+      .dropdown {
+        max-width: 12em;
+      }
+    }
+
+    .dependentDD {
+      height:2.2em;
+    }
+    .familyDudectable{
+      padding: 0px;
+    }
+    .tbl{
+      width: '30%';
+      margin:'0'
+    }
+    .customError{
+      width:100%;
+      text-align:center;
+      margin:8% 0;
+    }
+
+    .claims-table-footer {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 5px;
+
+      .view-all-btn {
+        float: left;
+        padding: 3px 10px;
+        border-radius: 10px;
+        color: white;
+        background-color: $active-color;
+        margin: -3px 5px 0 5px;
+        cursor: pointer;
+        font-size: 0.7em;
+      }
+      .view-all-btn:hover {
+      color:#0E4668;
+      }
+    }
+  }
+}
+
+.db-content-middle {
+  .card {
+    padding: 0px !important;
+  }
+
+  .header {
+    height: 1.5em;
+    border-bottom: 0.5px solid $grey-300;
+    padding: 10px;
+    font-family: "Roboto", sans-serif;
+  }
+
+  .graph-left,
+  .graph-right {
+    padding-top: 1.5em;
+    // padding-left: 2.5em;
+    font-family: "Roboto", sans-serif;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    .label {
+      font-size: 14px;
+      color: $grey-600;
+    }
+  }
+
+  .graph-left {
+    border-right: 0.5px solid $grey-300;
+  }
+
+  .graph {
+    max-width: 200px;
+    padding-right: 35px;
+  }
+
+  .left-info,
+  .right-info {
+    padding-top: 2em;
+
+    .top {
+      font-weight: bold;
+      font-size: 14px;
+      color: $grey-500;
+      padding: 3px 0 3px 0;
+    }
+
+    .middle {
+      font-weight: bold;
+      font-size: 28px;
+      color: $tuna;
+      padding: 5px 0 5px 0;
+    }
+
+    .bottom {
+      font-size: 14px;
+      color: $green-500;
+      padding: 5px 0 5px 0;
+    }
+  }
+}
+
+.db-content-bottom {
+  .slider-even {
+    font-family: "Roboto", sans-serif;
+    background-color: $white;
+  }
+
+  .slider {
+    font-family: "Roboto", sans-serif;
+    background-color: $blue-shade-125;
+  }
+
+  .slider,
+  .slider-even {
+    .text {
+      padding: 2px;
+      text-align: center;
+    }
+
+    .value {
+      padding: 5px;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .bar {
+      padding: 10px;
+    }
+  }
+}
+
+::ng-deep {
+  .db-content-bottom {
+     .ui-slider.ui-slider-horizontal {
+      height: 10px;
+      background-color: $grey-200;
+    }
+
+    .ui-slider .ui-slider-handle {
+      color: $white;
+      border-radius: 50%;
+      width: 2em;
+      height: 2em;
+    }
+
+    .slider .ui-slider .ui-slider-handle {
+      background-color: $white;
+      border: 5px solid #0d76b7;
+    }
+    .ui-slider.ui-slider-horizontal .ui-slider-handle {
+      top: -0.58em;
+    }
+
+    padding-bottom: 70%;
+  }
+}
+
+.submitbtn button {
+  width: 150%;
+}
+
+::ng-deep {
+  .register-header {
+    .ui-dialog .ui-dialog-titlebar .ui-dialog-title {
+      padding-top: 50px;
+      height: 80px;
+      width: 100%;
+      color: $white;
+      text-align: center;
+      background: linear-gradient(to right, $gradient-start, 35%, $gradient-end);
+    }
+  }
+}
+
+.header-right {
+  ::ng-deep {
+    p-button.inactive button {
+      background-color:white !important;
+      color: #4D4E4E !important;
+      border:1px solid #BBBDBF !important;
+    }
+    p-button.inactive button:hover {
+      background-color: white !important;
+      color: #4D4E4E !important;
+      border:1px solid #BBBDBF !important;
+    }
+    p-button.active button {
+      background-color: $gradient-start;
+      border:1px solid #BBBDBF !important;
+    }
+    p-button.active button:hover {
+      background-color: $gradient-start;
+      border:1px solid #BBBDBF !important;
+    }
+  }
+}
+
+::ng-deep {
+  .pDialog {
+    .ui-dialog .ui-dialog-titlebar {
+      padding: 0;
+    }
+    .ui-dialog .ui-dialog-footer {
+      border: none;
+      padding: 0;
+    }
+    .cancelBtn button {
+      background-color: $pdialog-cancel-btn-color !important;
+      color: $black !important;
+    }
+  }
+}
+.pheaderCss {
+  margin: 0;
+  padding: 0;
+  color: $white;
+  background: linear-gradient(to right, $gradient-end, 35%, $gradient-start);
+}
+.pHeaderCloseIcon {
+  background-color: $gradient-start;
+  color: $white;
+  cursor: pointer;
+}
+::ng-deep {
+  .header-right {
+    p-button button {
+      font-size: 0.9em;
+    }
+    .claim-text {
+      text-align: right;
+    }
+  }
+}
+.no-padding{
+  padding:0;
+}
+.dashboard{
+  display: flex;
+}
+// .dashboard-layout {
+//   padding: 1em;
+// }
+.notification{
+  font-weight: bold;
+  color:$gradient-end;
+}
+
+
+.desktopWidth{
+  width:calc(100%-200px);
+}
+
+.accordionIcon{
+  float:right;
+}
+
+.header-snapshot{
+  background: linear-gradient(to right, $gradient-start, 35%, $gradient-end);
+}

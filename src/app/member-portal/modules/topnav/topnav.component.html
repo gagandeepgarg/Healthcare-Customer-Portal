@@ -1,0 +1,105 @@
+<!--component html goes here -->
+<div class="topbar clearfix" [ngClass]="{ 'disabledNavBar': disableTopNav }">
+    <div class="topbar-left">
+        <div class="logo"> <img src="/assets/images/logo.png"></div>
+    </div>
+
+    <div *ngIf="!this.coreDataService.checkIfRouteLoginOrRegistration()">
+        <div class="contact">
+            <span [appendTo]="contact" pTooltip="{{constants?.ContactUs}}" [escape]="false">Contact Us</span>
+        </div>
+        <div #contact class="appended">
+            <span></span>
+        </div>
+    </div>
+    <div class="topbar-right" *ngIf="this.coreDataService.checkIfRouteLoginOrRegistration()">
+        <a id="menu-button"  (click)="app.onMenuButtonClick($event)">
+            <i></i>
+        </a>
+        <a class="greeting-message">
+            <span>
+                <span class="greeting">
+                    Good {{GetGreeting()}} 
+                    <span class="username-text">{{firstName}}!</span>
+                </span>
+                <span class="last-login-info">
+                    <span  *ngIf="today">{{today | date: 'fullDate'}}</span> |
+                    <span class="last-login-span"> Last login:
+                        <span  *ngIf="lastLogin"> {{lastLogin | date: 'short'}}</span>
+                    </span>
+                </span>
+            </span>
+        </a>
+
+        <a id="topbar-menu-button" href="#" (click)="app.onTopbarMenuButtonClick($event)">
+            <i class="material-icons">menu</i>
+        </a>
+
+        <ul class="topbar-items animated fadeInDown" [ngClass]="{'topbar-items-visible': app.topbarMenuActive}">
+            <li #settings [ngClass]="{'active-top-menu':app.activeTopbarItem === settings}">
+                <a href="#" (click)="app.onTopbarItemClick($event,settings)" class="topbar-item-alignment">
+                    <div class="topbar-nav-align">
+                        <div>
+                            <img  src="/assets/images/profile.jpg" class="nav-icon-img" alt="">
+                             
+                        </div>
+
+                        <div class="nav-profile-label">
+                            <span class="username-label"> Hi {{firstName}}</span>
+                            <span class="profile-arrow">
+                                <i class="material-icons">
+                                    keyboard_arrow_down
+                                </i>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+                <ul class="ultima-menu animated fadeInDown ">
+                    <li role="menuitem" *ngFor="let menuItem of userMenuItems; let i=index" class="top-nav-menu">
+                        <a href="#" (click)="onTopbarSubItemClick($event, i+1)">
+                            <i class="material-icons">
+                                {{menuItem?.icon}}
+                            </i>
+                            <span>{{menuItem?.label}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li class="icon-topnav-align" #notifications 
+                [ngClass]="{'active-top-menu':app.activeTopbarItem === notifications}">
+                <a (click)="onTopbarMenuIconClick($event,'notifications')" class="msg-notification-overlay"  title="Notifications">
+                    <img src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.notification_icon}}" />
+                    <span class="topbar-badge animated rubberBand" *ngIf="coreDataService.notifictaionUnreadMsgs>0">{{coreDataService.notifictaionUnreadMsgs}}</span>
+                    <span class="topbar-item-name">Notifications</span>
+                </a>
+                <div class="messages" (clickOutside)="onClickedOutside($event)" [exclude]="'.msg-notification-overlay'" *ngIf="showMessages">
+                    <app-messages-overlay 
+                    (viewallEvent)="viewAllMessages()"></app-messages-overlay>     
+                </div>
+            </li>
+            <li class="icon-topnav-align" #faq title="FAQs"
+                [ngClass]="{'active-top-menu':app.activeTopbarItem === faq}">
+                <a (click)="onTopbarMenuIconClick($event,'faq')">
+                    <img src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.faq_icon}}" />
+                    <span class="topbar-item-name">faq</span>
+                </a>
+            </li>
+            <li class="icon-topnav-align" #contact title="Contact Us"
+                [ngClass]="{'active-top-menu':app.activeTopbarItem === contact}">
+                <a (click)="onTopbarMenuIconClick($event,'contact')">
+                    <img src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.contactUs_icon}}" />
+                    <span class="topbar-item-name">contact</span>
+                </a>
+            </li>
+            <li class="icon-topnav-align" #home title="Home"
+                [ngClass]="{'active-top-menu':app.activeTopbarItem === home}">
+                <a (click)="onTopbarMenuIconClick($event,'home')">
+                    <img src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.home_icon}}" />
+                    <span class="topbar-item-name">Home</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

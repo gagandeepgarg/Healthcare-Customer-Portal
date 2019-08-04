@@ -1,0 +1,101 @@
+<div class="ui-g-12 padd-left-right-0">
+  <div class="ui-g-12 padd-left-right-0" >
+      <div class="ui-g-12 ui-md-12" >
+        <div class="ui-g-12 ui-md-2" style="padding-left:20px;">
+            <span class="label">
+              View MSRA For:
+            </span>
+          </div>
+          <div class="ui-g-12 ui-md-3 ui-inputgroup round-input-div">
+            <p-dropdown [options]="dependentMembers" [(ngModel)]="selectedDependent" (onChange)="onDependentSelected()"
+              optionLabel="label">
+            </p-dropdown>
+          </div>
+      </div>
+      <div class="ui-g-12 ui-md-12 full-width padd-left-right-0" style="padding: 0;">
+        <p-carousel [value]="individualDeductables" numVisible="2" pageLinks="10" headerText="Individual MSRA"
+          class="indiDeductableCarousel" *ngIf="individualDeductables?.length>0" [ngClass]="{'viewMSRAPageLinks': (individualDeductables?.length<=2)}">
+          <ng-template let-individualDeductable pTemplate="item">
+            <div>
+              <div style="padding-top: 4%;">
+                <!-- <span style="color:#808084;text-align: center;padding-left: 3%;padding-top: 10%;">{{individualDeductable?.AccumulatorType.toLowerCase().trim()=='deductible'?'MSRA':individualDeductable?.AccumulatorType }}</span> -->
+                <span class="accumulatorType" >{{individualDeductable?.AccumulatorType }}</span>
+                <br/>
+                <span class="accumulatorName">{{individualDeductable?.NetworkTier}}
+                  {{individualDeductable?.AccumulatorName}}</span>
+              </div>
+              <div class="ui-g-12 ui-md-6 cir">
+                <circle-progress class="circle" [percent]="individualDeductable.RemainingPercentage" [outerStrokeWidth]="10"
+                  [outerStrokeColor]="'#ccc'" [innerStrokeColor]="'#fbb03b'" [animation]="true" [animationDuration]="300"
+                  [renderOnClick]="false" *ngIf="individualDeductable.index%2!=0">
+                </circle-progress>
+                <circle-progress class="circle" [percent]="individualDeductable.RemainingPercentage" [outerStrokeWidth]="10"
+                  [outerStrokeColor]="'#ccc'" [innerStrokeColor]="'#5EB3E4'" [animation]="true" [animationDuration]="300"
+                  [renderOnClick]="false" *ngIf="individualDeductable.index%2==0">
+                </circle-progress>
+              </div>
+              <div class="ui-g-12 ui-md-6" style="margin: 6% 0 0 0;">
+                <div style="padding-bottom:5px;"><label style="color:#808084;font-weight:bold">Maximum</label></div>
+                <div style="padding-bottom:10px;"><label
+                  style="font-weight:bold;padding:3% 0 0 0;font-size: 2em">{{individualDeductable.MaxValue| currency}}</label>
+                </div>
+                <div style="color:#89C21F">Applied: {{individualDeductable.UsedValue| currency}}</div>
+              </div>
+            </div>
+          </ng-template>
+        </p-carousel>
+        <div class="ui-g-12 ui-md-12 padd-left-right-0" *ngIf="individualDeductables?.length==0" >
+          <p-card class="indicard">
+            <p-header>
+              Individual MSRA
+            </p-header>
+            <div style="width:100%;margin:10px;text-align: center;">
+              <span style="padding:5px;">No Individual MSRA to be displayed</span>
+            </div>
+          </p-card>
+        </div>
+
+      </div>
+  </div>
+
+  <div class="ui-g-12 ui-md-12 full-width padd-left-right-0">
+    <p-carousel [value]="individualLimits" headerText="Individual Limits for {{selectedDependent?.label}}" numVisible="3" pageLinks="15"
+      class="indiLimitCarousel" *ngIf="individualLimits?.length>0" [ngClass]="{'viewLimitPageLinks': (individualLimits?.length<=3)}">
+      <ng-template let-individualLimit pTemplate="item">
+        <div class="ui-g-12 ui-md-6" style="border:1px solid #ccc;width: 98%;"
+          [ngClass]="{'oddlimit': (individualLimit.index%2!=0)}">
+          <div style="text-align: center">
+            <label style="font-weight: bold;">{{individualLimit.AccumulatorName}}</label>
+          </div>
+          &nbsp;&nbsp;
+          <div style="text-align: center">
+            <label style="font-weight:bold;font-size: 2em">{{individualLimit.UsedValue}}</label>
+          </div>
+          &nbsp;
+          <div style="margin-left: 5%;margin-right: 5%">
+            <p-slider class="limitSlider" [ngModel]="individualLimit.UsedValue" [min]=0 [max]='individualLimit.MaxValue'
+              [disabled]="true" [ngClass]="{'oddlimitSlider': (individualLimit.index%2!=0)}"></p-slider>
+            <div style="padding-top:2%">
+              <span class="sliderMin">0</span>
+              <span class="sliderMax">{{individualLimit.MaxValue}}</span>
+            </div>
+            <!-- <div style="padding:4% 0 0 0;text-align: right">
+              <span>Max Limit: {{individualLimit.maxValue}}</span>
+            </div> -->
+          </div>
+        </div>
+        <div></div>
+      </ng-template>
+    </p-carousel>
+    <div class="ui-g-12 ui-md-12 padd-left-right-0" *ngIf="individualLimits?.length==0" >
+      <p-card class="indicard">
+        <p-header>
+          Individual Limits for {{selectedDependent?.label}}
+        </p-header>
+        <div style="width:100%;margin:10px;text-align: center;">
+          <span style="padding:5px;">No Individual Limits to be displayed</span>
+        </div>
+      </p-card>
+    </div>
+  </div>
+</div>

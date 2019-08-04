@@ -1,0 +1,272 @@
+// component css goes here
+@import "./../../../../assets/custom-sass/variables.scss";
+
+
+.side-menu {
+  padding: 0px;
+  
+  height: 100%;
+  background-color: $blue-shade-200;
+  padding-bottom: 5em;
+  font-family: "Roboto", sans-serif;
+  @media screen and (min-width:641px){
+    width: 200px;
+  }
+}
+.material-icons {
+  font-size: 85%;
+}
+.no-top-bottom-margin {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.label {
+  color: gray;
+}
+.profile-name {
+  background-color: $blue-shade-200;
+  font-size: 16px;
+  color: white;
+  text-align: left;
+  padding: 8px 0 8px 0;
+  font-family: "Roboto", sans-serif;
+  .overview-detail span {
+    margin-left: 10px;
+  }
+}
+.depCount {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  background-color: $blue-shade-250;
+  color: $user-profile-highlight-color;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.profile-info {
+  background-color: $blue-shade-250;
+  font-size: 11px;
+  padding: 8px 0px 8px 5px;
+
+  .info {
+    display: flex;
+    padding-left: 5px;
+    font-size: 12px;
+  }
+
+  .info-name {
+    color: $blue-shade-150;
+    float: left;
+    font-size: 12px;
+  }
+
+  .info-value {
+    color: $user-profile-highlight-color;
+    float: left;
+  }
+}
+
+.plan-details {
+  background-color: $blue-shade-300;
+  padding: 0px;
+
+  .header {
+    font-family: "Roboto Medium", sans-serif;
+    color: $blue-shade-50;
+    padding: 10px;
+    padding-bottom: 5px;
+  }
+
+  .plan {
+    display: flex;
+    justify-content: center;
+    font-size: 12px;
+    padding: 5px;
+    border-bottom: 1px solid $blue-shade-150;
+  }
+
+  .icon {
+    border-radius: 20px;
+    background-color: $blue-shade-300;
+    height: 10px;
+    width: 12px;
+    border: 1px solid $user-profile-highlight-color;
+    float: left;
+    margin: 3px 5px 6px 10px;
+  }
+
+  .detail {
+    width: calc(100% - 5px);
+    color: $user-profile-highlight-color;
+    float: left;
+    font-family: "Roboto", sans-serif;
+    margin-bottom: 3px;
+  }
+}
+.plan-alignment {
+  padding: 0px 0px 0px 25px;
+  margin: 0px;
+}
+.plan-list-view {
+  padding: 0;
+  width: 100%;
+  margin-left: 20px;
+  margin-top: 0px;
+}
+.plan-details-list {
+  color: $blue-shade-150;
+ 
+}
+.plan-detail{
+  float: right;width: 73px;
+}
+.coverage {
+  background-color: $blue-shade-300;
+  padding: 10px;
+  border-top: 0.75px solid $blue-shade-50;
+
+  .header {
+    font-size: 12px;
+    color: $blue-shade-50;
+    margin-bottom: 8px;
+  }
+
+  .icon {
+    font-size: 11px;
+    color: $user-profile-highlight-color;
+    float: left;
+    margin-right: 5px;
+    margin-left: 8px;
+  }
+
+  .date {
+    font-size: 12px;
+    color: $user-profile-highlight-color;
+    float: left;
+  }
+}
+
+.dependents-header {
+  background-color: $blue-shade-250;
+  font-size: 14px;
+  padding-left: 10px;
+
+  .header {
+    color: $blue-shade-50;
+    float: left;
+  }
+
+  .add-btn div {
+    color: $blue-shade-50;
+    background-color: $orange-shade-100;
+    float: right;
+    border-radius: 10px;
+    padding: 0px 9px;
+    cursor: pointer;
+  }
+}
+
+.dependent-list {
+  background-color: $blue-shade-300;
+  font-size: 12px;
+
+  .dependent {
+    height: 50px;
+    padding: 0.5em 0.5em 0 0.5em;
+  }
+
+  .logo {
+    float: left;
+    margin-right: 10px;
+
+    img {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  .dependent-info {
+    .text-1 {
+      width: 100%;
+      color: $blue-shade-50;
+    }
+
+    .text-2 {
+      color: $blue-shade-150;
+      width: 100%;
+    }
+  }
+}
+
+ul {
+  list-style-type: none;
+}
+.ml-15 {
+  margin-left: 14px;
+}
+/* .profile-img{
+  height: 242px;
+} */
+::ng-deep { body .ui-corner-top{
+  inline-size: max-content;
+}
+body .ui-button .pi, body .ui-datepicker-buttonpane > button .pi{
+  color: $fa-icon-color;
+  background: transparent;
+  border: none;
+}
+body .ui-fileupload .ui-fileupload-buttonbar .ui-button{
+  display: block;
+}
+.ui-fileupload-row>div:nth-child(2){
+  display: none;
+}
+
+// p:nth-child(2) {
+//   background: red;
+// }
+}
+
+.overview-imgpicker{
+  display:none;
+  //position: absolute;
+  bottom: 34px !important;
+  width: 94% !important;
+  border: 1px solid white;
+  padding: 5px;
+  margin-right: 5px;
+   cursor: pointer;
+  
+}
+.overview-pic{
+  margin-left: 10px;
+}
+.imgpicker-icon {
+  z-index: 9;
+  background-color: $user-profile-highlight-color;
+  font-size: 16px;
+  color: white;
+  text-align: left;
+  font-family: "Roboto", sans-serif;
+}
+.img-picker{
+  color: $white;
+  font-size: 1.2em;
+  cursor: pointer;
+  display: inherit;
+  float:right;
+}
+
+.overview-imgpicker:hover{
+  display: block;
+}
+.profile-img:hover ~ .overview-imgpicker {
+  display: block;
+}
+
+.user-image{
+  height: 100%;
+  width: 100%;
+}

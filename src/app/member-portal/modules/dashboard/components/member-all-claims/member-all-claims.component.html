@@ -1,0 +1,140 @@
+<div class="ui-g ui-fluid table" *ngIf="cliams">
+    <div class="ui-g-12 ui-lg-12 table-border">
+        <div class="card top-navbar">
+            <div class="ui-g-12 header">
+                <div class="header-right">
+                    <div class="header">
+                    <span class="header-text">Share Requests</span></div>
+                    <span style="float:right;">
+                        <p-button label="Medical" class="top-navbtn"
+                            [ngClass]="{'active':onMedicalselected,'inactive':!onMedicalselected}"
+                            (onClick)="onFilterSelect(1)"></p-button> &nbsp;&nbsp;
+
+                        <p-button label="Dental" class="top-navbtn" (onClick)="onFilterSelect(2)" 
+                            [ngClass]="{'active':onDentalselected,'inactive':!onDentalselected}"
+                            [disabled]="!plansCovered?.IsDental" >
+                        </p-button>&nbsp;&nbsp;
+
+                        <p-button label="Vision" class="top-navbtn" (onClick)="onFilterSelect(3)"
+                            [ngClass]="{'active':onVisionselected,'inactive':!onVisionselected}"
+                            [disabled]="!plansCovered?.IsVision" >
+                        </p-button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-12 claim-filters">
+            <div class="ui-g ui-md-9 pd-less" style="float:right;">
+                <div class="ui-g-12 ui-md-4" style="text-align:center;">
+                </div>
+                <div class="ui-g-12 ui-md-4">
+                    <div class="ui-g-12 ui-md-4">
+                        <span class="label" style="float:right;width:max-content">
+                            View Requests For:
+                        </span>
+                    </div>
+                    <div class="ui-g-12 ui-md-8 ui-inputgroup round-input-div">
+                        <p-dropdown [options]="dependentMembers" [(ngModel)]="selectedDependent"
+                            (onChange)="onDependentSelected()" optionLabel="label">
+                        </p-dropdown>
+                    </div>
+                </div>
+
+                <div class="ui-g-12 ui-md-4">
+                    <div class="ui-g-12 ui-md-4">
+                        <span class="label" style="float:right;">
+                            Within:
+                        </span>
+                    </div>
+                    <div class="ui-g-12 ui-md-8 ui-inputgroup round-input-div">
+                        <p-dropdown [options]="within" [(ngModel)]="withinValue" (onChange)="onWithinSelected()"
+                            optionLabel="label">
+                        </p-dropdown>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui-g-12 claims-table">
+            <p-table [columns]="columns" [value]="cliams" [paginator]="defaultPaginator" [rows]="10"
+                [totalRecords]="totalNumberOfRecords" [paginatorPosition]="'bottom'" [paginatorright]="'right'"
+                [lazy]="true" (onLazyLoad)="getPaginatedClaims($event)" [responsive]="true">
+                <!-- all claims table header -->
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th *ngFor="let col of columns" style.width="{{col?.width}}" class="table-header-align">
+                            <span [ngClass]="{'clickable-header':col.sortIdentifier}" (click)="sortData(col.sortIdentifier)">{{col.header}}
+                                <i *ngIf="col.sortIdentifier && sortField!=col.sortIdentifier"
+                                class="fa fa-sort double-arrow"></i>
+                                <i *ngIf="col.sortIdentifier && sortField==col.sortIdentifier  && sortOrder==='asc'"
+                                    class="fa fa-chevron-down"></i>
+                                <i *ngIf="col.sortIdentifier && sortField== col.sortIdentifier && sortOrder==='desc'"
+                                class="fa fa-chevron-up"></i>
+                            </span>
+                        </th>
+                    </tr>
+                </ng-template>
+                <!-- end of table header -->
+                <ng-template pTemplate="body" let-cliam>
+                    <tr [pSelectableRow]="rowData">
+                        <td class="tdPadding">
+                            {{cliam.ClaimsNumber}}<br />
+                            <span [ngClass]="{'Processing':cliam.ClaimsStatusDescription=='Processing',
+                                'Processed':cliam.ClaimsStatusDescription === 'Processed'}">
+                                {{'('+cliam.ClaimsStatusDescription+')'}}</span>
+                        </td>
+                        <td class="tdPadding text-bold">
+                            <span *ngIf="cliam.ServiceStartDate">{{ cliam.ServiceStartDate | date}}</span>
+                        </td>
+                        <td class="tdPadding text-bold">
+                                <span *ngIf="cliam.ServiceEndDate">{{ cliam.ServiceEndDate | date}}</span>
+                        </td>
+                        <td class="tdPadding">
+                            {{cliam.ServiceDescription}}
+                            <p class="processed" *ngIf="cliam.ClaimsStatusDescription === 'Processed'">
+                                PROCESSED on <span *ngIf="cliam.ProcessedDate">{{cliam.ProcessedDate|date}}</span></p>
+                        </td>
+                        <td class="tdPadding text-bold">
+                            {{cliam.BilledAmount | currency}}
+                        </td>
+                        <td class="tdPadding text-bold">
+                            {{ cliam.ClaimsStatusDescription === 'Processed' ? '$'+cliam.PlanDiscountedRate : '-' }}
+                        </td>
+                        <td class="tdPadding text-bold">
+                            {{ cliam.ClaimsStatusDescription === 'Processed' ? '$'+cliam.PlanPaidAmount : '-' }}
+                        </td>
+                        <td class="tdPadding text-bold">
+                            {{ cliam.ClaimsStatusDescription === 'Processed' ? '$'+cliam.DueAmount : '-' }}
+                        </td>
+                        <td class="tdPadding text-bold">
+                            {{ cliam.ClaimsStatusDescription === 'Processed' ? '$'+cliam.MSRAAmount : '-' }}
+                        </td>
+                        <td class="tdPadding">
+                            {{cliam.FacilityName}}
+                        </td>
+                        <td class="tdPadding" *ngIf="cliam.ClaimsStatusDescription === 'Processed'">
+                            <i class="fa fa-file-pdf-o fa-1_5x" style="cursor:pointer;" aria-hidden="false"
+                                (click)="downloadEOB(cliam.EOBIdentifier)"></i>
+                        </td>
+                        <td class="tdPadding" *ngIf="cliam.ClaimsStatusDescription === 'Processing'">
+                            <i>-</i>
+                        </td>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="paginatorleft" let-state>
+                    <span>Showing Results: {{state.page*state.rows+1}} - {{state.page*state.rows+state.rows >state.totalRecords ?state.totalRecords:state.page*state.rows+state.rows}} of {{state.totalRecords}}</span>
+                </ng-template>
+            </p-table>
+            <div *ngIf="!cliams || cliams?.length<1" style="width:100%;margin:10px;text-align: center;">
+                <span style="padding:5px;">No Share Requests to be displayed</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- EOB request popup -->
+<p-confirmDialog class="EOBConfirmDialog" [style]="{width: '38vw'}" key="eobConfirmation" [closable]="false"
+[closeOnEscape]="false" acceptLabel="OK" rejectLabel="Cancel" acceptIcon="" rejectIcon=""
+acceptButtonStyleClass="ok" rejectButtonStyleClass="cancel"></p-confirmDialog>

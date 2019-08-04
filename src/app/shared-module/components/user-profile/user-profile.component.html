@@ -1,0 +1,126 @@
+<!--component html goes here -->
+<div class="ui-g-12 ui-md-6 ui-lg-3 side-menu">
+  <div class="ui-g-12" style="padding: 0px;">
+    <div class="overview" style="padding: 0px;">
+      <div class="overview-content clearfix profile-img" style="padding: 0px;">
+        <!-- <img class="user-image" src="/assets/images/ProfileAvatar.jpg"> -->
+        <!-- <img *ngIf="url" class="user-image" [src]="url"> -->
+        <div class="ui-g-12" *ngIf="errorTextImg">
+          <span class="error">{{errorTextImg}}</span>
+        </div>
+        <div class="ui-g-12" *ngIf="scuccessTest">
+            <span class="sucessInfo">{{scuccessTest}}</span>
+          </div>
+      </div>
+      <!--<div class="overview-footer overview-imgpicker imgpicker-icon" (click)="fileInput.click()" title="click to upload image">
+        <div class="overview-pic">
+          <input type="file" maxFileSize="2000000" #fileInput style="display: none" accept="image/*"
+          (change)="processFile($event)">
+           <span>
+            Change Picture
+            <i class="fa fa-edit img-picker"  ></i><br/>
+            <span style="font-size:12px;">Max size 2 MB</span>
+          </span> 
+        </div>
+      </div>-->
+      <div class="overview-footer profile-name">
+        <div class="overview-detail">
+          <span class="ml-10">{{memberDashboardDetails?.FirstName +' '+memberDashboardDetails?.LastName }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui-g-12 profile-info">
+    <div class="info" *ngIf="!(memberDashboardDetails?.GroupId) || memberDashboardDetails?.GroupId<1">
+      <div class="info-name">Broker Name:&nbsp;</div>
+      <div class="info-value">{{memberDashboardDetails?.BrokerName}}</div>
+    </div>
+    <div class="info" *ngIf="memberDashboardDetails?.GroupName">
+      <div class="info-name">Group Name:&nbsp;</div>
+      <div class="info-value">{{memberDashboardDetails?.GroupName}}</div>
+    </div>
+    <div class="info" *ngIf="memberDashboardDetails?.GroupId && memberDashboardDetails?.GroupId>0">
+      <div class="info-name">Group Id:&nbsp;</div>
+      <div class="info-value">{{memberDashboardDetails?.GroupId}}</div>
+    </div>
+    <div class="info">
+      <div class="info-name">Member ID: &nbsp;</div>
+      <div class="info-value">{{memberDashboardDetails?.ExternalId}}</div>
+    </div>
+  </div>
+
+  <div class="ui-g-12 plan-details" *ngFor="let plan of memberDashboardDetails?.PlanDetails">
+    <div class="header">
+      Plan Details
+    </div>
+    <div class="plan">
+      <ul class="plan-list-view">
+        <li class="detail">
+          <i class="material-icons"> all_inbox</i> {{plan?.PlanName}}
+          <ul class="plan-alignment">
+            <li class="detail">MSRA <span class="plan-details-list plan-detail">: ${{plan?.MSRA  }} </span></li>
+            <li class="detail">Duration <span class="plan-details-list plan-detail">: {{plan?.Duration}} months</span>
+            </li>
+            <li class="detail">Max Limit<span class="plan-details-list plan-detail">: ${{plan?.MaxLimit}}</span></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="header">
+      Service Dates
+    </div>
+    <div class="plan">
+      <ul class="plan-alignment">
+        <li class="detail">
+          <i class="material-icons">date_range</i><span class="plan-details-list"> Effective Date:</span>
+          <p class="no-top-bottom-margin ml-15"><span *ngIf="plan?.CoverageDate"> {{plan?.CoverageDate | date: 'MM/dd/yyyy'}}</span></p>
+        </li>
+        <li class="detail">
+          <i class="material-icons">date_range</i><span class="plan-details-list"> Next Billing Date: </span>
+          <p class="no-top-bottom-margin ml-15"><span *ngIf="plan?.NextBillingDate">{{plan?.NextBillingDate | date: 'MM/dd/yyyy'}}</span></p>
+        </li>
+        <li class="detail">
+          <i class="material-icons">date_range</i><span class="plan-details-list"> Inactive Date: </span>
+          <p class="no-top-bottom-margin ml-15">
+            <span style="color:#f15b27;" *ngIf="plan?.InActiveDate">{{plan?.InActiveDate  | date: 'MM/dd/yyyy'}}</span></p>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div *ngIf="!dependents || dependents?.length>0">
+    <div class="ui-g-12 dependents-header">
+      <div class="header">
+        Dependents
+      </div>
+      <!-- <div class="add-btn">
+        <div class="btn">
+          Add
+        </div>
+      </div> -->
+    </div>
+
+    <div class="ui-g-12 dependent-list">
+      <div class="dependent" *ngFor="let dep of dependents">
+        <div class="logo">
+            <img *ngIf="!dep.url" src="/assets/images/profile.jpg">
+            <img *ngIf="dep.url" [src]="dep.url">
+        </div>
+        <div class="dependent-info">
+          <div class="text-1">
+            {{dep.Name}}
+          </div>
+          <div class="text-2">
+            {{dep.Age}}yrs / {{dep.Gender}}
+          </div>
+        </div>
+      </div>
+      <div class="dependent" *ngIf="this.dependentCount>3">
+        <div class="depCount" (click)="redirectToDependent()">
+          <div style="padding-top:10px;">+{{ this.dependentCount -3 }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

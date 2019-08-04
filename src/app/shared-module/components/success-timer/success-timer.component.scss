@@ -1,0 +1,49 @@
+@import "./../../../../assets/custom-sass/variables.scss";
+.icon {
+  margin-top: -3%;
+}
+.register-header {
+  height: 100px;
+  width: 100%;
+  color: $white;
+  text-align: center;
+  background: linear-gradient(to right, $gradient-start, 35%, $gradient-end);
+}
+.toppadd {
+  padding-top: 50px;
+}
+
+.reg-text {
+  display: inline-flex;
+  font-size: 2em;
+  margin-top: 5vh;
+}
+.successtext {
+  font-size: 1.5em;
+  margin-top: 0.5em;
+}
+
+.success-screen {
+  width: 100%;
+  margin: 0 auto;
+}
+.redirect-counter {
+  width: 120px;
+  border-radius: 50%;
+  text-align: center;
+  margin: 1% auto;
+  height: 120px;
+  font-size: 6em;
+  border: 2px dotted gray;
+}
+.success-login {
+  text-align: center;
+}
+.countercss {
+  padding-top: 40%;
+  height: 100%;
+}
+.timerbodytext {
+  text-align: center;
+  font-size: 1em;
+}

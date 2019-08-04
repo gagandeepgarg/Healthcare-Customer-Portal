@@ -1,0 +1,230 @@
+@import "../../../../../../assets/custom-sass/variables.scss";
+
+.card-margins{
+    margin-top: 2%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+::ng-deep {
+  .data-table {
+    font-size: 14px;
+    .ui-table .ui-table-thead > tr > th,
+    .ui-table .ui-table-tfoot > tr > td {
+      font-weight: 400;
+      color: #ffffff;
+      background-color: $gradient-start;
+      border: none !important;
+      text-align: left;
+      font-family: "Roboto", sans-serif;
+      font-size: 13px;
+    }
+
+    .ui-table .ui-table-tbody > tr > td {
+      background: inherit;
+      border-bottom: 1px solid #cacaca;
+      border: none;
+      font-family: "Roboto", sans-serif;
+      font-weight: 300;
+      img.pic {
+        height: 35px;
+        width: 35px;
+        border-radius: 20px;
+      }
+    }
+    .ui-table .ui-paginator {
+      text-align: right;
+      background-color: $grey-150;
+    }
+    .ui-widget-header {
+      //background-color: #E3E7E8;
+      color: grey;
+      font-size: 1em;
+      border: none;
+    }
+  }
+}
+.card-header{
+    padding: 2%;
+    font-weight: bold;
+}
+.card {
+    width: 100%;
+  padding: 0em !important;
+  ::ng-deep {
+    .ui-card {
+      width: 95%;
+      padding: 0em !important;
+      margin: 1%;
+      border-radius: 5px 5px 0 0;
+      border: none;
+      box-shadow: 0 0 10px -2px #ccc;
+    }
+    .ui-card-header {
+      background-color: #ffff;
+      font-size: 1.2em;
+      text-align: left;
+      padding: 2.2%;
+      border-radius: 5px 5px 0 0;
+      font-weight: 400;
+    }
+    .ui-card-body {
+      background-color: $grey-100;
+      overflow: hidden;
+      padding: 0;
+    }
+  }
+}
+.blue-font-color
+{
+   color:#0c76b4;
+}
+.id-card-link{
+    cursor: pointer;
+}
+::ng-deep {
+  .header-btns{
+    .submitbtn button:disabled{
+      font-size: 1em;
+    }
+    .submitbtn button{
+      font-size: 1em;
+    }
+    .cancelBtn button {
+      background-color: $pdialog-cancel-btn-color !important;
+      font-size: 1em;
+    }
+  }
+  .cancelBtn button {
+    background-color: $pdialog-cancel-btn-color !important;
+    //color: $black !important;
+  }
+
+  .submitbtn button:disabled{
+    color:black !important;
+  }
+  .requestbtn{
+    button{
+      font-size: 0.8em;
+    }
+  }
+    .ui-dialog .ui-dialog-footer .ui-button{
+        color: white;
+    }
+    .pDialog {
+        .ui-dialog .ui-dialog-footer .ui-button{
+            color: white;
+            font-size: 0.8em;
+        }
+        .ui-dialog .ui-dialog-footer .ui-button:hover{
+            color: white;
+            font-size: 0.8em;
+        }
+      .ui-dialog .ui-dialog-titlebar {
+        padding: 0;
+      }
+      .ui-dialog .ui-dialog-footer {
+        border: none;
+        padding: 0;
+      }
+      .cancelBtn button {
+        background-color: $pdialog-cancel-btn-color !important;
+        color: $black !important;
+      }
+    }
+  }
+  .pheaderCss {
+    margin: 0;
+    padding: 0;
+    color: $white;
+    background: linear-gradient(to right,$gradient-start, 35%,  $gradient-end);
+    height: 45px;
+  }
+  .pHeaderCloseIcon {
+    color: $white;
+    cursor: pointer;
+  }
+  .clickable-header{
+    cursor: pointer;
+
+  }
+  .buttons {
+    border-top:1px solid #CCCCD0;
+  ::ng-deep {
+      p-button button {
+        font-size: 0.8em;
+      }
+    }
+  }
+  .pdf-container{
+      height:40vh;
+      width:90%;
+      background-color: #D8DCDF;
+      margin: auto;
+  }
+  .view-id-icon{
+      margin-left:5%;
+    display: inline-flex;
+    vertical-align: super;
+  }
+  // override calendar styles
+.roundCalendardiv {
+  border: 1px solid grey;
+  font-size: 0.8em;
+  // ::ng-deep {
+  // }
+}
+
+
+.recipt-margin{
+      /* margin-top: 0%; */
+      margin-left: 4%;
+      margin-right: 4%;
+}
+.round-input-element{
+  padding-left:20px; 
+}
+@media screen and (max-width:1024px){
+  .SearchStb{
+ margin-right: 5%;
+  }
+  .findLabel{
+    margin-left: -27px;
+  }
+}
+
+@media screen and (max-width:640px){
+  .findLabel{
+    margin-left: 0;
+  }
+}
+
+.margin-top-bottom-4pc{
+  margin:4% 0;
+}
+.top-padding-3px{
+  padding-top:3px
+}
+.full-height{
+  height:100%;
+}
+.receipt-header{
+  margin-left: 3%;margin-right: 4%;
+}
+.receipt-header-row
+{
+  margin-top:10px;background-color: white;
+}
+.card-header-padding{
+  padding: 0.6em 0;
+}
+.right-padding-5pc
+{
+  padding-right: 5%;
+}
+.filterCss{
+  margin-left: -1px;
+}
+
+.clear-btn-padding{
+  padding-left: 5px;
+}

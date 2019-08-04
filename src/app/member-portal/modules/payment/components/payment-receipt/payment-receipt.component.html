@@ -1,0 +1,116 @@
+<app-page-header [iconName]="iconName" [headerInnerHtml]="headerHtml"></app-page-header>
+<div class="ui-fluid header-freeze-padding">
+    <div class="ui-g card-margins receipt-header">
+            <div class="ui-g-12 receipt-header-row">
+                <div class="ui-g-12 ui-md-5">
+                        <div class="card-header card-header-padding" ><b>Payment Receipts</b></div>
+                </div>
+                <div class="ui-g-12 ui-md-3">
+                    <div class="ui-g-12 ui-md-4" >
+                        <span class="filterCss" >
+                            Filter By Date:
+                        </span>
+                    </div>
+                    <div class="ui-g-12 ui-md-8 ui-inputgroup  round-input-div roundCalendardiv">
+                        <p-calendar class="round-input-element" 
+                        placeholder="From"  [maxDate]="maxStartDate" name="startDate"  [minDate]="minStartDate"
+                         [showIcon]="true"
+                        utc="false" [selectOtherMonths]="true"   [(ngModel)]="startDate" (onSelect)="onStartDateSelect()"
+                        > </p-calendar>
+                    </div>
+                </div>
+    
+                <div class="ui-g-12 ui-md-2">
+                    <div class="ui-g-12 ui-md-12 ui-inputgroup round-input-div roundCalendardiv"> 
+                        <p-calendar class="round-input-element" 
+                        placeholder="To" [minDate]="minToDate" [maxDate]="maxToDate" name="DateTo"  [showIcon]="true"
+                        utc="false" [(ngModel)]="DateTo" [selectOtherMonths]="true" (onSelect)="onToDateSelect()"
+                        > </p-calendar>
+                        </div> 
+                
+            </div>
+                <div class="ui-g-12 ui-md-2 header-btns">
+                    <p-button label="Search" class="ui-button-rounded submitbtn" type="button" (click)="onSearch()" [disabled]="!DateTo && !startDate"></p-button>
+                    <span class="clear-btn-padding">             
+                        <p-button label="Clear" class="ui-button-rounded cancelBtn" type="button"  (click)="onClear()" ></p-button> 
+                    </span> 
+                </div>
+            </div>
+              
+         
+          
+            <div class="data-table width-100">
+                <p-table #receiptsTable [value]="reciptData" [columns]="cols" [paginator]="paginateFlag" [rows]="10"
+                [totalRecords]="totalRecordsCount" [paginatorPosition]="'bottom'" [paginatorright]="'right'"
+                [responsive]="true" [lazy]="true" (onLazyLoad)="getPaginatedClaims($event)" >
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th class="wrap" *ngFor="let col of columns" style.width="{{col?.width}}">
+                                <span [ngClass]="{'clickable-header':col.sortIdentifier}" (click)="sortData(col.sortIdentifier)">{{col.header}}
+                                    <i *ngIf="col.sortIdentifier && sortField!=col.sortIdentifier"
+                                    class="fa fa-sort double-arrow"></i>
+                                    <i *ngIf="col.sortIdentifier && sortField==col.sortIdentifier  && sortOrder==='asc'"
+                                        class="fa fa-chevron-down"></i>
+                                    <i *ngIf="col.sortIdentifier && sortField== col.sortIdentifier && sortOrder==='desc'"
+                                    class="fa fa-chevron-up"></i>
+                                </span>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-paymentRec let-ri="rowIndex">
+                        <tr>
+                            <td class="blue-font-color wrap">{{paymentRec.TransactionId}}</td>
+                            <td class="blue-font-color wrap" *ngIf="paymentRec.PaidDate">{{paymentRec?.PaidDate | date}}</td>
+                            <td class="blue-font-color wrap" *ngIf="!paymentRec.PaidDate">-</td>
+                            <td>{{paymentRec.Amount | currency}}</td>
+                            <td>{{paymentRec.PaymentMethod}}</td>
+                            <td class="blue-font-color wrap">
+                              <div class="clickable-header" *ngIf="paymentRec.ReceiptId" title="Click to view or download the ID card" (click)="ViewRecipt(paymentRec.ReceiptId)">
+                                    <div class="inline-flex-display">
+                                        <img src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.ICON_PAYMENT_RECIPT}}" />
+                                    </div>
+                                    <div class="view-id-icon">
+                                        View Receipt
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <div *ngIf="!reciptData || reciptData?.length<1" class="width-100 text-center-align margin-10px">
+                    <span class="paddin-5px">{{errorMessage}}</span>
+                </div>
+            </div>
+        <!-- </p-card> -->
+    </div>
+  </div>
+  <!-- id card viewer -->
+  <p-dialog class="pDialog" [draggable]="false" [modal]="true" [closable]="false" [positionTop]="160" [focusOnShow]="false" [closeOnEscape]="false" [responsive]="true"
+  [(visible)]="display" [style]="{width: '40%', margin:'0'}">
+  <p-header>
+        <div class="ui-g-12 flex-container pheaderCss">
+                <div class="ui-g-10 ui-md-10 top-padding-3px" >
+                    &nbsp;<span>View Receipt</span>
+                </div>
+                <div class="ui-g-2 ui-md-2 top-padding-3px">
+                    <span class="right-float"><i class="fa fa-times-circle pHeaderCloseIcon" (click)="cancel()"></i></span>
+                </div>
+            </div>
+  </p-header>
+
+  <div class="width-100 text-center-align margin-top-bottom-4pc">
+     <div class="pdf-container">
+            <embed [attr.src]="idCardURL" type="application/pdf"  class="width-100 full-height">
+     </div>
+  </div>
+
+  <p-footer [style]="{padding:'0'}">
+      <div class="ui-g-12 flex-container">
+          <div class="ui-g-12 ui-md-12">
+              <p-button class="ui-button-rounded submitbtn right-float right-padding-5pc" (click)="downloadPaymentRecipt()"
+                  label="Download" type="button">
+              </p-button>
+          </div>
+      </div>
+  </p-footer>
+</p-dialog>

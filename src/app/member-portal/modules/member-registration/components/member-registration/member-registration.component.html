@@ -1,0 +1,30 @@
+<app-page-header [iconName]="iconName" [headerInnerHtml]="headerHtml"></app-page-header>
+<div class="ui-fluid header-freeze-padding">
+  <div>
+    <div class="steps">
+      <p-steps (click)="display($event)" [(activeIndex)]="activeIndex" [readonly]="true" [model]="items"
+        styleClass="steps-custom"></p-steps>
+    </div>
+    <div class="roler-container">
+      <hr class="roler" />
+      <hr class="roler tab-menu" [ngClass]="{'hr-active':activeIndex === 0}" />
+      <hr class="roler tab-menu" [ngClass]="{'hr-active':activeIndex === 1}" />
+      <hr class="roler" />
+    </div>
+  </div>
+  <div [ngSwitch]="activeIndex">
+    <p *ngSwitchCase="0">
+      <app-member-personalinfo (childevent)="PersonalInfoEvent($event)" [backClicked]="backBtnClicked">
+      </app-member-personalinfo>
+    </p>
+    <p *ngSwitchCase="1">
+      <app-member-create-account (childevent)="AccountCreated($event)" (backEvent)="backToPersonalInfo($event)">
+      </app-member-create-account>
+    </p>
+    <p *ngSwitchCase="false">
+    </p>
+    <p *ngSwitchDefault>
+    </p>
+  </div>
+</div>
+

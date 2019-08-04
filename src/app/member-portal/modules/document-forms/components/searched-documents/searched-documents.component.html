@@ -1,0 +1,74 @@
+<!-- //search rsesult grid -->
+<div class="width-100 left-float top-paddind-pt5em">
+  <div class="categoryheader">
+    Total number of records : {{totalFilesCount }}
+    <span *ngIf="searchedFilesData?.length>0" class="view-all-btn" (click)="onViewAllClick()">View All</span>
+  </div>
+  <div class="search-document-table">
+
+    <p-table #searchedDocuments [value]="searchedFilesData" [paginator]="defaultPaginator" [rows]="filesPerPage"
+      [totalRecords]="totalFilesCount" [rowsPerPageOptions]="[50,100, 200, 300, 400, 500]"
+      [paginatorPosition]="'bottom'" [sortField]="sortField" [pageLinks]="2"
+      (onLazyLoad)="getPaginatedMessages($event)">
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 7%;" class="wrap table-header-align">#
+          </th>
+          <th style="width: 43%;" class="wrap table-header-align">
+            <span class="clickable-header" (click)="sortData('filename')">Document Name
+                <i *ngIf="sortField!='filename'" class="fa fa-sort double-arrow"></i>
+              <i *ngIf="sortField=='filename' && sortOrder=='asc'" class="fa fa-chevron-down"></i>
+              <i *ngIf="sortField=='filename' && sortOrder=='desc'" class="fa fa-chevron-up"></i>
+            </span>
+          </th>
+          <th style="width: 25%; position: relative;" class="wrap table-header-align">
+            <span class="clickable-header" (click)="sortData('category')">Document Category
+                <i *ngIf="sortField!='category'" class="fa fa-sort double-arrow"></i>
+              <i *ngIf="sortField=='category' && sortOrder=='asc'" class="fa fa-chevron-down"></i>
+              <i *ngIf="sortField=='category' && sortOrder=='desc'" class="fa fa-chevron-up"></i>
+            </span>&nbsp;<span class="categoryList" style="margin-left:2em;">
+              <p-multiSelect dropdownIcon="pi pi-filter multi-select" name="ddlCategories"
+                [options]="dropdownCategories" (onChange)="onCategoryCheckChanged($event.value)" [showHeader]="false"
+                [(ngModel)]="selectedCategories" [panelStyle]="{minWidth:'12em'}"></p-multiSelect>
+            </span>
+          </th>
+          <th style="width: 25%;" class="wrap table-header-align">
+              <span class="clickable-header" (click)="sortData('lastupdatedon')">Date Last Modified
+                  <i *ngIf="sortField!='lastupdatedon'" class="fa fa-sort double-arrow"></i>
+                <i *ngIf="sortField=='lastupdatedon' && sortOrder=='asc'" class="fa fa-chevron-down"></i>
+                <i *ngIf="sortField=='lastupdatedon' && sortOrder=='desc'" class="fa fa-chevron-up"></i>
+              </span>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-file let-index="rowIndex">
+        <tr>
+          <td>{{index+1}}</td>
+          <td class="wrap">
+            <span class="fileList" (click)="GetFileContentToDownload(file.DocumentId,file.Ext,file.FileName)">
+              <div class="flex-inline-display">
+                <i class="fa fa-file-{{fileTypes[file.Ext.toUpperCase()]}}-o {{iconColor[file.Ext.toUpperCase()]}} top-padding-2px"></i>
+              </div>
+              <div class="file-label">
+                {{file?.FileName}}
+              </div>
+            </span>
+          </td>
+          <td class="wrap">{{file?.SectionDisplayName}}</td>
+          <td class="wrap"><span *ngIf="file?.LastUpdatedOn">{{file?.LastUpdatedOn | date:'MM/dd/yyyy'}}</span></td>
+          <!-- <td></td> -->
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="paginatorleft" let-state>
+        <span>Showing Results: {{state.page*state.rows+1}} -
+          {{state.page*state.rows+state.rows >state.totalRecords ?state.totalRecords:state.page*state.rows+state.rows}}
+          of {{state.totalRecords}}</span>
+      </ng-template>
+    </p-table>
+    <div *ngIf="!searchedFilesData || searchedFilesData?.length<1"
+    class="width-100 text-center-align margin-10px top-margin-20px">
+      <span class="padding-5px">No matching documents available</span>
+    </div>
+  </div>
+</div>

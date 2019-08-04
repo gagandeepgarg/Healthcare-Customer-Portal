@@ -1,0 +1,129 @@
+@import "./../assets/custom-sass/variables.scss";
+body {
+  background-color: #e3e9e9;
+  font-family: roboto;
+  margin: 0;
+  font-size: 16px;
+}
+.slide-left {
+  padding-left: 0px;
+  transition: 0.2s;
+}
+.slide-right {
+  padding-left: 200px;
+  transition: 0.4s;
+}
+.layout-menu {
+  max-height: 100vh;
+  overflow-y: auto;
+}
+.layout-spinner {
+  background-image: url("../assets/images/loader.gif");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50px 50px;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #424242;
+  top: 0;
+  left: 0;
+  z-index: 999999997;
+  opacity: 0.7;
+}
+.pheaderCss {
+  margin: 0;
+  padding: 0;
+  color: $white;
+  background: linear-gradient(to right,$gradient-start, 35%,  $gradient-end);
+  height: 45px;
+}
+.pHeaderCloseIcon {
+  color: $white;
+  cursor: pointer;
+}
+.readable-msg-subject{
+  padding-top:1px;
+  padding-bottom:1px; 
+  border-bottom: 1px solid #e0e0e3;
+}
+.readable-msg{
+  padding-top: 20px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #e0e0e3;
+}
+::ng-deep {
+  .providerConfirmDialog{
+    .ui-dialog .ui-dialog-titlebar {
+      background: linear-gradient(to right, $gradient-start, 55%, $gradient-end);
+  }
+  }
+  .pDialog {
+      .ui-dialog .ui-dialog-footer .ui-button{
+        color:  white;
+          font-size: 0.8em;
+      }
+      .ui-dialog .ui-dialog-footer .ui-button:hover{
+        color:  #0E4668 !important;
+          font-size: 0.8em;
+      }
+    .ui-dialog .ui-dialog-titlebar {
+      padding: 0;
+    }
+    .ui-dialog .ui-dialog-footer {
+      border: none;
+      padding: 0;
+    }
+    .cancelBtn button {
+      background-color: $pdialog-cancel-btn-color !important;
+      color: $black !important;
+    }
+  }
+}
+
+.sesssionTimePopUp{
+  //text-align:center !important;
+  ::ng-deep{
+    .ui-button-text{
+      color:#ffffff;
+    }
+    .ui-dialog-title{
+      padding:0 0 0 2%;
+    }
+    .ui-dialog-titlebar{
+      padding: 0.2em 0 0 0;
+    }
+    .ui-dialog-footer {
+      padding: 0;
+      text-align: center;
+  }
+
+  /* .loggedIn{
+    float:right;
+    .ui-button{
+      font-size:1em;
+      height: 1.85em;
+    }
+    .ui-button-text{
+      font-size:70%;
+    }
+  } */
+}
+}
+
+
+.submitbtn {
+  float: right;
+  font-size: 0.8em;
+  height: 1.85em;
+}
+.cancelBtn {
+  float: left;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  font-size: 0.8em;
+  ::ng-deep .ui-button-text{
+    color: grey;
+  }
+  
+}

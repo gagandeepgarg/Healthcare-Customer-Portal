@@ -1,0 +1,158 @@
+@import "../../../../../../assets/custom-sass/variables.scss";
+
+.labels {
+  color: $active-color;
+  font-size: 1.2em;
+}
+.value {
+  padding-left: 6%;
+  line-height: 1.7;
+  color: $text-color;
+}
+.countcharacterlabel {
+  color: $text-color;
+  float: right;
+  padding: 2px;
+}
+.social {
+  margin-top: 12%;
+  margin-left: 6%;
+}
+p-dialog .round-input-div {
+  border: 1px solid #ccc;
+}
+.right-contact {
+  color: $text-color;
+  padding-left: 3%;
+}
+//p-dialog CSS
+::ng-deep {
+  .cancelbtn button {
+    background-color: $white !important;
+    color: $cancel-btn-text-col0r !important;
+    border: 1px solid $placeholder-color !important;
+    font-size: 0.9em;
+  }
+  .ui-button-rounded submitbtn {
+    button {
+      font-size: 0.95em;
+    }
+  }
+  .register-header {
+    .ui-dialog .ui-dialog-titlebar .ui-dialog-title {
+      padding-top: 50px;
+      height: 80px;
+      width: 100%;
+      color: $white;
+      text-align: center;
+      background: linear-gradient(to right, $gradient-start, 35%, $gradient-end);
+    }
+  }
+}
+
+.header-right {
+  ::ng-deep {
+    p-button.inactive button {
+      background-color: lightgrey;
+    }
+    p-button.inactive button:hover {
+      background-color: lightgrey;
+    }
+    p-button.active button {
+      background-color: #41d0e0;
+    }
+    p-button.active button:hover {
+      background-color: #41d0e0;
+    }
+  }
+}
+
+::ng-deep {
+  .pDialog {
+    .ui-dialog .ui-dialog-titlebar {
+      padding: 0;
+    }
+    .ui-dialog .ui-dialog-footer {
+      border: none;
+      padding: 0;
+    }
+    .cancelBtn button {
+      background-color: $pdialog-cancel-btn-color !important;
+      color: $black !important;
+    }
+  }
+}
+.pheaderCss {
+  margin: 0;
+  padding: 0;
+  color: $white;
+}
+.pHeaderCloseIcon {
+  //background-color: $gradient-start;
+  color: $white;
+  cursor: pointer;
+}
+::ng-deep {
+  .header-right {
+    p-button button {
+      font-size: 0.9em;
+    }
+  }
+}
+
+/*custome-css-btn-submit*/
+.block-viewbtn {
+  clear: both;
+  display: block;
+  padding-left: 17px;
+}
+
+.block-viewbtn .ui-button-rounded {
+  display: block;
+}
+.block-viewbtn .ui-button-rounded {
+  display: block;
+  width: 110px;
+}
+.block-viewbtn .ui-button-rounded span {
+  line-height: 20px;
+}
+.get-inblock {
+  margin-top: 3.5%;
+  margin-left: 3%;
+}
+
+.get-inblock .round-input-div {
+  border-radius: 16px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+}
+.bordr-right {
+  display: block;
+  border-right: 1px solid #ddd;
+  width: 100%;
+}
+.contact-header {
+  color: rgb(81, 85, 84);
+  font-size: 2em;
+}
+.experience-label{
+  padding:2% 0;
+}
+
+.story-header-padding{
+  margin:5% 0;
+}
+
+
+/* For mobile phones: */
+@media only screen and (max-width: 769px) {
+  .popup-form{
+    height: 50vh;
+    overflow-y: auto;
+  }
+}
+
+.no-top-padding{
+  padding-top:0;
+}

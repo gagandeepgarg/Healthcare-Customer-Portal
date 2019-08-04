@@ -1,0 +1,98 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="login">
+  <img id="logo" class="lgo" src="../../../../assets/images/logo.png" />
+  <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
+    <div class="ui-g ui-fluid header-for-login" >
+      <div class="ui-g-12">
+        <label for="float-input" class="ui-g-12 ui-md-12 fntlog">{{'LOGIN.Header' | translate}}</label>
+
+        <div class="ui-g-12 ui-md-12 top-margin10p">
+          <div class="ui-g-1 ui-sm-1 ui-md-1"></div>
+          <div class="ui-g-10 ui-sm-10 ui-md-10 ui-inputgroup  round-input-div"
+            [ngClass]="{'has-error': ((loginForm.get('username').dirty) && loginForm.get('username').errors  || errorUserName)}">
+            <span class="ui-inputgroup-addon no-border-no-back"><i
+                class="fa fa-user round-input-icon"></i></span>
+            <input type="text" class="round-input-element" pInputText placeholder="Username *"
+              (input)="validateUserName($event)" formControlName="username" (paste)="paste($event)" />
+          </div>
+          <div class="ui-g-1 ui-sm-1 ui-md-1"></div>
+        </div>
+        <!--password start-->
+        <div class="ui-g-12 ui-md-12 top-margin10p login-block">
+          <div class="ui-g-1 ui-sm-1 ui-md-1"></div>
+          <div class="ui-g-10 ui-sm-10 ui-md-10 ui-inputgroup round-input-div"
+            [ngClass]="{'has-error': ((loginForm.get('password').dirty) && loginForm.get('password').errors || errorPassword)}">
+            <span class="ui-inputgroup-addon no-border-no-back"><i
+                class="fa fa-lock round-input-icon"></i></span>
+            <input type="password" class="round-input-element width-100" pInputText #password
+              placeholder="Password *" formControlName="password" (input)="validatePassword($event)"
+              (paste)="paste($event)" />
+            <span class="ui-inputgroup-addon eye-view no-border-no-back"><i
+                class="fa fa-eye round-input-icon" (touchstart)="password.type='text'"
+                (touchend)="password.type='password'" (mouseleave)="password.type='password'"
+                (mouseup)="password.type='password'" (mousedown)="password.type='text'"></i></span>
+          </div>
+          <i class="ui-g-1 ui-sm-1 ui-md-1 fa  fa-info-circle round-input-icon"
+            pTooltip="{{constants?.PASSWORD_POLICY_INFO}}" tooltipPosition="bottom" [escape]="false"
+            placeholder="Bottom"></i>
+        </div>
+        <!--password end-->
+        <div class="ui-g-12 ui-md-12">
+          <div class="ui-g-1 ui-sm-1 ui-md-1"></div>
+          <div class="ui-g-10 ui-sm-10 ui-md-10 ui-inputgroup">
+            <span *ngIf="errLoginstatus" class="error">
+              {{errorText}}
+            </span>
+          </div>
+          <div class="ui-g-1 ui-sm-1 ui-md-1"></div>
+        </div>
+
+        <!-- Sign in start-->
+        <div class="ui-g-12 ui-md-12">
+          <div class="ui-g-1 ui-sm-1 ui-md-1"></div>
+          <div class="ui-g-10 ui-sm-10 ui-md-10 div-horizontal-center" >
+            <p-button class="ui-button-rounded submitbtn width-100" label="Sign In" type="submit"></p-button>
+          </div>
+          <div class="ui-g-1 ui-sm-1 ui-md-1"></div>
+        </div>
+        <!-- Sign in end-->
+        <div class="ui-g-12 ui-md-12">
+          <div class="ui-g-1 ui-sm-1 ui-md-1"></div>
+          <div class="ui-g-10 ui-sm-10 ui-md-10 links">
+            <a class="left-float" (click)="NavigateToRegistration()">Register</a>
+            <a class="right-float" (click)="forgotPassword()">Forgot Password ?</a>
+            <a class="right-float" (click)="showUserNameInfo=true">Forgot Username ?</a>
+          </div>
+          <div class="ui-g-1 ui-sm-1 ui-md-1"></div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="p-col p-col-align-center">
+    <div class="box"><a class="alieramailLink" href="mailto:{{constants.ALIERA_MAIL}}">info@alierahealth.com</a></div>
+  </div>
+</div>
+
+<p-dialog [(visible)]="!isBrowserCompatible" [draggable]="false" [modal]="true" [showHeader]="false" 
+[focusOnShow]="false"
+    [style]="{width: '350px'}" [resizable]="false">
+    <div class="notification-content">{{constants.BROWSER_COMPATIBILTY_DESCRIPTION}}</div>
+    <hr>
+    <div class="notification-Buttons">
+        <div (click)="isBrowserCompatible=true;">
+            <p-button class="ui-button-rounded submitbtn right-float padding-right-5pc"
+            label="OK" type="button">
+            </p-button>
+        </div>
+    </div>
+</p-dialog>
+
+
+<p-dialog header="Info" [(visible)]="showUserNameInfo" [modal]="true" [draggable]="false">
+  <div class="ui-g-12 ui-lg-12">
+      <p class="forgotUserName" *ngIf="showUserNameInfo">
+          {{ constants.FORGOT_USER_NAME}}<br/>
+        <a href="mailto:info@alierahealth.com">info@alierahealth.com</a>
+      </p>
+  </div>
+</p-dialog>

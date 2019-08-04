@@ -1,0 +1,86 @@
+/* Add your customizations of layout here */
+
+@import './../../custom-sass/variables.scss';
+
+.layout-container .topbar {
+    background-color: #ffffff;
+}
+
+.layout-container .topbar .topbar-left {
+    background-color: #ffffff;
+    padding: 10px 10px 10px 40px;
+    height: 70px;
+    box-shadow: none;
+    width: 200px;
+    &:after{
+        border-right:3px solid #ccc;
+    }
+    .logo img {
+        height: 100%;
+        width: 80%;
+    }
+}
+
+.layout-container .topbar {
+    height: 70px;
+}
+
+@media (min-width: 1025px) {
+    .layout-container .topbar-items>li .topbar-icon {
+        color: $grey-850;
+    }
+
+    .layout-container.menu-layout-static .layout-main {
+        margin-left: 200px;
+    }
+
+    .layout-container .topbar-items>li>a .topbar-badge {
+        background-color: $red-950;
+    }
+}
+
+.layout-container .topbar .topbar-right #menu-button {
+    background-color: $white;
+    left: -194px;
+    color: $blue-750;
+    height: 36px;
+    box-shadow: none;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0);
+}
+
+.layout-container .layout-menu {
+    top: 70px;
+    width: 200px;
+    background-color: $layout-sidemenu-background;
+}
+
+.layout-container.menu-layout-overlay .topbar .topbar-right #menu-button i {
+    font-size: 30px !important;
+}
+
+.layout-container .topbar .topbar-right #topbar-menu-button i,
+.layout-container .topbar .topbar-right #rightpanel-menu-button i {
+    transition: color 0.3s;
+    font-size: 30px;
+    color: $tuna;
+}
+
+.layout-container .topbar .topbar-right #menu-button {
+    height: 30px;
+}
+
+@media (min-width: 1025px) {
+    .layout-container .topbar-items>li .topbar-icon {
+        font-size: 30px;
+    }
+}
+
+.layout-container .layout-main {
+    padding: 70px 0 0 0;
+}
+
+.layout-container .layout-main .layout-content {
+    padding: 0;
+}
+
+

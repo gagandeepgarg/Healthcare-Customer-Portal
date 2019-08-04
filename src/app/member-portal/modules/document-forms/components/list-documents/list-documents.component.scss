@@ -1,0 +1,165 @@
+@import "../../../../../../assets/custom-sass/variables.scss";
+.view-all-btn:hover {
+  cursor: pointer;
+  color: #0E4668;
+}
+
+.fileList {
+  display: inline-flex;
+  cursor: pointer;
+}
+.fileList:hover {
+  text-decoration: underline;
+  text-decoration-color: $active-color;
+  color: $active-color;
+}
+.wrap {
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
+.clickable-header {
+  cursor: pointer;
+}
+.categoryheader {
+  width: 100%;
+  border-bottom: 1px solid lightgray;
+  font-size: 1.3em;
+  color: $active-font-color;
+  padding: 1% 0;
+  margin-bottom: 1%;
+}
+//grid CSS
+
+.no-result-text {
+  text-align: center;
+}
+::ng-deep {
+  .categoryList {
+    .ui-multiselect-label-container {
+      display: none;
+    }
+    .ui-multiselect {
+      background: none;
+      display: inline;
+    }
+  }
+  .search-document-table {
+    box-shadow: 0 0 10px -2px #ccc;
+    border-radius: 5px 5px 0px 0px;
+    .ui-paginator .ui-paginator-pages a.ui-state-active {
+      background-color: $active-font-color;
+      color: $white;
+    }
+
+    .ui-table .ui-paginator-bottom {
+      background: transparent;
+      border: none;
+      color: grey;
+      .ui-paginator-element,
+      .ui-dropdown .ui-dropdown-trigger .pi {
+        color: $active-font-color;
+      }
+    }
+    .ui-table .ui-table-thead > tr > th {
+      border: none;
+      background-color: $gradient-start;
+      color: $white;
+      text-align: left;
+      &:first {
+        border-radius: 5px 5px 0px 0px;
+      }
+    }
+    .ui-table .ui-table-tbody > tr {
+      color: $grey-500;
+    }
+    .ui-table .ui-table-tbody > tr > td {
+      border: none;
+    }
+    .ui-multiselect .ui-multiselect-trigger .pi {
+      color: $white;
+    }
+  }
+}
+.view-all-btn {
+  width: 5em;
+  border-radius: 25px;
+  color:  white;
+  background-color: $active-color;
+  padding: 3px 3px 3px 3px;
+  text-align: center;
+  font-size: 0.7em;
+  float: right;
+  cursor: pointer;
+  margin-right:10px;
+}
+.file-label {
+  display: inline-flex;
+  padding-left: 5px;
+  word-break: break-all;
+}
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}
+.blue {
+  color: blue;
+}
+
+.total-record-count {
+  width: 60%;
+  float: left;
+  padding: 0.5em 0;
+  display: flex;
+}
+.double-arrow{
+  font-size:1.5em;
+}
+.top-paddind-pt5em{
+  padding-top: 0.5em;
+}
+.margin-10px{
+  margin:10px;
+}
+.padding-5px{
+  padding:5px;
+}
+
+.flex-inline-display{
+  display:inline-flex;
+}
+.top-padding-2px{
+  padding-top: 2px;
+}
+
+/* For mobile phones: */
+@media only screen and (max-width: 400px) {
+.view-all-btn{
+  margin-top:10px;
+  margin-bottom:5px;
+}
+::ng-deep {
+  .search-document-table {
+    .ui-paginator-left-content{
+      width:100%;
+    }
+  }
+}
+}
+@media only screen and (min-width: 400px) and (max-width: 640px) {
+  .view-all-btn{
+    margin-top:28px;
+    margin-bottom:5px;
+  }
+  ::ng-deep {
+    .search-document-table {
+      .ui-paginator-left-content{
+        width:100%;
+      }
+    }
+  }
+  }

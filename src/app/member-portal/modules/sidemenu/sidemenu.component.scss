@@ -1,0 +1,37 @@
+// component css goes here
+@import "../../../../assets/custom-sass/variables.scss";
+
+::ng-deep {
+  .providerConfirmDialog{
+    .ui-dialog .ui-dialog-titlebar {
+      background: linear-gradient(to right, $gradient-start, 55%, $gradient-end);
+  }
+  }
+  .layout-container .ultima-menu {
+    width: 200px;
+    font-family: "Roboto", sans-serif;
+  }
+
+  .layout-container .ultima-menu li a {
+    font-size: 1em;
+    color: #7aafc2;
+    padding: 1em 1em 1em 1em;
+  }
+
+  .layout-container .ultima-menu li a:hover {
+    color: #0c4d64;
+    cursor: pointer;
+  }
+
+  .layout-container .ultima-menu li a i {
+    color: #7aafc2;
+  }
+}
+
+.submenu-label{
+  padding-right:0;
+}
+.menu-label{
+  display: inline-flex !important;
+  width:90% !important;
+}

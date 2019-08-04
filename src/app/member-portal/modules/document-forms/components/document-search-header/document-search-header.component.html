@@ -1,0 +1,23 @@
+<div class="ui-fluid">
+  <div class="ui-g-12 searchHeader">
+    <div class="ui-g-1 ui-sm-2 no-padding" *ngIf="showBackButton">
+      <p-button icon="pi pi-arrow-left" label="Back" title="Back" class="ui-button-rounded submitbtn backbutton" type="button"
+        (onClick)="searchText.value='';BackCliked()"></p-button>
+    </div>
+    <div class="ui-g-1 ui-sm-2" *ngIf="showBackButton"></div>
+    <div class="round-input-div" [ngClass]="{'ui-g-6 ui-sm-8':showBackButton,'ui-g-8 ui-sm-12':!showBackButton}">
+      <input type="text" class="round-input-element" maxlength="250" pInputText
+        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+        #searchText placeholder="Search your Documents / Forms" [(ngModel)]="searchtextValue" name="searchtext"
+        autocomplete="nope" (keypress)="SearchPressed($event,searchText.value);" />
+    </div>
+
+    <div class="ui-g-3 ui-sm-12 ui-md-4 zero-top-pad text-right-align">
+      <p-button label="Search" icon="pi pi-search" [disabled]="!searchText.value || searchText.value.trim()==''"
+        title="Search" class="ui-button-rounded submitbtn right-margin" type="button"
+        (onClick)="SerachFile(searchText.value)"></p-button>
+        <p-button label="Clear" title="Clear" class="ui-button-rounded cancelBtn" type="button"
+        (onClick)="searchText.value='';"></p-button>
+    </div>
+  </div>
+</div>

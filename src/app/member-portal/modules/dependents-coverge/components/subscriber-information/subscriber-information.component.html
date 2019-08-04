@@ -1,0 +1,199 @@
+<div>
+    <div class="ui-g-12 flex-container">
+        <div class="ui-g-12 ui-md-6">
+            <span class="error">{{errorText}}</span>
+        </div>
+    </div>
+    <p-card class="card">
+        <p-header>
+            Subscriber Information
+            <i class="fa fa-edit round-input-icon card-header" (click)="editSubscriberInfo()"></i>
+
+        </p-header>
+        <div class="card-content">
+            <div class="ui-g-12 ui-md-4 ui-sm-12 user-details">
+                <div class="sub-header">
+                    <span class="label ui-g-12">{{memberInfo?.FirstName}}'s Details</span>
+                </div>
+                <div>
+                    <span class="label ui-g-12 ui-md-6">
+                        <div>
+                            Member ID:
+                        </div>
+                        <div class="subsInfo">
+                            {{memberInfo?.ExternalMemberId}}
+                        </div>
+                    </span>
+                    <span class="label ui-g-12 ui-md-6" *ngIf="memberInfo?.GroupID && memberInfo?.GroupID>0">
+                        <div>
+                            Group ID:
+                        </div>
+                        <div class="subsInfo">
+                            {{memberInfo?.GroupID}}
+                        </div>
+                    </span>
+                </div>
+
+                <div>
+                    <!-- <span class="label ui-g-12 ui-md-6">
+                    <div>
+                        Sub-Group ID:
+                    </div>
+                    <div class="subsInfo">
+                        {{memberInfo?.SubGroupID}}
+                    </div>
+                </span> -->
+                    <span class="label ui-g-12 ui-md-6" *ngIf="memberInfo?.DivisionID && memberInfo?.DivisionID > 0">
+                        <div>
+                            Division ID:
+                        </div>
+                        <div class="subsInfo">
+                            {{memberInfo?.DivisionID}}
+                        </div>
+                    </span>
+                </div>
+                <div>
+                    <span class="label ui-g-12 ui-md-6">
+                        <div>
+                            Paid Through Date:
+                        </div>
+                        <div class="subsInfo">
+                            {{paidThroughDate|date:'longDate'}}
+                        </div>
+                    </span>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-4 ui-sm-12 personal-details">
+                <div class="sub-header">
+                    <span class="label ui-g-12">Personal Details</span>
+                </div>
+                <div>
+                    <span class="label ui-g-12 ui-md-7">
+                        <div>
+                            First Name:
+                        </div>
+                        <div class="subsInfo">
+                            {{memberInfo?.FirstName}}
+                        </div>
+                    </span>
+                    <span class="label ui-g-12 ui-md-5">
+                        <div>
+                            Last Name:
+                        </div>
+                        <div class="subsInfo">
+                            {{memberInfo?.LastName}}
+                        </div>
+                    </span>
+                </div>
+                <div>
+                    <span class="label ui-g-12 ui-md-7">
+                        <div>
+                            Date Of Birth:
+                        </div>
+                        <div class="subsInfo">
+                            {{memberInfo?.DateofBirth|date:'longDate'}}
+                        </div>
+
+                    </span>
+                    <span class="label ui-g-12 ui-md-5">
+                        <div>
+                            Gender:
+                        </div>
+                        <div class="subsInfo">
+                            {{memberInfo?.Gender}}
+                        </div>
+                    </span>
+                </div>
+
+                <div>
+                    <span class="label ui-g-12 ui-md-7">
+                        <div>
+                            Email:
+                        </div>
+                        <div class="subsInfo">
+                            {{memberInfo?.Email}}
+                        </div>
+                    </span>
+                </div>
+                <div>
+                    <span class="label ui-g-12 ui-md-5">
+                        <div>
+                            Phone:
+                        </div>
+                        <div class="subsInfo">
+                            {{memberInfo?.PhoneNumber}}
+                        </div>
+                    </span>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-4 ui-sm-12">
+                <div class="sub-header">
+                    <span class="label ui-g-12">Address</span>
+                </div>
+                <div>
+                    <span class="label ui-g-12 ui-md-7">
+                        <div>
+                            Address1:
+                        </div>
+                        <div class="subsInfo">
+                            {{memberInfo?.Address1}}
+                        </div>
+                    </span>
+                    <span class="label ui-g-12 ui-md-5">
+                        <div>
+                            Address2:
+                        </div>
+                        <div class="subsInfo">
+                            {{memberInfo?.Address2}}
+                        </div>
+                    </span>
+                </div>
+
+                <div>
+                    <span class="label ui-g-12 ui-md-7">
+                        <div>
+                            City:
+                        </div>
+                        <div class="subsInfo">
+                            {{memberInfo?.City}}
+                        </div>
+                    </span>
+                    <span class="label ui-g-12 ui-md-5">
+                        <div>
+                            State/Province:
+                        </div>
+                        <div class="subsInfo">
+                            {{stateName}}
+                        </div>
+                    </span>
+                </div>
+
+                <div>
+                    <span class="label ui-g-12">
+                        <div>
+                            Zip Code:
+                        </div>
+                        <div class="subsInfo" *ngIf="memberInfo?.ZipCode.length > 5; else ZipCode">
+                            {{memberInfo?.ZipCode.substring(0, 5)}}-{{memberInfo?.ZipCode.substring(5, 9)}}
+                        </div>
+                        <ng-template #ZipCode>
+                            <div class="subsInfo">
+                                {{memberInfo?.ZipCode.substring(0, 5)}}
+                            </div>
+                        </ng-template>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </p-card>
+    <app-edit-subscriber [openEditSubscriberPopUp]="editSubscriber" (cancelEditSubscriberEvent)="onClose($event)"
+        [subscriberInfo]="memberInfo" [states]="states"></app-edit-subscriber>
+</div>
+<p-confirmDialog #cd [style]="{width: '45vw'}" class="addConfirmDialog" key="ConfirmationForSubscriberDetails"
+    [closable]="false" [closeOnEscape]="false" acceptIcon="" rejectIcon="" acceptButtonStyleClass="ok"
+    rejectButtonStyleClass="cancel" [escape]="false">
+    <p-footer>
+        <!-- <button type="button" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>-->
+        <p-button class="ui-button-rounded submitbtn okbtn" label="OK" (click)="cd.accept()"></p-button>
+    </p-footer>
+</p-confirmDialog>

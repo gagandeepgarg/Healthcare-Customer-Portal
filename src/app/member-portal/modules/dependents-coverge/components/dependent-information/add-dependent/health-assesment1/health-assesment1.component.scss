@@ -1,0 +1,49 @@
+@import "../../../../../../../../assets/custom-sass/variables.scss";
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.round-input-div {
+  border: 1px solid #cccccc;
+  padding: 0.4em;
+}
+.cancelBtn {
+  float: left;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  font-size: 0.8em;
+
+}
+.submitbtn {
+  float: right;
+  font-size: 0.8em;
+}
+
+.quest{
+  text-align: left;
+  color:#808084;
+  font-weight: 500;
+}
+
+.questContainer{
+  max-height:25em;
+  overflow: auto;
+  text-align: left;
+}
+
+.questContainer div{
+  display:inline-flex;
+}
+@media screen and (max-width:1024px){
+  .questContainer{
+    max-height:15em;
+    overflow: auto;
+  }
+  .smallbuton{
+    width:50%;
+  }
+}

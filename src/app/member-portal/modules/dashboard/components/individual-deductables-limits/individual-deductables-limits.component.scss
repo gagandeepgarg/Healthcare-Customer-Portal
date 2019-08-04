@@ -1,0 +1,162 @@
+@import "../../../../../../assets/custom-sass/variables.scss";
+
+.pd-less {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  .padd-left-right-0{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .dropdownDep{
+    //margin-top:5%;
+    padding-left:0;
+    //padding-top:2%;
+  }
+
+::ng-deep{
+.indiDeductableCarousel{
+  .ui-widget-content{
+    border:0;
+  }
+  .ui-widget-header{
+    background-color: #ffffff;
+    color:black;
+    font-weight:2px;
+  }
+  .ui-carousel{
+      //width:82%;
+      justify-content: center;
+      //position: absolute;
+  }
+  .ui-carousel-header{
+    margin:0;
+    border:0;
+    border-bottom: 0.5px solid #ccc;
+    padding: 1.225em 1em !important;
+  }
+  .ui-carousel .ui-carousel-viewport .ui-carousel-items .ui-carousel-item{
+    margin:0;
+    border-right: 1px solid #ccc;
+  }
+  .ui-carousel .ui-carousel-viewport .ui-carousel-items .ui-carousel-item:last-child{
+    border-right: none;
+  }
+  .ui-carousel .ui-carousel-header .ui-carousel-page-links {
+    margin: 5px 0 0 0;
+    font-size: 8px;
+  }
+
+  .ui-carousel .ui-carousel-page-links .ui-carousel-page-link {
+    color: #848484;
+  }
+  .ui-carousel-button{
+    display:none;
+  }
+
+}
+
+.viewMSRAPageLinks{
+  .ui-carousel .ui-carousel-page-links {
+    display:none;
+  }
+}
+
+.viewLimitPageLinks{
+  .ui-carousel .ui-carousel-page-links {
+    display:none;
+  }
+}
+
+
+
+.indiLimitCarousel{
+  .ui-widget-content{
+    border:0;
+  }
+  .ui-widget-header{
+    background-color: #ffffff;
+    color:black;
+    font-weight:2px;
+  }
+  // .ui-carousel{
+  //     width:82%;
+  //     position: absolute;
+  // }
+  .ui-carousel-header{
+    margin:0;
+    border: 0;
+    padding: 1.225em 1em !important;
+    border-bottom: 0.5px solid #ccc;
+  }
+  .ui-carousel .ui-carousel-viewport{
+    padding: 2% 0 2% 0;
+  }
+  .ui-carousel .ui-carousel-viewport .ui-carousel-items .ui-carousel-item{
+    margin:0;
+  }
+  .ui-carousel .ui-carousel-header .ui-carousel-page-links {
+    margin: 5px 0 0 0;
+    font-size: 8px;
+  }
+  .ui-carousel .ui-carousel-page-links .ui-carousel-page-link {
+    color: #848484;
+  }
+  .ui-carousel-button{
+    display:none;
+  }
+
+}
+
+
+.indicard{
+  .ui-card-header{
+    background: linear-gradient(to right, $gradient-start, 55%, $gradient-end);
+    padding: 0.625em 1em;
+    font-size: 1em;
+  }
+}
+
+.limitSlider{
+  .ui-slider-handle{
+    display:none;
+  }
+  .ui-slider.ui-slider-horizontal{
+    height:0.75em;
+  }
+}
+
+}
+.oddlimit{
+  //background: linear-gradient(to right, $gradient-start, 55%, $gradient-end);
+  //background: linear-gradient(to right, #ccffff 0%, #66ffff 100%);
+  background: linear-gradient(to right, #99ccff 0%, #ccffff 100%);
+}
+
+.sliderMin{
+  float:left;
+  font-weight: bold
+}
+
+.sliderMax{
+  float:right;
+  font-weight: bold
+}
+.label{
+  text-align: center;
+}
+
+.accumulatorName{
+  color:#808084;
+  text-align: center;
+  padding-left: 3%;
+  padding-top: 13%;
+}
+
+.accumulatorType{
+  color:#808084;
+  text-align: center;
+  padding-left: 3%;
+  padding-top: 10%;
+}

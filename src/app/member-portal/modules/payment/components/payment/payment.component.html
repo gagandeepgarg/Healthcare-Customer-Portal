@@ -1,0 +1,286 @@
+<app-page-header [iconName]="iconName" [headerInnerHtml]="headerHtml"></app-page-header>
+<div class="ui-fluid header-freeze-padding">
+  <div class="flex-container">
+    <div class="ui-grid">
+      <div class="ui-grid-col-12 top-margin-3pc" >
+        <div class="ui-g-12 ui-md-2">
+          <!-- inital empty 2 columns -->
+        </div>
+        <!-- second 4 colum area -->
+        <div class="ui-g-12 ui-md-4 bordr-right ">
+          <div class="ui-md-12">
+            <div class="bottom-margin-3pc">
+              <span class="contact-header">Current Payment Method Details</span>
+            </div>
+            <div>
+              <img src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.ICON_PAYMENT_dollar}}" />&nbsp;&nbsp;<span
+                class="labels">Payment Method Type</span>
+              <div class="value" >{{paymentDetail?.PaymentMethodType ==='CC'?'Credit Card':'ACH Bank Draft'}}</div>
+            </div>
+            <div class="payment-detail-header-margin">
+              <img src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.ICON_PAYMENT_Account}}" />&nbsp;
+              <span class="labels" *ngIf="paymentDetail?.PaymentMethodType ==='CC'">Last 4 digits of the card</span>
+              <span class="labels" *ngIf="paymentDetail?.PaymentMethodType ==='ACH'">Last 4 digits of the account
+                number</span>
+              <div class="value">{{paymentDetail?.Last4Digits}}</div>
+            </div>
+            <br />
+            <div class="bottom-margin-3pc">
+              <span class="contact-header">Recent Transaction Details</span>
+            </div>
+            <div >
+              <img src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.ICON_PAYMENT_Date}}" />&nbsp;
+              <span class="labels">Last Transaction Date</span>
+              <div class="value"><span *ngIf="paymentDetail?.LastTransactionDate">{{paymentDetail?.LastTransactionDate | date}}</span>&nbsp;</div>
+            </div>
+            <div class="premium-header-margin">
+              <img src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.ICON_PAYMENT_dollar}}" />&nbsp;&nbsp;
+              <span class="labels">Last Premium Amount</span>
+              <div class="value">{{paymentDetail?.PremiumAmount | currency}}</div>
+
+            </div>
+          </div>
+        </div>
+        <!-- 3rd 4 colum area -->
+        <div class="ui-g-12 ui-md-5 get-inblock">
+          <div class="ui-g-12">
+            <span class="contact-header">Change Payment Method</span>
+            <span *ngIf="!show" class="addbtn" title="Add Payment">
+              <p-button class="ui-button-rounded submitbtn" label="+ Add New" type="button"
+                (click)="onAddNewPayment()">
+              </p-button>
+            </span>
+          </div>
+
+          <div *ngIf="show">
+            <div class="ui-g-12 ui-md-12 ui-lg-12 detail-container no-pad">
+              <div class="ui-g-12 ui-md-12 ui-lg-10 card-detail-wrapper no-pad">
+                <div class="ui-g-12 ui-md-12 ui-lg-12 no-pad">
+                  <div  class="ui-g-12 ui-md-5 Radio">
+                    <p-radioButton name="group" value="Credit Card" label="Credit Card" 
+                      [(ngModel)]="preSelectedMethod" (click)="PaymentMethodRadioClick('CC')">
+                    </p-radioButton>
+                  </div>
+                  <div class="ui-g-12 ui-md-6"> 
+                    <p-radioButton name="group" value="ACH Bank Draft" 
+                      label="ACH Bank Draft" [(ngModel)]="preSelectedMethod" (click)="PaymentMethodRadioClick('ACH')">
+                    </p-radioButton>
+                  </div>
+                </div>
+                <div *ngIf="preSelectedMethod==='ACH Bank Draft'">
+                  <form [formGroup]="paymentACHForm" (ngSubmit)="onSubmit()">
+                    <div class="ui-g-12 ui-md-12">
+                      <div class="ui-g-12 ui-inputgroup  round-input-div"
+                        [ngClass]="{'has-error': (paymentACHForm.get('RoutingNumber').errors && isSubmitted)}">
+                        <input type="number" class="round-input-element" formControlName="RoutingNumber" pInputText
+                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                          placeholder="Bank Routing Number *" ms-input-placeholder="Bank Routing Number *" maxlength="9"
+                          (input)="validateNumber($event)" />
+                      </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12">
+                      <div class="ui-g-12 ui-inputgroup  round-input-div"
+                        [ngClass]="{'has-error': (paymentACHForm.get('AccountNumber').errors && isSubmitted)}">
+                        <input type="number" class="round-input-element" pInputText placeholder="Bank Account Number *"
+                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                          formControlName="AccountNumber" ms-input-placeholder="Bank Account Number *" maxlength="15"
+                          (input)="validateNumber($event)" />
+                      </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12">
+                        <div class="ui-g-12 ui-inputgroup  round-input-div ddl"
+                          [ngClass]="{'has-error': (paymentACHForm.get('AccountType').errors && isSubmitted)}">
+                          <p-dropdown class="round-input-element ddlsize" [options]="accountType" formControlName="AccountType"
+                            ms-input-placeholder="Account Type *" placeholder="Account Type *">
+                          </p-dropdown>
+                        </div>
+                      </div>
+                    <div class="ui-g-12 ui-md-12">
+                      <div class="ui-g-12 ui-inputgroup  round-input-div"
+                        [ngClass]="{'has-error': (paymentACHForm.get('BankName').errors && isSubmitted)}">
+                        <input type="text" class="round-input-element" formControlName="BankName" pInputText
+                          placeholder="Bank Name *" ms-input-placeholder="Bank Name *" maxlength="50" />
+                      </div>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-12">
+                      <div class="ui-g-12 ui-inputgroup  round-input-div"
+                        [ngClass]="{'has-error': (paymentACHForm.get('FirstName').errors && isSubmitted)}">
+                        <input type="text" class="round-input-element" formControlName="FirstName" pInputText
+                          placeholder="First Name *" ms-input-placeholder="First Name *" maxlength="50" />
+                      </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12 bottom-margin-10">
+                      <div class="ui-g-12 ui-inputgroup  round-input-div"
+                        [ngClass]="{'has-error': (paymentACHForm.get('LastName').errors && isSubmitted)}">
+                        <input type="text" class="round-input-element" formControlName="LastName" pInputText
+                          placeholder="Last Name *" ms-input-placeholder="Last Name *" maxlength="50" />
+                      </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12 buttons">
+                      <div class="ui-g-6 ui-md-6">
+                        <p-button class="ui-button-rounded cancelBtn left-float" (click)="onCancel('Card')"
+                          label="Cancel" type="button">
+                        </p-button>
+                      </div>
+                      <div class="ui-g-6 ui-md-6">
+                        <p-button class="ui-button-rounded submitbtn right-float"  label="Submit" type="submit">
+                        </p-button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                <div *ngIf="preSelectedMethod==='Credit Card'">
+                  <form [formGroup]="paymentCardForm" (ngSubmit)="onSubmit()">
+                    <div class="ui-g-12 ui-md-12 no-pad pad-left-10">
+                    <img src="../../../../assets/images/icons/{{constants.ICON_PAYMENT_Visa}}" />&nbsp;<img
+                    src="../../../../assets/images/icons/{{constants.ICON_PAYMENT_Master}}" />&nbsp;<img
+                    src="../../../../assets/images/icons/{{constants.ICON_PAYMENT_American}}" />&nbsp;<img
+                    src="../../../../assets/images/icons/{{constants.ICON_PAYMENT_Discover}}" />
+                  </div>
+                  <div class="ui-g-12 ui-md-12">
+                      <div class="ui-g-12 ui-inputgroup  round-input-div"
+                        [ngClass]="{'has-error': (paymentCardForm.get('CardNumber').errors && isSubmitted) || invalidCardNumber}">
+                        <input type="text" class="round-input-element" formControlName="CardNumber" pInputText
+                          placeholder="Credit Card Number *" ms-input-placeholder="Credit Card Number *" maxlength="16"
+                          (input)="validateNumber($event); invalidCardNumber=false;" />
+                      </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12 no-padding">
+                      <div class="ui-g-12 ui-md-6 no-left-pad">
+                        <div class="ui-g-12 ui-inputgroup  round-input-div ddl"
+                          [ngClass]="{'has-error': (paymentCardForm.get('Month').errors && isSubmitted) || wrongCardMonth}">
+                          <p-dropdown class="round-input-element ddlsize" [options]="months" formControlName="Month"
+                            ms-input-placeholder="Month *" (onChange)="CardMonthChanged()" placeholder="Month *" maxlength="2">
+                          </p-dropdown>
+                        </div>
+                      </div>
+                      <div class="ui-g-12 ui-md-6">
+                        <div class="ui-g-12 ui-inputgroup  round-input-div"
+                          [ngClass]="{'has-error': (paymentCardForm.get('Year').errors && isSubmitted) || wrongCardYear}">
+                          <input type="number" class="round-input-element" pInputText formControlName="Year"
+                            placeholder="Year *" ms-input-placeholder="Year *" maxlength="4"
+                            (input)="validateNumber($event)" (input)=" limitYear($event)" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-6">
+                      <div class="ui-g-12 ui-inputgroup  round-input-div"
+                        [ngClass]="{'has-error': (paymentCardForm.get('Cvv').errors && isSubmitted)}">
+                        <input type="number" class="round-input-element" pInputText formControlName="Cvv"
+                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                          placeholder="Security Code/CVV2 *" ms-input-placeholder="Security Code *" maxlength="4"
+                          (input)="validateNumber($event)" />
+                      </div>
+                    </div>
+                    
+                    <div class="ui-g-12 ui-md-12">
+                      <p-checkbox class="example-margin" formControlName="AutoFill" (onChange)="onAutoFill($event)" name="sameMember">
+                      </p-checkbox>Same as Member information
+                    </div>
+                    <div class="ui-g-12 ui-md-12 no-pad">
+                      <div class="ui-g-12 ui-md-6">
+                        <div class="ui-g-12 ui-inputgroup  round-input-div"
+                          [ngClass]="{'has-error': (paymentCardForm.get('FirstName').errors && isSubmitted)}">
+                          <input type="text" class="round-input-element" pInputText formControlName="FirstName"
+                            placeholder="First Name *" ms-input-placeholder="First Name *" maxlength="50" />
+                        </div>
+                      </div>
+                      <div class="ui-g-12 ui-md-6">
+                        <div class="ui-g-12 ui-inputgroup  round-input-div"
+                          [ngClass]="{'has-error': (paymentCardForm.get('LastName').errors && isSubmitted)}">
+                          <input type="text" class="round-input-element" pInputText formControlName="LastName"
+                            placeholder="Last Name *" ms-input-placeholder="Last Name *" maxlength="50" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12 no-pad">
+                      <div class="ui-g-12 ui-md-6">
+                        <div class="ui-g-12 ui-inputgroup  round-input-div"
+                          [ngClass]="{'has-error': (paymentCardForm.get('Address').errors && isSubmitted)}">
+                          <input type="text" class="round-input-element" pInputText formControlName="Address"
+                            placeholder="Address *" ms-input-placeholder="Address *" maxlength="100" />
+                        </div>
+                      </div>
+                      <div class="ui-g-12 ui-md-6">
+                        <div class="ui-g-12 ui-inputgroup  round-input-div"
+                          [ngClass]="{'has-error': (paymentCardForm.get('City').errors && isSubmitted)}">
+                          <input type="text" class="round-input-element" pInputText placeholder="City *"
+                            formControlName="City" ms-input-placeholder="City *" maxlength="50" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 bottom-margin-10">
+                      <div class="ui-g-12 ui-inputgroup  round-input-div ddl"
+                        [ngClass]="{'has-error': (paymentCardForm.get('State').errors && isSubmitted)}">
+                        <p-dropdown class="round-input-element ddlsize" [options]="states" formControlName="State"
+                        optionLabel="label" placeholder="State *"  ms-input-placeholder="State *">
+                        </p-dropdown>
+                      </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-6">
+                      <div class="ui-g-12 ui-inputgroup  round-input-div"
+                        [ngClass]="{'has-error': (paymentCardForm.get('ZipCode').errors && isSubmitted) || invalidZipCode}">
+                        <input type="number" class="round-input-element" pInputText formControlName="ZipCode"
+                          placeholder="Zip Code *" ms-input-placeholder="Zip Code *" (input)=" limitZipCode($event)"
+                          maxlength="9" (input)="validateNumber($event)" />
+                      </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12 buttons">
+                      <div class="ui-g-6 ui-md-6">
+                        <p-button class="ui-button-rounded cancelBtn left-float" (click)="onCancel('ACH')"
+                          label="Cancel" type="button">
+                        </p-button>
+                      </div>
+                      <div class="ui-g-6 ui-md-6">
+                        <p-button class="ui-button-rounded submitbtn right-float" label="Submit" type="submit">
+                        </p-button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+            <p-dialog class="pDialog" [draggable]="false" [modal]="true" [closable]="false" [closeOnEscape]="false" [responsive]="true"
+    [(visible)]="confirmationDialogue" [style]="{width: '26%', margin:'0'}">
+    <p-header>
+        <div class="ui-g-12 flex-container pheaderCss">
+            <div class="ui-g-12 ui-md-12 top-padding-3px">
+                &nbsp;<span>Change Payment</span>
+            </div>
+            
+        </div>
+    </p-header>
+
+    <div class="width-100 text-center-align dialog-header-margin" >
+        <span> {{dialogHeader}}</span></div>
+
+    <p-footer [style]="{padding:'0'}">
+        <div class="ui-g-12 flex-container">
+            <div class="ui-g-12 ui-md-12">
+                <p-button label="No" class="ui-button-rounded cancelBtn left-float" type="button"
+                    (click)="onNo()"></p-button>
+                <p-button class="ui-button-rounded submitbtn right-float" (click)="onConform()"
+                    label="Yes" type="button">
+                </p-button>
+            </div>
+        </div>
+    </p-footer>
+
+</p-dialog>
+            <div class="ui-g-12">
+              <span class="error">{{errorText}}</span>
+            </div>
+
+          </div>
+          <div class="ui-g-12" *ngIf="successText">
+              <span class="sucessInfo" >{{successText}}</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

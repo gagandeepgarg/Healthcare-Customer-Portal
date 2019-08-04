@@ -1,0 +1,186 @@
+@import "../../../../../../assets/custom-sass/variables.scss";
+.view-all-btn:hover {
+  cursor: pointer;
+  color: #0E4668;
+}
+.wrap {
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
+.clickable-header {
+  cursor: pointer;
+}
+.category-header {
+  background-color: #0a4a7a;
+  color: white;
+  width: 80%;
+  padding-left: 0.5em;
+}
+//grid CSS
+
+.no-result-text {
+  text-align: center;
+}
+::ng-deep {
+  .categoryList {
+    .ui-multiselect-label-container {
+      display: none;
+    }
+    .ui-multiselect {
+      background: none;
+      display: inline;
+    }
+  }
+  .search-document-table {
+    .ui-multiselect-panel.ui-widget .ui-multiselect-item {
+      outline: none;
+    }
+    .ui-paginator .ui-paginator-pages a.ui-state-active {
+      background-color: $active-font-color;
+      color: $white;
+    }
+
+    .ui-state-active,
+    .ui-state-highlight {
+      background-color: #ffffff;
+      color: #808084;
+      outline: none;
+      &:focus {
+        outline: none;
+      }
+    }
+    p-multiselectitem,
+    li {
+      &:focus {
+        outline: none;
+      }
+    }
+    .ui-multiselect-panel.ui-widget .ui-multiselect-item.ui-state-highlight {
+      background-color: #ffffff;
+      color: #808084;
+      outline: none;
+      &:focus {
+        outline: none;
+      }
+    }
+    .ui-table .ui-paginator-bottom {
+      background: transparent;
+      border: none;
+      color: gray;
+      .ui-paginator-element,
+      .ui-dropdown .ui-dropdown-trigger .pi {
+        color: gray;
+      }
+    }
+    .ui-table .ui-table-thead > tr > th {
+      border: none;
+      background-color: $gradient-start;
+      color: $white;
+    }
+    .ui-table .ui-table-tbody > tr > td {
+      border: none;
+    }
+    .ui-multiselect .ui-multiselect-trigger .pi {
+      color: $white;
+    }
+  }
+}
+.view-all-btn {
+  width: 5em;
+  border-radius: 25px;
+  color:  white;
+  background-color: $active-color;
+  padding: 3px 3px 3px 3px;
+  text-align: center;
+  font-size: 0.7em;
+  float: right;
+  cursor: pointer;
+  margin-right:10px;
+}
+.fileList {
+  display: inline-flex;
+  cursor: pointer;
+}
+.fileList:hover {
+  text-decoration: underline;
+  text-decoration-color: $active-color;
+  color: $active-color;
+}
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}
+.blue {
+  color: blue;
+}
+.file-label {
+  display: inline-flex;
+  padding-left: 5px;
+  word-break: break-all;
+}
+.total-record-count {
+  width: 60%;
+  float: left;
+  padding: 0.5em 0;
+  display: flex;
+}
+.categoryheader {
+  width: 100%;
+  border-bottom: 1px solid lightgray;
+  font-size: 1.3em;
+  color: $active-font-color;
+  padding: 1% 0;
+  margin-bottom: 1%;
+}
+.double-arrow{
+  font-size:1.5em;
+}
+
+.top-margin-20px{
+  margin-top:20px;
+}
+.padding-5px{
+  padding:5px;
+}
+.top-paddind-pt5em{
+  padding-top: 0.5em;
+}
+.flex-inline-display{
+  display:inline-flex;
+}
+.top-padding-2px{
+  padding-top: 2px;
+}
+
+/* For mobile phones: */
+@media only screen and (max-width: 400px) {
+  .view-all-btn{
+    margin-top:10px;
+    margin-bottom:5px;
+  }
+  ::ng-deep {
+    .search-document-table {
+      .ui-paginator-left-content{
+        width:100%;
+      }
+    }
+  }
+}
+@media only screen and (min-width: 400px) and (max-width: 640px) {
+  .view-all-btn{
+    margin-top:28px;
+    margin-bottom:5px;
+  }
+  ::ng-deep {
+    .search-document-table {
+      .ui-paginator-left-content{
+        width:100%;
+      }
+    }
+  }
+  }

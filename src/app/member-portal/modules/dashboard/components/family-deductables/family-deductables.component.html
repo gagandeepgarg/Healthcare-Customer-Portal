@@ -1,0 +1,42 @@
+<div class="ui-g-12 ui-md-12" style="width:100%">
+  <p-carousel [value]="familyDeductables" headerText="Family Accumulators" numVisible="2" pageLinks="10"
+    class="familyDeductableCarousel" *ngIf="familyDeductables?.length>0" [ngClass]="{'viewFamilyPageLinks': (familyDeductables?.length<=2)}">
+
+    <ng-template let-familyDeductable pTemplate="item" let-ri="index">
+      <div>
+        <div style="padding-top: 4%;">
+          <!-- <span style="color:#808084;text-align: center;padding-left: 3%;padding-top: 10%;">{{familyDeductable?.AccumulatorType.toLowerCase().trim()=='deductible'?'MSRA':familyDeductable?.AccumulatorType}}</span> -->
+          <span style="color:#808084;text-align: center;padding-left: 3%;padding-top: 10%;">{{familyDeductable?.AccumulatorType}}</span>
+          <br/>
+          <span style="color:#808084;text-align: center;padding-left: 3%;padding-top: 13%;">{{familyDeductable.NetworkTier}} {{familyDeductable.AccumulatorName}}</span>
+        </div>
+        <div class="ui-g-12 ui-md-6">
+          <circle-progress [percent]="familyDeductable.RemainingPercentage" [outerStrokeWidth]="10"
+            [outerStrokeColor]="'#ccc'" [innerStrokeColor]="'#fbb03b'" [animation]="true" [animationDuration]="300" [renderOnClick]="false"
+            *ngIf="familyDeductable.index%2!=0">
+          </circle-progress>
+          <circle-progress [percent]="familyDeductable.RemainingPercentage" [outerStrokeWidth]="10"
+            [outerStrokeColor]="'#ccc'" [innerStrokeColor]="'#5EB3E4'" [animation]="true" [animationDuration]="300" [renderOnClick]="false"
+            *ngIf="familyDeductable.index%2==0">
+          </circle-progress>
+        </div>
+        <div class="ui-g-12 ui-md-6" style="margin: 6% 0 0 0;">
+          <div style="padding-bottom:5px;" ><label style="color:#808084;font-weight:bold">Maximum</label></div>
+          <div style="padding-bottom:10px;"><label style="font-weight:bold;font-size: 2em;">{{familyDeductable.MaxValue| currency}}</label>
+          </div>
+          <div style="color:#89C21F">Applied: {{familyDeductable.UsedValue| currency}}</div>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
+  <div class="ui-g-12 ui-md-12" style="padding-left:0;padding-right:0;" *ngIf="familyDeductables?.length==0">
+      <p-card class="indicard">
+        <p-header>
+          Family MSRA
+        </p-header>
+        <div style="width:100%;margin:10px;text-align: center;">
+          <span style="padding:5px;">No Family MSRA to be displayed</span>
+        </div>
+      </p-card>
+    </div>
+</div>

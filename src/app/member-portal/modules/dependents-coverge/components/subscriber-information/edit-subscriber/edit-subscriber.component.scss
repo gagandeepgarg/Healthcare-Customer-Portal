@@ -1,0 +1,65 @@
+@import "../../../../../../../assets/custom-sass/variables.scss";
+
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0;
+  }
+  
+  .round-input-div {
+    border: 1px solid #cccccc;
+    padding: 0.4em;
+  }
+
+  .cancelBtn {
+    float: left;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    font-size: 0.8em;
+    
+  }
+  .submitbtn {
+    float: right;
+    font-size: 0.8em;
+    
+  }
+  .right-content{
+    text-align: right;
+  }
+  .okbtn button{
+    color:#1D5883;
+    float:right;
+  }
+
+  .error-div{
+    padding:0;
+  }
+  ::ng-deep{
+    /* .editSubscriberDialog .ui-dialog {
+        overflow-y: auto;
+        max-height: 100%;
+    } */
+
+    .editSubscriberDialog .ui-dialog .ui-dialog-titlebar {
+          background-color: #41d0e0;
+      }
+  }
+
+  
+  .backgroundDiasbed{
+    background-color: #F0F0F2 !important;
+  }
+  .round-input-div input[type=text]:disabled {
+    background-color: #F0F0F2 !important;
+    border:none !important;
+    cursor:not-allowed !important;
+    color:black !important;
+    opacity: 1;
+  }
+.address-link{
+  padding-top: 35px;
+}
+  

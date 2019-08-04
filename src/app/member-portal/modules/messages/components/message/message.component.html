@@ -1,0 +1,168 @@
+<app-page-header [iconName]="iconName" [headerInnerHtml]="headerHtml"></app-page-header>
+<div class="ui-fluid header-freeze-padding">
+  <div class="msgs-content">
+    <div class="ui-g-2 msg-sidemenu">
+        <div class="categoryheaderLabel">Messages</div>
+        <div class="categorymenuitem">
+            <div class="categorymenuitemLabel wrap" (click)="categoryChanged('inbox','sidemenu')"
+             [ngClass]="{'active':selectedCategory=='inbox'}">
+             <img src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.ICON_MSG_Inbox_Default}}" />
+              Inbox <span *ngIf="inboxUnreadCount>0">({{inboxUnreadCount | number }})</span>
+            </div>
+          </div>
+          <div class="categorymenuitem">
+              <div class="categorymenuitemLabel wrap" (click)="categoryChanged('archive','sidemenu')"
+               [ngClass]="{'active':selectedCategory=='archive'}">
+               <img src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.ICON_MSG_Archive_Default}}" />
+                Archive <span *ngIf="archiveUnreadCount>0">({{archiveUnreadCount | number }})</span>
+              </div>
+            </div>
+    </div>
+    <!-- message section list -->
+    <div class="ui-g-10 msg-layout" >
+        <!-- messages header -->
+        <div class="message-header">
+            <!-- <span class="inbox-label">Inbox ({{inboxCount | number }})</span> -->
+            <span class="unread-label" (click)="SortByUnread()">unread
+                <span *ngIf="selectedCategory=='inbox'">({{inboxUnreadCount | number }})</span>
+                <span *ngIf="selectedCategory=='archive'">({{archiveUnreadCount | number }})</span>
+            </span>
+            <span class="total-label">Total 
+              <span *ngIf="selectedCategory=='inbox'">({{inboxCount | number }})</span>
+              <span *ngIf="selectedCategory=='archive'">({{archiveCount | number }})</span>
+            </span>
+            <span class="right-float">
+              <!-- delete messagefunctionality for future reference -->
+                <!-- <img src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.ICON_MSG_Delete}}"  
+                (click)="CummulativeDeleteClicked()" class="icon right-margin-15px"
+                title="Delete selected messages" /> -->
+                &nbsp;&nbsp;
+                <img *ngIf="selectedCategory=='inbox'" src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.ICON_MSG_Archive}}"
+                (click)="CummulativeArchiveClicked()" class="icon" title="Archive selected messages" />
+                <img *ngIf="selectedCategory=='archive'" src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.ICON_MSG_MoveToInbox}}"
+                  (click)="CummulativeMoveToInboxClicked()" class="icon" title="Move to Inbox" />
+            </span>
+        </div>
+        <!-- list of messages -->
+        <div class="ui-g-12" class="list-wrapper" #listmessageswrapper>
+          <div *ngIf="userMessages?.length<1" class="top-margin-10px text-center-align">
+            <span>No message is available to display</span>
+          </div>
+          <div class="ui-g message" *ngFor="let message of userMessages | paginate: { itemsPerPage: 10, currentPage: activePage, totalItems: selectedCategory=='inbox'?inboxCount:archiveCount  }; let i=index ">
+            <div class="ui-g-12 msg-inner-row" [ngClass]="{'selected':message.Checked}">
+              <div class="ui-g-1 ui-md-1 text-center-align">
+                    <span>
+                      <input type="checkbox" value="1" id="checkbox_{{message.MessageId}}" (change)="checkValue(message.MessageId)"  />
+                  </span>
+              </div>
+              <div class="ui-g-1 ui-md-1">
+                  <img *ngIf="message.IsRead" src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.ICON_MSG_Read}}"
+                  title="Read" />
+                <img *ngIf="!message.IsRead" src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.ICON_MSG_Unread}}"
+                   title="Unread" />
+              </div>
+              <div class="ui-g-6 ui-md-6 msg-text" (click)="openMessage(message.MessageId)" title="Click to view the message">
+                <!-- <p class="subject" [ngClass]="{'unread': !message.isRead}">Sub: {{message.subject}}</p> -->
+                <p class="block-with-text" [ngClass]="{'unread': !message.IsRead}">
+                <span> 
+                  {{message.Message}}</span></p>
+              </div>
+              <div class="ui-g-2 ui-md-2">
+                  <span *ngIf="todayDate==getDateString(message.MessageSentTime)">{{message.MessageSentTime | date : 'h:mm a'}}, Today</span>
+                  <span *ngIf="todayDate!=getDateString(message.MessageSentTime)">{{message.MessageSentTime | date : 'MMM dd, yyyy h:mm a'}}</span>
+              </div>
+              <div class="ui-g-2 ui-md-2" class="icon-padding">
+                <div class="indiviualIcon">
+                  <!-- delete messagefunctionality for future reference -->
+                  <!-- <img src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.ICON_MSG_Delete}}"  
+                  (click)="DeleteClicked(message.MessageId)" class="icon right-margin-15px"
+                  title="Delete" /> -->
+                  &nbsp;&nbsp;
+                  <img *ngIf="selectedCategory=='inbox'" src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.ICON_MSG_Archive}}"
+                  (click)="ArchiveClicked(message.MessageId)" class="icon" title="Archive" />
+                  <img *ngIf="selectedCategory=='archive'" src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.ICON_MSG_MoveToInbox}}"
+                  (click)="MoveToInboxClicked(message.MessageId)" class="icon" title="Move to Inbox" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- footer section  -->
+        <div class="message-footer"
+         *ngIf="(selectedCategory=='inbox' && inboxCount>10) || (selectedCategory=='archive' && archiveCount>10)" >
+         <div class="pagination-footer">
+            <div>
+              <button class="pagination-cudton-controls" (click)="pageChanged(1)" [disabled]="activePage==1"><i class="fa fa-angle-double-left" ></i>
+              </button>
+            </div>
+            <div>
+              <pagination-controls
+              previousLabel="&lt;" nextLabel="&gt;" [page]="activePage"
+              (pageChange)="pageChanged($event)" ></pagination-controls>
+            </div>
+            <div><button class="pagination-cudton-controls" (click)="pageChanged(lastPageNumber)" [disabled]="activePage==lastPageNumber">
+              <i class="fa fa-angle-double-right" ></i></button>
+            </div>
+          </div>
+        </div>
+  </div>
+</div>
+</div>
+
+
+<!-- Read full message popup -->
+<p-dialog class="pDialog readMsgDialog" [draggable]="false" [modal]="true" [closable]="false" [positionTop]="180" [focusOnShow]="false" [closeOnEscape]="false" [responsive]="true"
+  [(visible)]="viewMessagePopUp" [style]="{width: '60%', margin:'0'}">
+  <p-header>
+      <div class="ui-g-12 pheaderCss">
+          <div class="ui-g-10 ui-md-10 no-top-padding">
+              &nbsp;<span>View Message</span>
+          </div>
+          <div class="ui-g-2 ui-md-2 top-padding-3px" >
+              <span class="right-float"><i class="fa fa-times-circle pHeaderCloseIcon" (click)="closeMessage()"></i></span>
+          </div>
+      </div>
+  </p-header>
+
+  <div class="width-100">
+     <div class="ui-g-12 readable-msg-subject">
+        <span>From : {{readMessageSender}}</span>
+        <span class="right-float">Date: {{readMessageDate| date : 'MM/dd/yy h:mm:ss a'}}</span>
+      </div>
+     <div class="ui-g-12 readable-msg">
+        {{readMessageText}}
+       </div>
+  </div>
+</p-dialog>
+
+<!--confirm archive/delete/movetoinbox message popup -->
+<p-dialog class="pDialog readMsgDialog" [draggable]="false" [modal]="true" [closable]="false" [positionTop]="200" [focusOnShow]="false" [closeOnEscape]="false" [responsive]="true"
+  [(visible)]="deleteMessagePopUp" [style]="{width: '30%', margin:'0'}">
+  <p-header>
+      <div class="ui-g-12 pheaderCss">
+          <div class="ui-g-10 ui-md-10 no-top-padding">
+              &nbsp;<span>{{confirmationBtnLabel}} Message</span>
+          </div>
+          <div class="ui-g-2 ui-md-2 top-padding-3px" >
+              <span class="right-float"><i class="fa fa-times-circle pHeaderCloseIcon" (click)="closeDeleteMessage()"></i></span>
+          </div>
+      </div>
+  </p-header>
+
+  <div class="width-100">
+     {{confirmationText}}
+  </div>
+ <p-footer [style]="{padding:'0'}">
+    <div class="ui-g-12 ui-md-12" >
+        <p-button class="ui-button-rounded submitbtn right-float padding-right-5pc" (click)="DeleteMessage()"
+            label="{{confirmationBtnLabel}}" type="button">
+        </p-button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+
+<!-- //success/error msgs dialog -->
+<p-confirmDialog [style]="{width: '30vw'}" key="notificationDialog" [closable]="false"
+    [closeOnEscape]="false" acceptLabel="OK"  acceptIcon="" [rejectVisible]="false"
+    acceptButtonStyleClass="ok" rejectButtonStyleClass="cancel"></p-confirmDialog>

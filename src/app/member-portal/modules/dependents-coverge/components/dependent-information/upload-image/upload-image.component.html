@@ -1,0 +1,48 @@
+<div class="ui-fluid">
+  <div class="ui-g">
+    <p-dialog [(visible)]="display" [draggable]="false" [dismissableMask]="true" [modal]="true" [blockScroll]="true" [responsive]="true"
+      (onHide)="onCancel()" [closeOnEscape]="false"  class="uploadImageDialog" [focusOnShow]="false"
+      [style]="{width: '18%', height: '55%'}">
+      <p-header>
+        Upload Profile Picture
+      </p-header>
+
+   
+          <div class="ui-g-12 ui-md-12" *ngIf="errorText">
+            <span class="error" >{{errorText}}</span>
+          </div>
+          <div class="ui-g-12 ui-md-12" *ngIf="errorTextImg">
+              <span class="error">{{errorTextImg}}</span>
+            </div>
+            <div class="ui-g-12 ui-md-12" *ngIf="scuccessTest">
+                <span class="sucessInfo">{{scuccessTest}}</span>
+              </div>
+        <div class="ui-g-12 ui-md-12">
+          <img *ngIf="!url" class="profile-img" src="/assets/images/ProfileAvatar.jpg">
+          <img *ngIf="url" class="profile-img" [src]="url">
+            <div class="overview-imgpicker imgpicker-icon" (click)="fileInput.click()" title="click to upload image">
+                <div class="overview-pic">
+                  <input type="file" maxFileSize="2000000" #fileInput style="display: none" accept="image/*"
+                  (change)="processFile($event)">
+                  <span>
+                    Change Picture
+                    <i class="fa fa-edit img-picker"  ></i>
+                    <span style="font-size:12px;">Max size 2 MB</span>
+                  </span>
+                </div>
+              </div>
+      </div>
+        <p-footer>
+          <div class="ui-g-12">     
+              <p-button id="createAccount" label="Cancel" class="ui-button-rounded cancelBtn" type="button"
+                (click)="onCancel()"  style="float:left;"></p-button>
+            
+              <p-button class="ui-button-rounded submitbtn" label="Submit" type="submit" (click)="onSubmit()"
+              style="float:right;">
+              </p-button>
+          
+          </div>
+        </p-footer>
+    </p-dialog>
+  </div>
+</div>

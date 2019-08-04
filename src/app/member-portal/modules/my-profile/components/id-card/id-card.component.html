@@ -1,0 +1,112 @@
+<app-page-header [iconName]="iconName" [headerInnerHtml]="headerHtml"></app-page-header>
+<div class="ui-fluid header-freeze-padding">
+    <div class="ui-g card-margins">
+        <p-card class="card">
+          <p-header>
+              <div class="card-header">Digital ID Card</div>
+          </p-header>
+            <div class="data-table" >
+                <p-table [value]="cardsData" [columns]="cols" [paginator]="false">
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th *ngFor="let col of columns" class="wrap" style.width="{{col?.width}}">
+                                {{col.header}}
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-dependent let-ri="rowIndex">
+                        <tr>
+                            <td class="wrap">
+                                <img class='pic' src="/assets/images/profile.jpg">
+                                <!-- <img class='pic' *ngIf="!dependent.url" src="/assets/images/profile.jpg">
+                                     <img class='pic' *ngIf="dependent.url" [src]="dependent.url"> -->
+                            </td>
+                            <td class="blue-font-color wrap">{{dependent.FirstName}}</td>
+                            <td class="blue-font-color wrap">{{dependent.LastName}}</td>
+                            <td>{{dependent.DependentRelationship.toLowerCase().trim() =='self'?'Primary':'Dependent'}}</td>
+                            <td class="blue-font-color wrap">
+                              <div class="id-card-link inline-flex-display wrap" *ngIf="dependent.DigitalCardId && dependent.DigitalCardId!=0" title="Click to view or download the ID card" (click)="ViewIDCard(dependent.DigitalCardId)">
+                                    <div class="inline-flex-display height-50pc">
+                                        <img src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.IDCARD_DOWNLOAD}}" />
+                                    </div>
+                                    <div class="view-id-icon">
+                                        View ID Card
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="wrap requestbtn-td">
+                                <p-button class="ui-button-rounded submitbtn requestbtn right-float right-padding-5px"  *ngIf="dependent.DigitalCardId && dependent.DigitalCardId!=0" (click)="RequestPhysicalIDCard(dependent.DependentDetailId)"
+                                   title="Request Physical ID card" type="button"><span>Request Physical ID card</span>
+                                </p-button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </p-card>
+    </div>
+  </div>
+  <!-- id card viewer -->
+  <p-dialog class="pDialog" [draggable]="false" [modal]="true" [closable]="false" [positionTop]="160" [focusOnShow]="false" [closeOnEscape]="false" [responsive]="true"
+  [(visible)]="display" [style]="{width: '50%', margin:'0'}">
+  <p-header>
+      <div class="ui-g-12 flex-container pheaderCss">
+          <div class="ui-g-10 ui-md-10 top-padding-3px">
+              &nbsp;<span>Digital ID Card View</span>
+          </div>
+          <div class="ui-g-2 ui-md-2 top-padding-3px">
+              <span class="right-float"><i class="fa fa-times-circle pHeaderCloseIcon" (click)="cancel()"></i></span>
+          </div>
+      </div>
+  </p-header>
+
+  <div class="width-100 text-center-align">
+     <div class="pdf-container">
+            <embed [attr.src]="idCardURL" type="application/pdf" class="width-100 full-height" >
+        <!-- <ngx-extended-pdf-viewer [src]="idCardURL" class="width-100 full-height"[useBrowserLocale]="true" >
+        </ngx-extended-pdf-viewer> -->
+     </div>
+  </div>
+
+  <p-footer [style]="{padding:'0'}">
+      <div class="ui-g-12 flex-container no-padding">
+          <div class="ui-g-12 ui-md-12" >
+              <p-button class="ui-button-rounded submitbtn right-float padding-right-5pc" (click)="DownloadIDCard()"
+                  label="Download" type="button">
+              </p-button>
+          </div>
+      </div>
+  </p-footer>
+</p-dialog>
+
+<!-- physical id card request popup -->
+<p-dialog class="pDialog" [draggable]="false" [modal]="true" [closable]="false" [positionTop]="250" [focusOnShow]="false" [closeOnEscape]="false" [responsive]="true"
+  [(visible)]="physicalIdRequestFlag" [style]="{width: '25%', margin:'0'}">
+  <p-header>
+      <div class="ui-g-12 flex-container pheaderCss">
+          <div class="ui-g-10 ui-md-10 top-padding-3px" >
+              &nbsp;<span>Physical ID Card Request</span>
+          </div>
+          <div class="ui-g-2 ui-md-2 top-padding-3px">
+              <span class="right-float"><i class="fa fa-times-circle pHeaderCloseIcon" (click)="cancelRequest()"></i></span>
+          </div>
+      </div>
+  </p-header>
+
+  <div class="width-100 text-center-align margin-top-bottom-4pc">
+     <div>
+            Your request has been registered successfully
+     </div>
+  </div>
+
+  <p-footer [style]="{padding:'0'}">
+      <div class="ui-g-12 flex-container">
+          <div class="ui-g-12 ui-md-12">
+              <p-button class="ui-button-rounded submitbtn right-float padding-right-5pc" (click)="cancelRequest()"
+                  label="Ok" type="button">
+              </p-button>
+          </div>
+      </div>
+  </p-footer>
+
+</p-dialog>

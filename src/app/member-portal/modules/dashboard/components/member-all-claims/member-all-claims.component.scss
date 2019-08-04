@@ -1,0 +1,183 @@
+// component css goes here
+@import "../../../../../../assets/custom-sass/variables.scss";
+
+.header-right {
+  ::ng-deep {
+    p-button.inactive button {
+      background-color:white !important;
+      color: #4D4E4E !important;
+      border:1px solid #BBBDBF !important;
+    }
+    p-button.inactive button:hover {
+      background-color: white !important;
+      color: #4D4E4E !important;
+      border:1px solid #BBBDBF !important;
+    }
+    p-button.active button {
+      background-color: $gradient-start;
+      border:1px solid #BBBDBF !important;
+    }
+    p-button.active button:hover {
+      background-color: $gradient-start;
+      border:1px solid #BBBDBF !important;
+    }
+
+    p-button button {
+      font-size: 1em;
+    }
+  }
+}
+.wrap {
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
+.clickable-header {
+  cursor: pointer;
+}
+::ng-deep {
+  .EOBConfirmDialog{
+    .ui-dialog .ui-dialog-titlebar {
+      background: linear-gradient(to right, $gradient-start, 55%, $gradient-end);
+  }
+  }
+  .categoryList {
+    .ui-multiselect-label-container {
+      display: none;
+    }
+    .ui-multiselect {
+      background: none;
+      display: inline;
+    }
+  }
+  .claims-table {
+    padding: 0;
+    .ui-table .ui-paginator-top {
+      float: right;
+      background: transparent;
+      border: none;
+      color: gray;
+      .ui-paginator-element,
+      .ui-dropdown .ui-dropdown-trigger .pi {
+        color: gray;
+      }
+    }
+    .ui-table .ui-table-thead > tr > th {
+      border: none;
+      background-color: $gradient-start;
+      color: $white;
+      text-align: left;
+      font-size: 12px;
+    }
+    .ui-table .ui-paginator {
+      text-align: right;
+      background-color: transparent;
+
+      .ui-paginator-element,
+      .ui-dropdown .ui-dropdown-trigger .pi {
+        color: #0c76b4;
+      }
+    }
+
+    .ui-widget-header {
+      //background-color: #E3E7E8;
+      color: grey;
+      font-size: 1em;
+      border: none;
+    }
+    .ui-paginator .ui-paginator-pages a.ui-state-active {
+      background-color: #034C7B;
+      color: white;
+    }
+
+    .ui-table .ui-table-tbody > tr > td {
+      border: none;
+    }
+    .ui-multiselect .ui-multiselect-trigger .pi {
+      color: $white;
+    }
+  }
+}
+.view-all-btn {
+  width: 5em;
+  border-radius: 25px;
+  color: $white;
+  background-color: $active-color;
+  padding: 3px 3px 3px 3px;
+  text-align: center;
+  font-size: 0.7em;
+  float: right;
+  cursor: pointer;
+}
+
+.tdPadding {
+  word-break: break-word;
+}
+.processed {
+  color: green;
+  margin: 0;
+  font-size: 12px;
+}
+
+.Processing {
+  color: $active-color;
+  font-size: 12px;
+}
+
+.Processed {
+  color: green;
+  font-size: 12px;
+}
+.total-record-count {
+  width: 60%;
+  float: left;
+  padding: 0.5em 0;
+  display: flex;
+}
+
+.top-navbar {
+  width: 100%;
+  display: block;
+  height: 70px;
+  padding: 15px 10px 15px 0px;
+  margin-bottom: 0px;
+  border-radius: 5px 5px 0px 0px;
+}
+.claim-filters {
+  padding-bottom: 0px;
+  padding-top: 0px;
+  font-size: 12px;
+}
+.pd-less {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.table {
+  padding: 1.5em;
+  .table-border {
+    box-shadow: 0 0 10px -2px #ccc;
+    padding: 0;
+  }
+  .header {
+    padding-top: 6px;
+    display: inline-block;
+    .header-text {
+      width: 100%;
+      margin: 20px;
+      text-align: left;
+      font-weight: 500;
+    }
+    p-button{
+      font-size: 0.9em
+    }
+  }
+}
+.double-arrow{
+  font-size:1.5em;
+}
+.notification{
+  font-weight: bold;
+  color:$gradient-end;
+}

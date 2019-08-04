@@ -1,0 +1,67 @@
+<div class="ui-g-12 ui-lg-12 no-padding overlay-box">
+  <div class="card card-w-title db-top-right">
+    <div class="ui-g-12 header">
+      <div class="header-left">
+          <span class="text">Messages</span>
+          <span class="badge animated rubberBand" *ngIf="inboxUnreadCount>0">{{inboxUnreadCount}}</span>
+        </div>
+        <div class="header-right">
+            <div class="messages-total">
+                Total: <span class="count">{{inboxCount  | number }}</span>
+            </div>
+        </div>
+      </div>
+      <div class="ui-g-12 filters">
+        <!-- <div>
+            <span (click)="DeleteClicked()" title="Delete selected messages">
+              <img src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.ICON_MSG_Delete}}"  
+                class="imgIcon" />
+            </span>
+        </div> -->
+        <div>
+            <span (click)="ArchiveClicked()" title="Archive selected messages">
+              <img src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.ICON_MSG_Archive}}"
+                  class="imgIcon" />
+            </span>
+        </div>
+      </div>
+      <div class="ui-g-12 text-center-align" *ngIf="loadingMsgs">
+        <span >Loading...</span>
+        
+      </div>
+    <div class="ui-g-12 text-center-align" *ngIf="successText || errorText">
+      <span *ngIf="errorText" class="error">{{errorText}}</span>
+      <span *ngIf="successText" class="sucessInfo">{{successText}}</span>
+    </div>
+    
+    <div class="ui-g-12 messages">
+        <div *ngIf="userMessages?.length<1"  class="text-center-align top-margin-10px">
+            <span>No message is available to display</span>
+        </div>
+      <div class="ui-g message" *ngFor="let message of userMessages; let i=index">
+        <div class="ui-g-12 msg-inner-row" [ngClass]="{'selected':message.Checked}">
+          <div class="ui-g-12 ui-md-3 icon">
+              <span>
+                  <input type="checkbox" value="1" id="checkbox_{{i}}" (change)="checkValue(message.MessageId)"  />
+              </span>
+              <span class="left-padding-5px">
+                  <img *ngIf="message.IsRead" src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.ICON_MSG_Read}}"
+                  title="Read" />
+                <img *ngIf="!message.IsRead" src="{{constants.ImagePaths.RelativePathImagesForModules}}icons/{{constants.ICON_MSG_Unread}}"
+                   title="Unread" />
+            </span>
+          </div>
+          <div class="ui-g-12 ui-md-9 text" (click)="openMessage(message.MessageId)" title="Click to view the message">
+            <!-- <p class="subject"  [ngClass]="{'unread': !message.isRead}">Sub: {{message.subject}}</p> -->
+            <p class="block-with-text" [ngClass]="{'unread': !message.IsRead}">
+            <span> 
+              {{message.Message}}</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui-g-12 messages-footer">
+        <div class="view-all-btn" (click)="viewAllClicked()">View All</div>
+    </div>
+  </div>
+</div>

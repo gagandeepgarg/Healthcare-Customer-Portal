@@ -1,0 +1,75 @@
+<app-page-header [iconName]="iconName" [headerInnerHtml]="headerHtml"></app-page-header>
+<div class="ui-fluid header-freeze-padding">
+    <form [formGroup]="securityQuestionForm" (ngSubmit)="onSubmit()">
+  <!-- first question -->
+    <div class="ui-g-12 flex-container top-margin">
+      <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-12 ui-inputgroup  round-input-div">
+          <span class="ui-inputgroup-addon" style="border:none;background:transparent;"><i
+              class="fa fa-lock round-input-icon"></i></span>
+          <p-dropdown class="round-input-element" [options]="questions1" formControlName="question1"
+            (onChange)="filterQuestions1()" placeholder="Select a Question"></p-dropdown>
+        </div>
+        <div class="ui-g-12 ui-sm-12 ui-md-12 ui-inputgroup  round-input-div top-margin"
+          [ngClass]="{'has-error':isSubmitted && answer1Error}">
+          <input type="text" maxlength="100" name="answer1" class="round-input-element" formControlName="answer1"
+            pInputText placeholder="Answer *" (input)="validateField($event,1)" />
+        </div>
+      </div>
+    </div>
+    <!-- second question -->
+    <div class="ui-g-12 flex-container top-margin-2pc">
+      <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-12 ui-inputgroup  round-input-div">
+          <span class="ui-inputgroup-addon" style="border:none;background:transparent;"><i
+              class="fa fa-lock round-input-icon"></i></span>
+          <p-dropdown class="round-input-element" [options]="questions2" formControlName="question2"
+            (onChange)="filterQuestions2()" placeholder="Select a Question"></p-dropdown>
+        </div>
+        <div class="ui-g-12 ui-sm-12 ui-md-12 ui-inputgroup  round-input-div top-margin"
+          [ngClass]="{'has-error':isSubmitted && answer2Error }">
+          <input type="text" maxlength="100" name="answer2" class="round-input-element" formControlName="answer2"
+            pInputText placeholder="Answer *" (input)="validateField($event,2)" />
+        </div>
+      </div>
+    </div>
+    <!-- third question -->
+    <div class="ui-g-12 flex-container top-margin-2pc">
+      <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-12 ui-inputgroup  round-input-div">
+          <span class="ui-inputgroup-addon" style="border:none;background:transparent;"><i
+              class="fa fa-lock round-input-icon"></i></span>
+          <p-dropdown class="round-input-element" [options]="questions3" formControlName="question3"
+            (onChange)="filterQuestions3()" placeholder="Select a Question"></p-dropdown>
+        </div>
+        <div class="ui-g-12 ui-sm-12 ui-md-12 ui-inputgroup  round-input-div top-margin"
+          [ngClass]="{'has-error':isSubmitted && answer3Error}">
+          <input type="text" maxlength="100" name="answer3" class="round-input-element" formControlName="answer3"
+            pInputText placeholder="Answer *" (input)="validateField($event,3)" />
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-g-12 flex-container">
+      <div class="ui-g-12 ui-md-6">
+        <span class="error">{{errorText}}</span>
+      </div>
+    </div>
+    <div class="ui-g-12 flex-container">
+      <div class="ui-g-12  ui-md-6">
+        <hr />
+      </div>
+    </div>
+    <div class="ui-g-12 flex-container">
+      <div class="ui-g-12 ui-md-3">
+        <p-button label="Cancel" class="ui-button-rounded cancelBtn" type="button" style="float:left;"
+          (click)="NavigateToDashboard()"></p-button>
+      </div>
+      <div class="ui-g-12 ui-md-3">
+        <p-button class="ui-button-rounded submitbtn" (click)="onSubmit()" style="float:right;" label="Submit"
+          type="button">
+        </p-button>
+      </div>
+    </div>
+  </form>
+  </div>

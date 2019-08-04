@@ -1,0 +1,55 @@
+<div class="ui-fluid">
+  <div class="ui-g">
+    <p-dialog [(visible)]="display" [draggable]="false" [dismissableMask]="true" [modal]="true" [blockScroll]="true"
+      [responsive]="true" (onHide)="onCancel()" [closeOnEscape]="false" [positionTop]="10" [contentStyle]="{'overflow-y': 'auto','text-align':'center',
+      'max-height': '100%','overflow':'visible'}" class="addDependentDialog" [focusOnShow]="false"
+      [style]="{width: '67%'}">
+      <p-header>
+        Add New Dependent
+      </p-header>
+
+      <div class="ui-fluid">
+        <div>
+          <div class="steps">
+            <!--  <p-steps (click)="stepsdisplay($event)" [(activeIndex)]="activeIndex" [readonly]="true" [model]="items"
+              styleClass="steps-custom"></p-steps> -->
+            <p-steps [(activeIndex)]="activeIndex" [readonly]="true" [model]="items" styleClass="steps-custom">
+            </p-steps>
+          </div>
+          <div class="roler-container">
+            <hr class="initial-roler" />
+            <hr class="roler2 tab-menu" [ngClass]="{'hr-active':activeIndex === 0}" />
+            <hr class="roler3 tab-menu" [ngClass]="{'hr-active':activeIndex === 1}" />
+            <hr class="roler4 tab-menu" [ngClass]="{'hr-active':activeIndex === 2}" />
+            <hr class="roler5" />
+          </div>
+        </div>
+        <div [ngSwitch]="activeIndex">
+          <p *ngSwitchCase="0">
+            <app-dependent-details (childevent)="DependentDetails($event)" [dependentsInfo]="dependentsInfo"
+              [isSpouseExits]="isSpouseExits" [backClicked]="backBtnClicked">
+            </app-dependent-details>
+          </p>
+          <p *ngSwitchCase="1">
+            <app-health-assesment1 (childevent)="HealthAssesment1($event)" (backEvent)="backTo($event)"
+              [questions]="questions">
+            </app-health-assesment1>
+          </p>
+          <p *ngSwitchCase="2">
+            <app-health-assesment2 (childevent)="healthAssesment2($event)" (backEvent)="backTo($event)"
+              [questions]="questions">
+            </app-health-assesment2>
+          </p>
+          <p *ngSwitchCase="false">
+          </p>
+          <p *ngSwitchDefault>
+          </p>
+        </div>
+      </div>
+    </p-dialog>
+  </div>
+</div>
+<p-confirmDialog [style]="{width: '45vw'}" class="addConfirmDialog" key="addConfirmation" [closable]="false"
+  [closeOnEscape]="false" acceptIcon="" rejectIcon="" acceptButtonStyleClass="ok" rejectButtonStyleClass="cancel"
+  [escape]="false">
+</p-confirmDialog>

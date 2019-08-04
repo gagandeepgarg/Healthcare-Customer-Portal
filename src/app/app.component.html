@@ -1,0 +1,103 @@
+<div class="layout-wrapper" [ngClass]="{'layout-compact':layoutCompact}" (click)="onLayoutClick()">
+  <div #layoutContainer class="layout-container" [ngClass]="{'menu-layout-static': !isOverlay(),
+          'menu-layout-overlay': isOverlay(),
+          'layout-menu-overlay-active': !!overlayMenuActive,
+          'menu-layout-horizontal': isHorizontal(),
+          'menu-layout-slim': isSlim(),
+          'layout-menu-static-inactive': staticMenuDesktopInactive,
+          'layout-menu-static-active': staticMenuMobileActive}">
+
+    <app-topnav *ngIf="checkIfRouteLogin()"></app-topnav>
+    <div class="layout-menu" [ngClass]="{'layout-menu-dark':darkMenu}" (click)="onMenuClick($event)">
+      <app-sidemenu *ngIf="coreDataService.checkIfRouteLoginOrRegistration()"></app-sidemenu>
+    </div>
+
+    <div class="layout-main" [ngStyle]="{'padding-top': checkIfRouteLogin() ? '70px' : '0px'}"
+      [ngClass]="{'slide-right':rotateMenuButton && !isMobile(), 'slide-left':!rotateMenuButton  && !isMobile() }">
+      <div class="layout-content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="layout-spinner" *ngIf="loadinSpinnerService.loading"></div>
+
+
+<!-- Read full message popup -->
+<p-dialog class="pDialog readMsgDialog" [draggable]="false" [modal]="true" [closable]="false" [positionTop]="180" [focusOnShow]="false"
+  [closeOnEscape]="false" [responsive]="true" [(visible)]="readMessagePopUp" [style]="{width: '60%', margin:'0'}">
+  <p-header>
+    <div class="ui-g-12 pheaderCss">
+      <div class="ui-g-10 ui-md-10">
+        &nbsp;<span>View Message</span>
+      </div>
+      <div class="ui-g-2 ui-md-2" style="padding-top:3px;">
+        <span style="float:right;"><i class="fa fa-times-circle pHeaderCloseIcon"
+            (click)="closeMessageReadPopUP()"></i></span>
+      </div>
+    </div>
+  </p-header>
+
+  <div style="width:100%;">
+    <!-- <div class="ui-g-12 readable-msg-subject">
+        Subject: {{readMessageSubject}}
+     </div> -->
+    <div class="ui-g-12 readable-msg-subject">
+      <span>From : {{readMessageSender}}</span>
+      <span style="float:right;">Date: {{readMessageDate| date : 'MM/dd/yy h:mm:ss a'}}</span>
+    </div>
+    <div class="ui-g-12 readable-msg">
+      {{readMessageText}}
+    </div>
+  </div>
+</p-dialog>
+
+<!--confirm archive/delete/movetoinbox message popup -->
+<p-dialog class="pDialog readMsgDialog" [draggable]="false" [modal]="true" [closable]="false" [positionTop]="200" [focusOnShow]="false"
+  [closeOnEscape]="false" [responsive]="true" [(visible)]="ConfirmationMessagePopUp"
+  [style]="{width: '30%', margin:'0'}">
+  <p-header>
+    <div class="ui-g-12 pheaderCss">
+      <div class="ui-g-10 ui-md-10">
+        &nbsp;<span>{{confirmationBtnLabel}} Message</span>
+      </div>
+      <div class="ui-g-2 ui-md-2" style="padding-top:3px;">
+        <span style="float:right;"><i class="fa fa-times-circle pHeaderCloseIcon"
+            (click)="closeConfirmationMessagePopUp()"></i></span>
+      </div>
+    </div>
+  </p-header>
+
+  <div style="width:100%;">
+    {{confirmationText}}
+  </div>
+  <p-footer [style]="{padding:'0'}">
+    <div class="ui-g-12 ui-md-12">
+      <p-button class="ui-button-rounded submitbtn" (click)="ConfirmDeleteArchiveMessage()"
+        style="float:right;padding-right: 5%;" label="{{confirmationBtnLabel}}" type="button">
+      </p-button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+<!-- session expiring warning popup -->
+<p-dialog header="Session Warning" [draggable]="false" [(visible)]="sessionTimeoutPopUp" [modal]="true" [closeOnEscape]="false"
+  [responsive]="true" [blockScroll]="true" [style]="{width: '30%', margin:'0'}" [dismissableMask]="true"
+  [closable]="false" class="sesssionTimePopUp">
+  Your session will expire in
+  {{(_timeOutMinutes !== 0 ? + _timeOutMinutes+' Minute'+(_timeOutMinutes > 1 ? 's ' : ' ') : '') + _timeOutSeconds+' Seconds'}}.
+  <p-footer [style]="{padding:'0'}">
+    <div class="ui-g-12 ui-md-12">
+      <p-button class="ui-button-rounded submitbtn loggedIn" (click)="onKeepLoginIn()" label="Keep me logged in"
+        type="button"> </p-button>
+      <p-button class="ui-button-rounded cancelBtn loggedOut" (click)="onLogOut()" label="Log Out" type="button">
+      </p-button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+
+<!-- provider request popup -->
+<p-confirmDialog class="providerConfirmDialog" [style]="{width: '38vw'}" key="providerConfirmation" [closable]="false"
+    [closeOnEscape]="false" acceptLabel="OK" rejectLabel="Cancel" acceptIcon="" rejectIcon=""
+    acceptButtonStyleClass="ok" rejectButtonStyleClass="cancel"></p-confirmDialog>

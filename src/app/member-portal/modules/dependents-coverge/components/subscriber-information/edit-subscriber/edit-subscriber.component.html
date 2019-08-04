@@ -1,0 +1,197 @@
+<div class="ui-fluid">
+  <div class="ui-g">
+    <p-dialog [(visible)]="openEditSubscriberPopUp" [draggable]="false" [closeOnEscape]="false" [dismissableMask]="true" [modal]="true"
+      [blockScroll]="true" [responsive]="true" [style]="{width: '55%', height: '55%'}" (onHide)="onCancel()"
+      [positionTop]="150" [focusOnShow]="false" [contentStyle]="{'overflow':'visible', 'overflow-y': 'auto',
+      'max-height': '75%'}" class="editSubscriberDialog">
+      <p-header>
+        Edit Subscriber Information
+      </p-header>
+
+
+      <form [formGroup]="editSubscriberForm" (ngSubmit)="saveSubscriberInfo()">
+        <p-accordion class="myAccordian">
+          <p-accordionTab header="Group Details" [selected]="true">
+            <div class="ui-g flex-container">
+              <div class="ui-g-12 ui-md-6">
+                <label>Member ID:</label>
+                <div class="ui-g-12 ui-inputgroup  round-input-div" [ngClass]="{'backgroundDiasbed': memberId.disabled}">
+                  <input pInputText type="text" #memberId class="round-input-element" formControlName="memberId" />
+                </div>
+              </div>
+
+              <div class="ui-g-12 ui-md-6">
+                <label>Group ID:</label>
+                <div class="ui-g-12 ui-inputgroup  round-input-div"  [ngClass]="{'backgroundDiasbed': groupID.disabled}">
+                  <input pInputText type="text" class="round-input-element" formControlName="groupID" #groupID/>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g flex-container">
+              <!-- <div class="ui-g-12 ui-md-6">
+                <label>Sub-Group ID:</label>
+                <div class="ui-g-12 ui-inputgroup  round-input-div" [ngClass]="{'backgroundDiasbed': subGroupID.disabled}">
+                  <input pInputText type="text" class="round-input-element" formControlName="subGroupID" #subGroupID/>
+                </div>
+              </div> -->
+              <div class="ui-g-12 ui-md-6">
+                <label>Division ID:</label>
+                <div class="ui-g-12 ui-inputgroup  round-input-div"  [ngClass]="{'backgroundDiasbed': divisionID.disabled}">
+                  <input pInputText type="text" class="round-input-element" formControlName="divisionID" #divisionID/>
+                </div>
+              </div>
+              <div class="ui-g-12 ui-md-6">
+                  <label>Paid Through Date:</label>
+                  <div class="ui-g-12 ui-inputgroup  round-input-div" [ngClass]="{'backgroundDiasbed': paidThroughDate.disabled}">
+                    <input pInputText type="text" class="round-input-element" formControlName="paidThroughDate" #paidThroughDate/>
+                  </div>
+                </div>
+            </div>
+          </p-accordionTab>
+          <br>
+          <p-accordionTab header="Personal Details" [selected]="true">
+            <div class="ui-g flex-container">
+              <div class="ui-g-12 ui-md-6">
+                <label>First Name:</label>
+                <div class="ui-g-12 ui-inputgroup  round-input-div" [ngClass]="{'backgroundDiasbed': firstName.disabled}">
+                  <input pInputText type="text" class="round-input-element" formControlName="firstName" #firstName/>
+                </div>
+              </div>
+              <div class="ui-g-12 ui-md-6">
+                <label>Last Name:</label>
+                <div class="ui-g-12 ui-inputgroup  round-input-div" [ngClass]="{'backgroundDiasbed': lastName.disabled}">
+                  <input pInputText type="text" class="round-input-element" formControlName="lastName" #lastName/>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g flex-container">
+              <div class="ui-g-12 ui-md-6">
+                <label>DOB:</label>
+                <div class="ui-g-12 ui-inputgroup  round-input-div" [ngClass]="{'backgroundDiasbed': dateofBirth.disabled}">
+                  <input pInputText type="text" class="round-input-element" formControlName="dateofBirth" #dateofBirth/>
+                </div>
+              </div>
+              <div class="ui-g-12 ui-md-6">
+                <label>Gender:</label>
+                <div class="ui-g-12 ui-inputgroup  round-input-div" [ngClass]="{'backgroundDiasbed': gender.disabled}">
+                  <input pInputText type="text" class="round-input-element" formControlName="gender" #gender/>
+                </div>
+              </div>
+            </div>
+            <div class="ui-g flex-container">
+              <div class="ui-g-12 ui-md-6">
+                <label>Email:</label>
+                <div class="ui-g-12 ui-inputgroup  round-input-div"
+                  [ngClass]="{'has-error': ( isSubmitted && editSubscriberForm.get('email').errors)}">
+                  <input pInputText type="text" class="round-input-element" formControlName="email" />
+                </div>
+              </div>
+              <div class="ui-g-12 ui-md-6">
+                <label>Phone:</label>
+                <div class="ui-g-12 ui-inputgroup  round-input-div"
+                  [ngClass]="{'has-error': ( isSubmitted && editSubscriberForm.get('phone').errors)}">
+                  <input pInputText type="text" class="round-input-element" formControlName="phone" maxlength="10"
+                    (keydown)="validateNumber($event)" />
+                </div>
+              </div>
+            </div>
+          </p-accordionTab>
+          <br>
+          <p-accordionTab header="Address" [selected]="true">
+            <div class="ui-g flex-container">
+              <div class="ui-g-12 ui-md-6">
+                <label>Address1:</label>
+                <div class="ui-g-12 ui-inputgroup  round-input-div"
+                  [ngClass]="{'has-error': ( isSubmitted && editSubscriberForm.get('address1').errors)}">
+                  <input pInputText type="text" class="round-input-element" formControlName="address1" />
+                </div>
+              </div>
+              <div class="ui-g-12 ui-md-6">
+                <label>Address2:</label>
+                <div class="ui-g-12 ui-inputgroup  round-input-div"
+                  [ngClass]="{'has-error': ( isSubmitted && editSubscriberForm.get('address2').errors)}">
+                  <input pInputText type="text" class="round-input-element" formControlName="address2" />
+                </div>
+              </div>
+            </div>
+
+            <div class="ui-g flex-container">
+              <div class="ui-g-12 ui-md-6">
+                <label>City:</label>
+                <div class="ui-g-12 ui-inputgroup  round-input-div"
+                  [ngClass]="{'has-error': ( isSubmitted && editSubscriberForm.get('city').errors)}">
+                  <input pInputText type="text" class="round-input-element" formControlName="city" />
+                </div>
+              </div>
+              <div class="ui-g-12 ui-md-6">
+                <label>State/Province:</label>
+                <div class="ui-g-12 ui-inputgroup  round-input-div"
+                  [ngClass]="{'has-error': ( isSubmitted && editSubscriberForm.get('stateProvince').errors)}">
+                  <p-dropdown class="round-input-element state" [options]="states" formControlName="stateProvince"
+                    placeholder="Select State/Province" optionLabel="label" [filter]="true" filterBy="label" [resetFilterOnHide]="true">
+                  </p-dropdown>
+                </div>
+              </div>
+            </div>
+            <div class="ui-g flex-container">
+              <div class="ui-g-12 ui-md-6">
+                <label>Zip Code:</label>
+                <div class="ui-g-12 ui-inputgroup  round-input-div"
+                  [ngClass]="{'has-error': ( isSubmitted && editSubscriberForm.get('zipCode').errors)}">
+                  <input pInputText type="text" class="round-input-element" formControlName="zipCode" maxlength="10"
+                  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />
+                </div>
+              </div>
+              <div class="ui-g-12 ui-md-6 right-content address-link">
+                <span><a (click)="validateAddress()">Verify Address</a></span>
+              </div>
+            </div>
+          </p-accordionTab>
+          <br>
+        </p-accordion>
+
+
+          <div class="ui-g-12 error-div">
+            &nbsp;
+            <span class="error" *ngIf="errorText">{{errorText}}</span>
+            <span class="error"
+              *ngIf="(!errorText && isSubmitted && editSubscriberForm.controls['email'].errors?.Invalid_Email && editSubscriberForm.controls['phone'].errors?.Invalid_Phone && editSubscriberForm.controls['zipCode'].errors?.Invalid_ZipCode) ;else ShowErrors">Please
+              enter a valid Email ID, Zip Code and Phone Number</span>
+            <ng-template #ShowErrors>
+              <span class="error"
+                *ngIf="(!errorText && isSubmitted && editSubscriberForm.controls['email'].errors?.Invalid_Email && editSubscriberForm.controls['zipCode'].errors?.Invalid_ZipCode)">Please
+                enter a valid Email ID and Zip Code</span>
+              <span class="error"
+                *ngIf="(!errorText && isSubmitted && editSubscriberForm.controls['email'].errors?.Invalid_Email && editSubscriberForm.controls['phone'].errors?.Invalid_Phone)">Please
+                enter a valid Email ID and Phone Number</span>
+              <span class="error"
+                *ngIf="(!errorText && isSubmitted && editSubscriberForm.controls['zipCode'].errors?.Invalid_ZipCode && editSubscriberForm.controls['phone'].errors?.Invalid_Phone)">Please
+                enter a valid Zip Code and Phone Number</span>
+              <span class="error"
+                *ngIf="(!errorText && isSubmitted && editSubscriberForm.controls['email'].errors?.Invalid_Email && !editSubscriberForm.controls['zipCode'].errors?.Invalid_ZipCode && !editSubscriberForm.controls['phone'].errors?.Invalid_Phone)">{{constants.INVALID_EMAIL}}</span>
+              <span class="error"
+                *ngIf="(!errorText && isSubmitted && editSubscriberForm.controls['zipCode'].errors?.Invalid_ZipCode && !editSubscriberForm.controls['email'].errors?.Invalid_Email && !editSubscriberForm.controls['phone'].errors?.Invalid_Phone)">{{constants.INVALID_ZIPCODE}}</span>
+              <span class="error"
+                *ngIf="(!errorText && isSubmitted && editSubscriberForm.controls['phone'].errors?.Invalid_Phone && !editSubscriberForm.controls['zipCode'].errors?.Invalid_ZipCode && !editSubscriberForm.controls['email'].errors?.Invalid_Email)">{{constants.INVALID_PHONENUMBER}}</span>
+            </ng-template>
+          </div>
+    
+
+        <p-footer>
+          <div class="ui-g-12">
+            <div class="ui-g-6 ui-md-6">
+              <p-button id="createAccount" label="Cancel" class="ui-button-rounded cancelBtn" type="button"
+                (click)="onCancel()"></p-button>
+            </div>
+            <div class="ui-g-6 ui-md-6">
+              <p-button class="ui-button-rounded submitbtn okbtn" label="Submit" type="submit">
+              </p-button>
+            </div>
+          </div>
+        </p-footer>
+      </form>
+    </p-dialog>
+  </div>
+</div>

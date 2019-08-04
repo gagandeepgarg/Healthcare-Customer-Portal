@@ -1,0 +1,73 @@
+<!--component html goes here -->
+
+<div class="data-table">
+
+    <p-table [columns]="columns" [value]="items" [(selection)]="selectedRow" [paginator]="false" [rows]="rows"
+        [responsive]="true" scrollHeight="200px">
+
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" style.width="{{col?.width}}" class="table-header-align">
+                    {{col.header}}
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-item>
+            <tr [pSelectableRow]="rowData">
+                <td class="tdPadding">
+                    {{item.ClaimsNumber}}<br />
+                    <span [ngClass]="{'Processing':item.ClaimsStatusDescription=='Processing',
+                    'Processed':item.ClaimsStatusDescription === 'Processed'}">
+                        {{'('+item.ClaimsStatusDescription+')'}}</span>
+                </td>
+                <td class="tdPadding text-bold">
+                    <span *ngIf="item.ServiceStartDate">{{item.ServiceStartDate|date}}</span>
+                </td>
+                <td class="tdPadding text-bold">
+                    <span *ngIf="item.ServiceEndDate">{{item.ServiceEndDate|date}}</span>
+                </td>
+                <td class="tdPadding">
+                    {{item.ServiceDescription}}
+                    <p class="processed" *ngIf="item.ClaimsStatusDescription === 'Processed'">
+                        PROCESSED on <span *ngIf="item.ProcessedDate">{{item.ProcessedDate|date}}</span></p>
+                </td>
+                <td class="tdPadding text-bold">
+                    {{item.BilledAmount | currency}}
+                </td>
+                <td class="tdPadding text-bold">
+                    {{ item.ClaimsStatusDescription === 'Processed' ? '$'+item.PlanDiscountedRate : '-' }}
+                </td>
+                <td class="tdPadding text-bold">
+                    {{ item.ClaimsStatusDescription === 'Processed' ? '$'+item.PlanPaidAmount : '-' }}
+                </td>
+                <td class="tdPadding text-bold">
+                    {{ item.ClaimsStatusDescription === 'Processed' ? '$'+item.DueAmount : '-' }}
+                </td>
+                <td class="tdPadding text-bold">
+                    {{ item.ClaimsStatusDescription === 'Processed' ? '$'+item.MSRAAmount : '-' }}
+                </td>
+                <td class="tdPadding">
+                    {{item.FacilityName}}
+                </td>
+                <td class="tdPadding" *ngIf="item.ClaimsStatusDescription === 'Processed'">
+                    <i class="fa fa-file-pdf-o fa-1_5x" style="cursor:pointer;" aria-hidden="false"
+                        (click)="downloadEOB(item.EOBIdentifier)"></i>
+                </td>
+                <td class="tdPadding" *ngIf="item.ClaimsStatusDescription === 'Processing'">
+                    <i>-</i>
+                </td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+    <div *ngIf="!items || items?.length<1" style="width:100%;margin:10px;text-align: center;">
+        <span style="padding:5px;">No Share Requests to be displayed</span>
+    </div>
+</div>
+
+
+<!-- claim EOB request popup -->
+<p-confirmDialog class="EOBConfirmDialog" [style]="{width: '38vw'}" key="eobConfirmation" [closable]="false"
+    [closeOnEscape]="false" acceptLabel="OK" rejectLabel="Cancel" acceptIcon="" rejectIcon=""
+    acceptButtonStyleClass="ok" rejectButtonStyleClass="cancel"></p-confirmDialog>

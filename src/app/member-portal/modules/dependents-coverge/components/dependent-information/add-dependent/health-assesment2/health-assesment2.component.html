@@ -1,0 +1,236 @@
+<div class="ui-fluid">
+  <div class="ui-g ">
+    <form [formGroup]="healthQuestionnireForm" (ngSubmit)="onSubmit()">
+      <div class="ui-g-12 flex-container">
+        <div class="ui-g-12">
+          <span class="error" *ngIf="errorText">{{errorText}}</span>
+        </div>
+      </div>
+
+      <div class="ui-g-12 questContainer">
+        <div class="ui-g-12 ui-md-12 ">
+          <div class="ui-g-12 quest">
+            <span>2. {{healthConcernsQuestion?.MemberQuestionnaire}}</span>
+          </div>
+          <div class="ui-g-12">
+            <textarea class="textArea" [rows]="3" [width]="30" pInputTextarea formControlName="healthConcerns"
+              maxlength={{constants.HEALTH_CONCERNS_TEXT_LENGTH}} autoResize="autoResize" (input)="calculateHealthConcernsTextLength(healthQuestionnireForm.get('healthConcerns').value)"></textarea>
+            <span class="max-chars">(Max {{healthConcernsTextLength}} Characters)</span>
+          </div>
+          <hr>
+        </div>
+
+        <div class="ui-g-12">
+          <div class="ui-g-12 ui-md-6">
+            <div class="ui-g-12 ui-md-6 quest">
+              <span>3. {{weightQuestion?.MemberQuestionnaire}}</span>
+            </div>
+            <div class="ui-g-12 ui-md-3 round-input-div"
+              [ngClass]="{'has-error': (isSubmitted && healthQuestionnireForm.get('weight').errors)}">
+              <input pInputText type="text" class="round-input-element" formControlName="weight" placeholder="Weight" />
+            </div>
+            <div class="ui-g-12 ui-md-1"></div>
+            <div class="ui-g-12 ui-md-3 round-input-div">
+              <p-dropdown class="round-input-element" [options]="weightUnits" formControlName="weightUnits">
+              </p-dropdown>
+            </div>
+          </div>
+          <!-- <div class="ui-g-12 ui-md-1"></div> ui-inputgroup-->
+          <div class="ui-g-12 ui-md-6">
+            <div class="ui-g-12 ui-md-6 quest">
+              <span>4. {{heightQuestion?.MemberQuestionnaire}}</span>
+            </div>
+            <div class="ui-g-12 ui-md-3 round-input-div"
+              [ngClass]="{'has-error': (isSubmitted && healthQuestionnireForm.get('height').errors)}">
+              <input pInputText type="text" class="round-input-element" formControlName="height" placeholder="Height" />
+            </div>
+            <div class="ui-g-12 ui-md-1"></div>
+            <div class="ui-g-12 ui-md-3 round-input-div">
+              <p-dropdown class="round-input-element" [options]="heightUnits" formControlName="heightUnits">
+              </p-dropdown>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="ui-g-12">
+          <div class="ui-g-12 ui-md-12 ">
+            <div class="ui-g-12 quest">
+              5. {{smokeQuestion?.MemberQuestionnaire}}
+            </div>
+            <div class="ui-g-12" [ngClass]="{'has-error': (isSubmitted && healthQuestionnireForm.get('smoke').errors)}">
+
+              <div class="ui-g-12 ui-md-2">
+                <p-radioButton name="smokeGroup" value="yes" label="Yes" formControlName="smoke" inputId="smoke1"
+                  (onClick)="onSmoke(healthQuestionnireForm)">
+                </p-radioButton>
+              </div>
+              <div class="ui-g-12 ui-md-2">
+                <p-radioButton name="smokeGroup" value="no" label="No" formControlName="smoke" inputId="smoke2"
+                  (onClick)="onSmoke(healthQuestionnireForm)">
+                </p-radioButton>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui-g-12 ui-md-12" *ngIf="healthQuestionnireForm.get('smoke').value.toLowerCase().trim() == 'yes'">
+            <div class="ui-g-12 quest">
+              <span> {{smokeTextQuestion?.MemberQuestionnaire}}</span>
+            </div>
+            <div class="ui-g-12"
+              [ngClass]="{'backgroundDiasbed': smokeText.disabled,'has-error': (isSubmitted && healthQuestionnireForm.get('smokeText').errors)}">
+              <!-- <input pInputText type="text" class="round-input-element" formControlName="smokeText" #smokeText /> -->
+              <textarea class="textArea" [rows]="3" [width]="30" pInputTextarea formControlName="smokeText"
+                maxlength={{constants.OTHER_TEXT_LENGTH}} #smokeText autoResize="autoResize" (input)="calculateSmokeTextLength(healthQuestionnireForm.get('smokeText').value)"></textarea>
+              <span class="max-chars">(Max {{smokeTextLength}} Characters)</span>
+            </div>
+          </div>
+          <hr>
+        </div>
+
+
+        <div class="ui-g-12">
+          <div class="ui-g-12 ui-md-12 ">
+            <div class="ui-g-12 quest">
+              <span>6. {{cancerQuestion?.MemberQuestionnaire}}</span>
+            </div>
+            <div class="ui-g-12"
+              [ngClass]="{'has-error': (isSubmitted && healthQuestionnireForm.get('cancer').errors)}">
+              <div class="ui-g-12 ui-md-2">
+                <p-radioButton name="cancerGroup" value="yes" label="Yes" formControlName="cancer" inputId="cancer1"
+                  (onClick)="onCancer(healthQuestionnireForm)">
+                </p-radioButton>
+              </div>
+              <div class="ui-g-12 ui-md-2">
+                <p-radioButton name="cancerGroup" value="no" label="No" formControlName="cancer" inputId="cancer2"
+                  (onClick)="onCancer(healthQuestionnireForm)">
+                </p-radioButton>
+              </div>
+            </div>
+          </div>
+          <div class="ui-g-12 ui-md-12"
+            *ngIf="healthQuestionnireForm.get('cancer').value.toLowerCase().trim() == 'yes'">
+            <div class="ui-g-12 quest">
+              <span> {{cancerTextQuestion?.MemberQuestionnaire}}</span>
+            </div>
+            <div class="ui-g-12"
+              [ngClass]="{'backgroundDiasbed': cancerText.disabled,'has-error': (isSubmitted && healthQuestionnireForm.get('cancerText').errors)}">
+              <!-- <input pInputText type="text" class="round-input-element" formControlName="cancerText" #cancerText /> -->
+              <textarea class="textArea" [rows]="3" [width]="30" pInputTextarea formControlName="cancerText"
+                maxlength={{constants.OTHER_TEXT_LENGTH}} #cancerText autoResize="autoResize" (input)="calculateCancerTextLength(healthQuestionnireForm.get('cancerText').value)"></textarea>
+              <span class="max-chars">(Max {{cancerTextLength}} Characters)</span>
+            </div>
+          </div>
+          <hr>
+        </div>
+
+        <div class="ui-g-12">
+          <div class="ui-g-12 ui-md-12 ">
+            <div class="ui-g-12 quest">
+              <span>7. {{competitiveSportsQuestion?.MemberQuestionnaire}}</span>
+            </div>
+            <div class="ui-g-12"
+              [ngClass]="{'has-error': (isSubmitted && healthQuestionnireForm.get('competitiveSports').errors)}">
+              <div class="ui-g-12 ui-md-2">
+                <p-radioButton name="sportsGroup" value="yes" label="Yes" formControlName="competitiveSports"
+                  inputId="competitiveSports1" (onClick)="onSports(healthQuestionnireForm)">
+                </p-radioButton>
+              </div>
+              <div class="ui-g-12 ui-md-2">
+                <p-radioButton name="sportsGroup" value="no" label="No" formControlName="competitiveSports"
+                  inputId="competitiveSports2" (onClick)="onSports(healthQuestionnireForm)">
+                </p-radioButton>
+              </div>
+            </div>
+          </div>
+          <div class="ui-g-12 ui-md-12"
+            *ngIf="healthQuestionnireForm.get('competitiveSports').value.toLowerCase().trim() == 'yes'">
+            <div class="ui-g-12 quest">
+              <span> {{competitiveSportsTextQuestion?.MemberQuestionnaire}}</span>
+            </div>
+            <div class="ui-g-12"
+              [ngClass]="{'backgroundDiasbed': competitiveSportsText.disabled ,'has-error': (isSubmitted && healthQuestionnireForm.get('competitiveSportsText').errors)}">
+              <!-- <input pInputText type="text" class="round-input-element" formControlName="competitiveSportsText"
+                #competitiveSportsText /> -->
+              <textarea class="textArea" [rows]="3" [width]="30" pInputTextarea formControlName="competitiveSportsText"
+                maxlength={{constants.OTHER_TEXT_LENGTH}} #competitiveSportsText autoResize="autoResize" (input)="calculateSportsTextLength(healthQuestionnireForm.get('competitiveSportsText').value)"></textarea>
+              <span class="max-chars">(Max {{sportsTextLength}} Characters)</span>
+            </div>
+          </div>
+          <hr>
+        </div>
+
+
+        <div class="ui-g-12">
+          <div class="ui-g-12 ui-md-12 ">
+            <div class="ui-g-12 quest">
+              <span>8. {{drinkQuestion?.MemberQuestionnaire}} </span>
+            </div>
+            <div class="ui-g-12" [ngClass]="{'has-error': (isSubmitted && healthQuestionnireForm.get('drink').errors)}">
+              <div class="ui-g-12 ui-md-2">
+                <p-radioButton name="drinkGroup" value="yes" label="Yes" formControlName="drink" inputId="drinkGroup1"
+                  (onClick)="onDrink(healthQuestionnireForm)">
+                </p-radioButton>
+              </div>
+              <div class="ui-g-12 ui-md-2">
+                <p-radioButton name="drinkGroup" value="no" label="No" formControlName="drink" inputId="drinkGroup2"
+                  (onClick)="onDrink(healthQuestionnireForm)">
+                </p-radioButton>
+              </div>
+            </div>
+          </div>
+          <div class="ui-g-12 ui-md-12" *ngIf="healthQuestionnireForm.get('drink').value.toLowerCase().trim() == 'yes'">
+            <div class="ui-g-12 quest">
+              <span> {{drinkRadioQuestion?.MemberQuestionnaire}}</span>
+            </div>
+            <div class="ui-g-12 ui-inputgroup"
+              [ngClass]="{'has-error': (isSubmitted && healthQuestionnireForm.get('drinkRadio').errors)}">
+              <div class="ui-g-12 ui-md-3" *ngFor="let drinkRadioOption of drinkRadioOptions; let i=index">
+                <p-radioButton name="drinkRadioOptionGroup" value={{drinkRadioOption}} label={{drinkRadioOption}}
+                  formControlName="drinkRadio" inputId="drinkGroup{{i}}"></p-radioButton>
+              </div>
+            </div>
+          </div>
+          <hr>
+        </div>
+
+        <div class="ui-g-12" *ngIf="isFemale">
+          <div class="ui-g-12 ui-md-12">
+            <div class="ui-g-12 quest">
+              <span>9. {{pregnantQuestion?.MemberQuestionnaire}}</span>
+            </div>
+            <div class="ui-g-12"
+              [ngClass]="{'has-error': (isSubmitted && healthQuestionnireForm.get('pregnant').errors)}">
+              <div class="ui-g-12 ui-md-2">
+                <p-radioButton name="pregnantGroup" value="yes" label="Yes" formControlName="pregnant"
+                  inputId="pregnant1">
+                </p-radioButton>
+              </div>
+              <div class="ui-g-12 ui-md-2">
+                <p-radioButton name="pregnantGroup" value="no" label="No" formControlName="pregnant"
+                  inputId="pregnant2">
+                </p-radioButton>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="ui-g-12 flex-container">
+        <div class="ui-g-12">
+          <!-- <div class="ui-g-12 ui-md-2"></div> -->
+          <div class="ui-g-12 ui-md-6 smallbuton">
+            <p-button id="healthassesment1" label="Back" class="ui-button-rounded cancelBtn" type="button"
+              (click)="onBack()"></p-button>
+          </div>
+          <div class="ui-g-12 ui-md-6 smallbuton">
+            <p-button class="ui-button-rounded submitbtn" label="Submit" type="submit">
+            </p-button>
+          </div>
+        </div>
+        <!-- <div class="ui-g-2"></div> -->
+      </div>
+    </form>
+  </div>
+</div>
