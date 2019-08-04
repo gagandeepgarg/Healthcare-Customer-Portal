@@ -1,0 +1,221 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/custom-sass/variables.scss";
+@import "./assets/circular-bar/circle.scss";
+
+body {
+  background-color: $grey-150;
+  font-family: "Roboto", sans-serif;
+}
+
+// error border syles
+.has-error {
+  border: 1px solid $error-color !important;
+}
+.sucessInfo {
+  color: $success-color;
+}
+.error {
+  color: $error-color;
+}
+
+// Textboxes styling
+.round-input-element:focus {
+  box-shadow: none;
+  border-color: transparent;
+  outline: none !important;
+}
+.round-input-div {
+  background-color: $white;
+  border-radius: 50px;
+}
+.round-input-element {
+  border: none;
+  background-color: $white;
+  color: $black;
+  outline: none !important;
+  width: 100%;
+}
+.round-input-icon {
+  color: $fa-icon-color;
+  background: transparent;
+  border: none;
+}
+// global dropdowns styling
+p-dropdown {
+  width: 100%;
+}
+.ui-dropdown {
+  width: 100%;
+  border: none;
+  box-shadow: none;
+  border-color: transparent;
+  outline: none !important;
+}
+.round-input-element.fullWidth {
+  max-width: 100%;
+}
+.ui-dropdown-trigger {
+  background-color: transparent;
+}
+
+// global button styles
+.submitbtn button {
+  background-color: $active-color !important;
+  color: #FFFFFF;
+}
+.submitbtn button:hover
+{
+  color:#0E4668
+}
+p-button button {
+  font-size: 1.2em;
+}
+.cancelBtn button {
+  background-color: $white !important;
+  color: $cancel-btn-text-col0r !important;
+  color:#4D4E4E !important;
+  border: 1px solid #BBBDBF !important;
+}
+.cancelBtn button:hover {
+  color:#4D4E4E !important;
+  border: 1px solid #808080 !important;
+}
+a {
+  color: $active-color;
+  text-decoration: none;
+  cursor: pointer;
+}
+a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.ui-tooltip-text.ui-shadow.ui-corner-all {
+  background-color: #ffffff;
+  color: #bdc6c8;
+  padding: 10%;
+  min-width: 180%;
+  box-shadow: 5px 10px 10px #2d2d2d;
+  -moz-box-shadow: 5px 10px 10px #2d2d2d;
+  -webkit-box-shadow: 5px 10px 10px #2d2d2d;
+}
+
+.ui-tooltip-arrow {
+  top: 0;
+  left: 50%;
+  margin-left: -0.25em;
+  border-width: 0 0.25em 0.25em;
+  border-bottom-color: #fff !important;
+}
+
+//polyfills
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+.table-header-align{
+  vertical-align: top;
+}
+
+/*=========Scrollbar styling ===========*/
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 15px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: gray; 
+  border-radius: 15px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: gray; 
+}
+/*========= end of Scrollbar styling ===========*/
+.header-freeze-padding{
+  padding-top: 60px;
+}
+
+.pheaderCss{
+  height: 35px !important;
+    padding-top: 0 !important;
+}
+// custom global styles
+.top-margin-3pc{
+  margin-top:3%;
+}
+.bottom-margin-3pc{
+  margin-bottom:3%;
+}
+.bottom-margin-6pc{
+  margin-bottom:6%;
+}
+.left-margin-5pc{
+  margin-left:5%;
+}
+.pointer-cursor{
+  cursor: pointer;
+}
+.right-float{
+  float:right;
+}
+.left-float{
+  float:left;
+}
+.width-100{
+  width:100%;
+}
+.text-center-align{
+  text-align:center;
+}
+.no-padding{
+  padding:0;
+}
+.wrap {
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
+.no-left-pad{
+  padding-left: 0;
+}
+.no-right-pad{
+  padding-right: 0;
+}
+.inline-flex-display{
+  display: inline-flex;
+}
+.margin-10px{
+  margin:10px;
+}
+.padding-5px{
+  padding:5px;
+}
+.full-height{
+  height: 100%;;
+}
+.padding-right-5pc{
+  padding-right: 5%;
+}
+.no-border-no-back{
+  border:none;background:transparent;
+}
+
+.flex-growth-1{
+  flex-grow:1;
+}
