@@ -6,8 +6,11 @@ import { SelectItem } from 'primeng/api';
 import { ClamesFilter } from '../dashboard/Modals/ClamesFilter';
 import * as constants from '@core/constants/app-constants';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from '@app/reducers';
+import { FetchClaimsByExternalId } from './dashboard.selector';
+import { ClaimsRequested } from './dashboard.actions';
+import { tap, filter, first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -95,6 +98,19 @@ export class DashboardComponent implements OnInit {
   }
 
   dependentMemberData(clamesFilter: ClamesFilter) {
+    // return
+    this.store.pipe(
+      select(FetchClaimsByExternalId(clamesFilter.externalMemberId)),
+      tap(claims => {
+        if (!claims) {
+          this.store.dispatch(new ClaimsRequested(clamesFilter.externalMemberId));
+        }
+      }),
+      filter(claim => !!claim),
+      first()
+    );
+
+
     this.dashboardService.getClaimDetails(clamesFilter).subscribe((res: any[]) => {
       this.onMedicalselected = true;
       if (res && res.length > 0) {

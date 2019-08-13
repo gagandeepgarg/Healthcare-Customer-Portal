@@ -12,6 +12,10 @@ import { FamilyDeductablesComponent } from './components/family-deductables/fami
 
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { IndividualDeductablesLimitsComponent } from './components/individual-deductables-limits/individual-deductables-limits.component';
+import { EffectsModule } from '@ngrx/effects';
+import { DashboardEffects } from './dashboard.effects';
+import { StoreModule } from '@ngrx/store';
+import { DasboardReducer } from './dashboard.reducer';
 
 @NgModule({
     imports: [
@@ -39,7 +43,9 @@ import { IndividualDeductablesLimitsComponent } from './components/individual-de
             'space': -10,
             'subtitle': 'Remaining',
             'subtitleFontSize': '15',
-        })
+        }),
+        StoreModule.forFeature('dashboard', DasboardReducer),
+        EffectsModule.forFeature([DashboardEffects])
     ],
     declarations: [
         ...COMPONENT_DECLARATIONS,
